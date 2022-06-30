@@ -355,7 +355,7 @@ begin
     S.Add('    "services": [');
     S.Add('      "StatsService"');
     S.Add('    ]');
-    S.Add(' },');
+    S.Add('  },');
     S.Add('  "dns": null,');
     S.Add('  "routing": {');
     S.Add('    "domainStrategy": "IPIfNonMatch",');

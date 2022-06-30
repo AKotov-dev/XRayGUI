@@ -25,7 +25,7 @@ vendor=alex_q_2000 (C) 2022
 summary=GUI for XRay (VMESS)
 
 [URLCOPY]
-urlcopy=111
+urlcopy=https://github.com/AKotov-dev/XRayGUI
 
 [LICENSE]
 license=GPLv3
@@ -53,10 +53,10 @@ deb=1
 4=/usr/share/icons/xraygui.png
 
 [URL32]
-url32=111
+url32=https://github.com/AKotov-dev/XRayGUI
 
 [URL64]
-url64=
+url64=https://github.com/AKotov-dev/XRayGUI
 
 [PROGRAMNAME]
 programname=XRayGUI

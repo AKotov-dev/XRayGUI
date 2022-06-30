@@ -1,0 +1,81 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: tmainform.caption
+msgid "XRayGUI"
+msgstr ""
+
+#: tmainform.clearbox.caption
+msgid "Clear cache and cookies"
+msgstr ""
+
+#: tmainform.clearbox.hint
+msgid "Clean up the GUI at startup"
+msgstr ""
+
+#: tmainform.deletebtn.caption
+msgid "Delete"
+msgstr ""
+
+#: tmainform.groupbox1.caption
+msgid "Configurations [vmess]"
+msgstr ""
+
+#: tmainform.groupbox2.caption
+msgid "Management/Logging"
+msgstr ""
+
+#: tmainform.label1.caption
+msgid "Port:"
+msgstr ""
+
+#: tmainform.loaditem.caption
+msgctxt "tmainform.loaditem.caption"
+msgid "Load from file"
+msgstr ""
+
+#: tmainform.pastebtn.caption
+msgid "Paste"
+msgstr ""
+
+#: tmainform.pastebtn.hint
+msgid "Paste from clipboard"
+msgstr ""
+
+#: tmainform.saveitem.caption
+msgctxt "tmainform.saveitem.caption"
+msgid "Save to file"
+msgstr ""
+
+#: tmainform.selallbtn.caption
+msgid "*"
+msgstr ""
+
+#: tmainform.selallbtn.hint
+msgid "Select all"
+msgstr ""
+
+#: tmainform.startbtn.caption
+msgid "Start"
+msgstr ""
+
+#: tmainform.statictext1.caption
+msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
+msgstr ""
+
+#: tmainform.stopbtn.caption
+msgid "Stop"
+msgstr ""
+
+#: unit1.sdeletemsg
+msgid "Delete the selected configurations?"
+msgstr ""
+
+#: unit1.snotvalidmsg
+msgid "The file is not valid!"
+msgstr ""
+
+#: unit1.svmessonlymsg
+msgid "Need the vmess://... format!"
+msgstr ""
+

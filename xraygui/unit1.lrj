@@ -1,0 +1,18 @@
+{"version":1,"strings":[
+{"hash":227073225,"name":"tmainform.caption","sourcebytes":[88,82,97,121,71,85,73],"value":"XRayGUI"},
+{"hash":83095853,"name":"tmainform.groupbox1.caption","sourcebytes":[67,111,110,102,105,103,117,114,97,116,105,111,110,115,32,91,118,109,101,115,115,93],"value":"Configurations [vmess]"},
+{"hash":78392485,"name":"tmainform.deletebtn.caption","sourcebytes":[68,101,108,101,116,101],"value":"Delete"},
+{"hash":195296268,"name":"tmainform.selallbtn.hint","sourcebytes":[83,101,108,101,99,116,32,97,108,108],"value":"Select all"},
+{"hash":42,"name":"tmainform.selallbtn.caption","sourcebytes":[42],"value":"*"},
+{"hash":27149092,"name":"tmainform.pastebtn.hint","sourcebytes":[80,97,115,116,101,32,102,114,111,109,32,99,108,105,112,98,111,97,114,100],"value":"Paste from clipboard"},
+{"hash":5671589,"name":"tmainform.pastebtn.caption","sourcebytes":[80,97,115,116,101],"value":"Paste"},
+{"hash":240766647,"name":"tmainform.groupbox2.caption","sourcebytes":[77,97,110,97,103,101,109,101,110,116,47,76,111,103,103,105,110,103],"value":"Management/Logging"},
+{"hash":371552,"name":"tmainform.stopbtn.caption","sourcebytes":[83,116,111,112],"value":"Stop"},
+{"hash":5941396,"name":"tmainform.startbtn.caption","sourcebytes":[83,116,97,114,116],"value":"Start"},
+{"hash":254828400,"name":"tmainform.clearbox.hint","sourcebytes":[67,108,101,97,110,32,117,112,32,116,104,101,32,71,85,73,32,97,116,32,115,116,97,114,116,117,112],"value":"Clean up the GUI at startup"},
+{"hash":186715075,"name":"tmainform.clearbox.caption","sourcebytes":[67,108,101,97,114,32,99,97,99,104,101,32,97,110,100,32,99,111,111,107,105,101,115],"value":"Clear cache and cookies"},
+{"hash":5728634,"name":"tmainform.label1.caption","sourcebytes":[80,111,114,116,58],"value":"Port:"},
+{"hash":248956965,"name":"tmainform.statictext1.caption","sourcebytes":[76,105,99,101,110,115,101,58,32,71,80,76,118,51,32,32,32,65,117,116,104,111,114,58,32,97,108,101,120,95,113,95,50,48,48,48,32,40,67,41,32,50,48,50,50,32,32,32,85,82,76,58,32,104,116,116,112,115,58,47,47,108,105,110,117,120,102,111,114,117,109,46,114,117],"value":"License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"},
+{"hash":9308581,"name":"tmainform.saveitem.caption","sourcebytes":[83,97,118,101,32,116,111,32,102,105,108,101],"value":"Save to file"},
+{"hash":8431845,"name":"tmainform.loaditem.caption","sourcebytes":[76,111,97,100,32,102,114,111,109,32,102,105,108,101],"value":"Load from file"}
+]}

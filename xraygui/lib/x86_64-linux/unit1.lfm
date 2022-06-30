@@ -1,0 +1,291 @@
+object MainForm: TMainForm
+  Left = 315
+  Height = 696
+  Top = 122
+  Width = 942
+  ActiveControl = ConfigBox
+  Caption = 'XRayGUI'
+  ClientHeight = 696
+  ClientWidth = 942
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  SessionProperties = 'ConfigBox.ItemIndex;GroupBox1.Width;Height;Left;Panel1.Height;PortEdit.Value;Top;Width;OpenDialog1.InitialDir;SaveDialog1.InitialDir'
+  LCLVersion = '2.2.0.4'
+  object GroupBox1: TGroupBox
+    Left = 0
+    Height = 676
+    Top = 0
+    Width = 267
+    Align = alLeft
+    Caption = 'Configurations [vmess]'
+    ClientHeight = 658
+    ClientWidth = 265
+    TabOrder = 0
+    object Panel1: TPanel
+      Left = 0
+      Height = 56
+      Top = 0
+      Width = 265
+      Align = alTop
+      BevelOuter = bvNone
+      ClientHeight = 56
+      ClientWidth = 265
+      TabOrder = 0
+      OnResize = Panel1Resize
+      object DeleteBtn: TSpeedButton
+        AnchorSideRight.Side = asrBottom
+        Left = 6
+        Height = 36
+        Top = 8
+        Width = 85
+        Caption = 'Delete'
+        OnClick = DeleteBtnClick
+        ShowHint = True
+        ParentShowHint = False
+      end
+      object SelAllBtn: TSpeedButton
+        AnchorSideLeft.Control = DeleteBtn
+        AnchorSideLeft.Side = asrBottom
+        Left = 96
+        Height = 36
+        Hint = 'Select all'
+        Top = 8
+        Width = 40
+        BorderSpacing.Left = 5
+        BorderSpacing.Right = 5
+        Caption = '*'
+        OnClick = SelAllBtnClick
+        ShowHint = True
+        ParentShowHint = False
+      end
+      object PasteBtn: TSpeedButton
+        AnchorSideRight.Side = asrBottom
+        Left = 173
+        Height = 36
+        Hint = 'Paste from clipboard'
+        Top = 8
+        Width = 85
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 5
+        Caption = 'Paste'
+        OnClick = PasteBtnClick
+        ShowHint = True
+        ParentShowHint = False
+      end
+    end
+    object Splitter2: TSplitter
+      Cursor = crVSplit
+      Left = 0
+      Height = 5
+      Top = 56
+      Width = 265
+      Align = alTop
+      ResizeAnchor = akTop
+    end
+    object ConfigBox: TCheckListBox
+      Left = 0
+      Height = 597
+      Top = 61
+      Width = 265
+      Align = alClient
+      ItemHeight = 0
+      MultiSelect = True
+      OnClickCheck = ConfigBoxClickCheck
+      OnDblClick = StartBtnClick
+      PopupMenu = PopupMenu1
+      TabOrder = 2
+      TopIndex = -1
+    end
+  end
+  object Splitter1: TSplitter
+    Left = 267
+    Height = 676
+    Top = 0
+    Width = 4
+  end
+  object GroupBox2: TGroupBox
+    Left = 271
+    Height = 676
+    Top = 0
+    Width = 671
+    Align = alClient
+    Caption = 'Management/Logging'
+    ClientHeight = 658
+    ClientWidth = 669
+    TabOrder = 2
+    object Panel2: TPanel
+      Left = 0
+      Height = 56
+      Top = 0
+      Width = 669
+      Align = alTop
+      BevelOuter = bvNone
+      ClientHeight = 56
+      ClientWidth = 669
+      TabOrder = 0
+      OnResize = Panel2Resize
+      object Shape1: TShape
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = ClearBox
+        AnchorSideTop.Side = asrCenter
+        Left = 8
+        Height = 12
+        Top = 20
+        Width = 12
+        BorderSpacing.Left = 10
+        Brush.Color = clYellow
+        Shape = stCircle
+      end
+      object PortEdit: TSpinEdit
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = ClearBox
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = ClearBox
+        AnchorSideBottom.Side = asrBottom
+        Left = 216
+        Height = 36
+        Top = 8
+        Width = 88
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 5
+        MinValue = 1000
+        ParentShowHint = False
+        TabOrder = 0
+        Value = 1089
+      end
+      object StopBtn: TSpeedButton
+        AnchorSideRight.Control = StartBtn
+        Left = 491
+        Height = 36
+        Top = 8
+        Width = 85
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 1
+        Caption = 'Stop'
+        OnClick = StopBtnClick
+      end
+      object StartBtn: TSpeedButton
+        AnchorSideRight.Side = asrBottom
+        Left = 577
+        Height = 36
+        Top = 8
+        Width = 85
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 5
+        Caption = 'Start'
+        OnClick = StartBtnClick
+      end
+      object ClearBox: TCheckBox
+        AnchorSideLeft.Control = Shape1
+        AnchorSideTop.Control = StopBtn
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = StopBtn
+        Left = 309
+        Height = 32
+        Hint = 'Clean up the GUI at startup'
+        Top = 10
+        Width = 177
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 5
+        Caption = 'Clear cache and cookies'
+        OnChange = ClearBoxChange
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+      end
+      object Label1: TLabel
+        AnchorSideTop.Control = PortEdit
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = PortEdit
+        Left = 184
+        Height = 17
+        Top = 18
+        Width = 29
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 3
+        Caption = 'Port:'
+      end
+    end
+    object Splitter3: TSplitter
+      Cursor = crVSplit
+      Left = 0
+      Height = 5
+      Top = 56
+      Width = 669
+      Align = alTop
+      ResizeAnchor = akTop
+    end
+    object LogMemo: TMemo
+      Left = 0
+      Height = 597
+      Top = 61
+      Width = 669
+      Align = alClient
+      Font.Height = -12
+      Font.Name = 'Monospace'
+      ParentFont = False
+      ReadOnly = True
+      ScrollBars = ssVertical
+      TabOrder = 2
+      WantReturns = False
+    end
+  end
+  object StaticText1: TStaticText
+    Left = 0
+    Height = 20
+    Top = 676
+    Width = 942
+    Align = alBottom
+    Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
+    Font.Color = clGray
+    Font.Height = -11
+    Font.Name = 'Sans'
+    ParentFont = False
+    TabOrder = 3
+  end
+  object IniPropStorage1: TIniPropStorage
+    StoredValues = <    
+      item
+        Name = 'findex'
+        Value = '100'
+      end>
+    OnRestoreProperties = IniPropStorage1RestoreProperties
+    Left = 320
+    Top = 104
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 432
+    Top = 104
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 121
+    Top = 104
+    object SaveItem: TMenuItem
+      Caption = 'Save to file'
+      OnClick = SaveItemClick
+    end
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object LoadItem: TMenuItem
+      Caption = 'Load from file'
+      OnClick = LoadItemClick
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = '.*.vmess'
+    Filter = 'XRayGUI files (*.vmess)|*.vmess'
+    Options = [ofNoNetworkButton, ofEnableSizing]
+    Left = 64
+    Top = 176
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.*.vmess'
+    Filter = 'XRayGUI file (*.vmess)|*.vmess'
+    Options = [ofOverwritePrompt, ofEnableSizing]
+    Left = 168
+    Top = 176
+  end
+end

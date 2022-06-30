@@ -183,7 +183,7 @@ object MainForm: TMainForm
         AnchorSideRight.Control = StopBtn
         Left = 309
         Height = 32
-        Hint = 'Clean up the GUI at startup'
+        Hint = 'Clean up the GUI at startup (Mageia only)'
         Top = 10
         Width = 177
         Anchors = [akTop, akRight]

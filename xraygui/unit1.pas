@@ -188,7 +188,7 @@ begin
     S.Add('  "log": {');
     S.Add('    "access": "",');
     S.Add('    "error": "",');
-    S.Add('    "loglevel": "debug"');
+    S.Add('    "loglevel": "info"');
     S.Add('  },');
     S.Add('  "inbounds": [');
     S.Add('    {');

@@ -1,5 +1,5 @@
 object MainForm: TMainForm
-  Left = 315
+  Left = 324
   Height = 696
   Top = 122
   Width = 942
@@ -138,11 +138,11 @@ object MainForm: TMainForm
       end
       object PortEdit: TSpinEdit
         AnchorSideLeft.Side = asrBottom
-        AnchorSideTop.Control = ClearBox
+        AnchorSideTop.Control = AutoStartBox
         AnchorSideTop.Side = asrCenter
-        AnchorSideRight.Control = ClearBox
+        AnchorSideRight.Control = AutoStartBox
         AnchorSideBottom.Side = asrBottom
-        Left = 216
+        Left = 121
         Height = 36
         Top = 8
         Width = 88
@@ -197,13 +197,27 @@ object MainForm: TMainForm
         AnchorSideTop.Control = PortEdit
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = PortEdit
-        Left = 184
+        Left = 89
         Height = 17
         Top = 18
         Width = 29
         Anchors = [akTop, akRight]
         BorderSpacing.Right = 3
         Caption = 'Port:'
+      end
+      object AutoStartBox: TCheckBox
+        AnchorSideTop.Control = ClearBox
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = ClearBox
+        Left = 214
+        Height = 32
+        Top = 10
+        Width = 90
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 5
+        Caption = 'Autostart'
+        OnChange = AutoStartBoxChange
+        TabOrder = 2
       end
     end
     object Splitter3: TSplitter

@@ -1,0 +1,7 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=xray
+Type=Application
+Exec=/bin/bash -c 'cd /usr/share/xraygui/xray && ./xray -config ~/.config/xraygui/config.json > ~/.config/xraygui/xraygui.log &'
+Terminal=false

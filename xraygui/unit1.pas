@@ -14,6 +14,7 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    AutoStartBox: TCheckBox;
     ClearBox: TCheckBox;
     ConfigBox: TCheckListBox;
     GroupBox1: TGroupBox;
@@ -43,6 +44,7 @@ type
     Splitter3: TSplitter;
     StaticText1: TStaticText;
     Timer1: TTimer;
+    procedure AutoStartBoxChange(Sender: TObject);
     procedure ClearBoxChange(Sender: TObject);
     procedure ConfigBoxClickCheck(Sender: TObject);
     procedure DeleteBtnClick(Sender: TObject);
@@ -126,6 +128,15 @@ end;
 function CheckClear: boolean;
 begin
   if FileExists(GetUserDir + '.config/xraygui/clear') then
+    Result := True
+  else
+    Result := False;
+end;
+
+//Проверка чекбокса AutoStart
+function CheckAutoStart: boolean;
+begin
+  if FileExists(GetUserDir + '.config/autostart/xray.desktop') then
     Result := True
   else
     Result := False;
@@ -510,6 +521,10 @@ procedure TMainForm.FormCreate(Sender: TObject);
 begin
   MainForm.Caption := Application.Title;
 
+  //Директория ссылок Автозапуска
+  if not DirectoryExists(GetUserDir + '.config/autostart') then
+    MkDir(GetUserDir + '.config/autostart');
+
   //Рабочая директория (конфигурации + лог)
   if not DirectoryExists(GetUserDir + '.config/xraygui') then
     MkDir(GetUserDir + '.config/xraygui');
@@ -576,6 +591,16 @@ begin
     RunCommand('/bin/bash', ['-c', 'touch ~/.config/xraygui/clear'], S);
 end;
 
+procedure TMainForm.AutoStartBoxChange(Sender: TObject);
+var
+  S: ansistring;
+begin
+  if not AutoStartBox.Checked then
+    RunCommand('/bin/bash', ['-c', 'rm -f ~/.config/autostart/xray.desktop'], S)
+  else
+    RunCommand('/bin/bash', ['-c',
+      'cp -f /usr/share/xraygui/xray.desktop ~/.config/autostart/xray.desktop'], S);
+end;
 
 procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
@@ -593,6 +618,7 @@ begin
 
   ButtonStatus;
   ClearBox.Checked := CheckClear;
+  AutoStartBox.Checked := CheckAutoStart;
 
   //Процесс непрерывного чтения лога
   FShowLogTRD := ShowLogTRD.Create(False);

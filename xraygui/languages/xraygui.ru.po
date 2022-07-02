@@ -12,6 +12,14 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "Language: ru\n"
 
+#: tmainform.autostartbox.caption
+msgid "Autostart"
+msgstr "Автостарт"
+
+#: tmainform.autostartbox.hint
+msgid "Start proxy after reboot"
+msgstr "Старт прокси после перезагрузки"
+
 #: tmainform.caption
 msgid "XRayGUI"
 msgstr ""
@@ -71,7 +79,7 @@ msgstr ""
 
 #: tmainform.selallbtn.hint
 msgid "Select all"
-msgstr "Выделить всё"
+msgstr "Выбрать все"
 
 #: tmainform.startbtn.caption
 msgid "Start"

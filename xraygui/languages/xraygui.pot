@@ -1,6 +1,14 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: tmainform.autostartbox.caption
+msgid "Autostart"
+msgstr ""
+
+#: tmainform.autostartbox.hint
+msgid "Start proxy after reboot"
+msgstr ""
+
 #: tmainform.caption
 msgid "XRayGUI"
 msgstr ""

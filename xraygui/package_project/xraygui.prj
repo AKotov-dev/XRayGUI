@@ -80,7 +80,7 @@ toolversion=2.2.0
 [INFO]
 0=v0.3
 1=+ Autostart proxy after reboot
-2=+ Disabling xray before installation/upgrade (rpm/spec)
+2=+ Disabling xray before upgrade/remove (rpm/spec)
 3=
 4=v0.2
 5=+ PopUp menu: Paste from clipboard

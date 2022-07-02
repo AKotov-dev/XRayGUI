@@ -591,6 +591,7 @@ begin
     RunCommand('/bin/bash', ['-c', 'touch ~/.config/xraygui/clear'], S);
 end;
 
+//Автостарт
 procedure TMainForm.AutoStartBoxChange(Sender: TObject);
 var
   S: ansistring;

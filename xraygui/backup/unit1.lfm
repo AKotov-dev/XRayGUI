@@ -211,12 +211,15 @@ object MainForm: TMainForm
         AnchorSideRight.Control = ClearBox
         Left = 214
         Height = 32
+        Hint = 'Start proxy after reboot'
         Top = 10
         Width = 90
         Anchors = [akTop, akRight]
         BorderSpacing.Right = 5
         Caption = 'Autostart'
         OnChange = AutoStartBoxChange
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 2
       end
     end

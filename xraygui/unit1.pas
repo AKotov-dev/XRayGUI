@@ -558,8 +558,17 @@ begin
     //Сохранение нового списка
     ConfigBox.Items.SaveToFile(GetUserDir + '.config/xraygui/configlist');
 
-    if ConfigBox.Count <> 0 then ConfigBox.ItemIndex := 0;
-    ConfigBox.Click;
+    if ConfigBox.Count <> 0 then
+    begin
+      ConfigBox.ItemIndex := 0;
+      ConfigBox.Click;
+    end
+    else
+    begin
+      //Список пуст = удаляем ярлык автозагрузки
+      DeleteFile(GetUserDir + '.config/autostart/xray.desktop');
+      AutoStartBox.Checked := CheckAutoStart;
+    end;
   end;
 
   //Запоминаем позицию чекера

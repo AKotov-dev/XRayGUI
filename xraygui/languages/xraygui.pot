@@ -39,6 +39,12 @@ msgid "Paste"
 msgstr ""
 
 #: tmainform.pastebtn.hint
+msgctxt "tmainform.pastebtn.hint"
+msgid "Paste from clipboard"
+msgstr ""
+
+#: tmainform.pasteitem.caption
+msgctxt "tmainform.pasteitem.caption"
 msgid "Paste from clipboard"
 msgstr ""
 

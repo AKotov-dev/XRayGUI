@@ -47,13 +47,12 @@ object MainForm: TMainForm
       object SelAllBtn: TSpeedButton
         AnchorSideLeft.Control = DeleteBtn
         AnchorSideLeft.Side = asrBottom
-        Left = 96
+        Left = 93
         Height = 36
         Hint = 'Select all'
         Top = 8
-        Width = 40
-        BorderSpacing.Left = 5
-        BorderSpacing.Right = 5
+        Width = 36
+        BorderSpacing.Left = 2
         Caption = '*'
         OnClick = SelAllBtnClick
         ShowHint = True
@@ -260,6 +259,7 @@ object MainForm: TMainForm
     Top = 104
   end
   object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
     Left = 121
     Top = 104
     object SaveItem: TMenuItem
@@ -272,6 +272,13 @@ object MainForm: TMainForm
     object LoadItem: TMenuItem
       Caption = 'Load from file'
       OnClick = LoadItemClick
+    end
+    object Separator2: TMenuItem
+      Caption = '-'
+    end
+    object PasteItem: TMenuItem
+      Caption = 'Paste from clipboard'
+      OnClick = PasteItemClick
     end
   end
   object OpenDialog1: TOpenDialog

@@ -22,6 +22,8 @@ type
     Label1: TLabel;
     LogMemo: TMemo;
     LoadItem: TMenuItem;
+    PasteItem: TMenuItem;
+    Separator2: TMenuItem;
     OpenDialog1: TOpenDialog;
     SaveDialog1: TSaveDialog;
     SaveItem: TMenuItem;
@@ -49,9 +51,11 @@ type
     procedure FormShow(Sender: TObject);
     procedure IniPropStorage1RestoreProperties(Sender: TObject);
     procedure LoadItemClick(Sender: TObject);
+    procedure PasteItemClick(Sender: TObject);
     procedure Panel1Resize(Sender: TObject);
     procedure Panel2Resize(Sender: TObject);
     procedure PasteBtnClick(Sender: TObject);
+    procedure PopupMenu1Popup(Sender: TObject);
     procedure SaveItemClick(Sender: TObject);
     procedure SelAllBtnClick(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
@@ -188,6 +192,7 @@ begin
     S.Add('  "log": {');
     S.Add('    "access": "",');
     S.Add('    "error": "",');
+    //LOG LEVEL (debug, info, warning, error)
     S.Add('    "loglevel": "info"');
     S.Add('  },');
     S.Add('  "inbounds": [');
@@ -457,6 +462,13 @@ begin
   ButtonStatus;
 end;
 
+procedure TMainForm.PopupMenu1Popup(Sender: TObject);
+begin
+  if ConfigBox.Count = 0 then SaveItem.Enabled := False
+  else
+    SaveItem.Enabled := FTrue;
+end;
+
 procedure TMainForm.SaveItemClick(Sender: TObject);
 begin
   if SaveDialog1.Execute then ConfigBox.Items.SaveToFile(SaveDialog1.FileName);
@@ -634,6 +646,12 @@ begin
 
     S.Free;
   end;
+end;
+
+//Вставить из буфера
+procedure TMainForm.PasteItemClick(Sender: TObject);
+begin
+  PasteBtn.Click;
 end;
 
 //Одинаковая высота левой и правой панелей при изменении

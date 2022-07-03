@@ -2,7 +2,7 @@
 name=xraygui
 
 [VERSION]
-version=0.3
+version=0.4
 
 [RELEASE]
 release=0.mrx9
@@ -78,12 +78,15 @@ devtool=Lazarus
 toolversion=2.2.0
 
 [INFO]
-0=v0.3
-1=+ Autostart proxy after reboot
-2=+ Disabling xray before updating/deleting rpm/deb (spec)
-3=
-4=v0.2
-5=+ PopUp menu: Paste from clipboard
-6=+ Cosmetic edits, hints, etc...
-7=
-8=v0.1 - initial release
+0=v0.4
+1=+ Optimization of log output
+2=
+3=v0.3
+4=+ Autostart proxy after reboot
+5=+ Disabling xray before updating/deleting rpm/deb (spec)
+6=
+7=v0.2
+8=+ PopUp menu: Paste from clipboard
+9=+ Cosmetic edits, hints, etc...
+10=
+11=v0.1 - initial release

@@ -204,7 +204,7 @@ begin
     S.Add('    "access": "",');
     S.Add('    "error": "",');
     //LOG LEVEL (debug, info, warning, error)
-    S.Add('    "loglevel": "error"');
+    S.Add('    "loglevel": "info"');
     S.Add('  },');
     S.Add('  "inbounds": [');
     S.Add('    {');

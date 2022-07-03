@@ -91,6 +91,11 @@ begin
   for i := 0 to Result.Count - 1 do
     MainForm.LogMemo.Lines.Append(' ' + Result[i]);
 
+  //Выводим последние записи минус "n"
+  if MainForm.LogMemo.Lines.Count > 500 then
+    for i := 0 to 500 do
+      MainForm.LogMemo.Lines.Delete(i);
+
   //Промотать список вниз
   MainForm.LogMemo.SelStart := Length(MainForm.LogMemo.Text);
   MainForm.LogMemo.SelLength := 0;

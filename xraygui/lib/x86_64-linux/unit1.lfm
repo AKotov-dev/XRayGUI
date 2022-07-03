@@ -1,5 +1,5 @@
 object MainForm: TMainForm
-  Left = 314
+  Left = 316
   Height = 708
   Top = 124
   Width = 990
@@ -18,7 +18,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 267
     Align = alLeft
-    Caption = 'Configurations [vmess]'
+    Caption = 'Configurations [ss/vmess]'
     ClientHeight = 670
     ClientWidth = 265
     TabOrder = 0
@@ -293,13 +293,6 @@ object MainForm: TMainForm
     object LoadItem: TMenuItem
       Caption = 'Load from file'
       OnClick = LoadItemClick
-    end
-    object Separator2: TMenuItem
-      Caption = '-'
-    end
-    object PasteItem: TMenuItem
-      Caption = 'Paste from clipboard'
-      OnClick = PasteItemClick
     end
   end
   object OpenDialog1: TOpenDialog

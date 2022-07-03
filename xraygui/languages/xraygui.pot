@@ -26,7 +26,7 @@ msgid "Delete"
 msgstr ""
 
 #: tmainform.groupbox1.caption
-msgid "Configurations [vmess]"
+msgid "Configurations [ss/vmess]"
 msgstr ""
 
 #: tmainform.groupbox2.caption
@@ -48,11 +48,6 @@ msgstr ""
 
 #: tmainform.pastebtn.hint
 msgctxt "tmainform.pastebtn.hint"
-msgid "Paste from clipboard"
-msgstr ""
-
-#: tmainform.pasteitem.caption
-msgctxt "tmainform.pasteitem.caption"
 msgid "Paste from clipboard"
 msgstr ""
 
@@ -90,6 +85,6 @@ msgid "The file is not valid!"
 msgstr ""
 
 #: unit1.svmessonlymsg
-msgid "Need the vmess://... format!"
+msgid "Need the vmess:// or ss:// (without obfs) format!"
 msgstr ""
 

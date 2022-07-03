@@ -23,8 +23,6 @@ type
     Label1: TLabel;
     LogMemo: TMemo;
     LoadItem: TMenuItem;
-    PasteItem: TMenuItem;
-    Separator2: TMenuItem;
     OpenDialog1: TOpenDialog;
     SaveDialog1: TSaveDialog;
     SaveItem: TMenuItem;
@@ -66,7 +64,10 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure ButtonStatus;
     function VmessDecode(URL, val: string): string;
-    procedure CreateConfig(VMESSURL, PORT, SAVEPATH: string);
+    procedure CreateVMESSConfig(VMESSURL, PORT, SAVEPATH: string);
+    function SSDecode(URL: string; val: integer): string;
+    procedure CreateSSConfig(SSURL, PORT, SAVEPATH: string);
+
   private
 
   public
@@ -77,7 +78,7 @@ var
   MainForm: TMainForm;
 
 resourcestring
-  SVmessOnlyMsg = 'Need the vmess://... format!';
+  SVmessOnlyMsg = 'Need the vmess:// or ss:// (without obfs) format!';
   SDeleteMsg = 'Delete the selected configurations?';
   SNotValidMsg = 'The file is not valid!';
 
@@ -142,7 +143,7 @@ begin
     Result := False;
 end;
 
-//Декодирование/Нормализация/Поиск URL из конфигурации VMESS
+//VMESS - Декодирование/Нормализация/Поиск URL из конфигурации VMESS
 function TMainForm.VmessDecode(URL, val: string): string;
 var
   i: integer;
@@ -185,8 +186,8 @@ begin
   end;
 end;
 
-//Создать и сохранить ~./config/xraygui/config.json
-procedure TMainForm.CreateConfig(VMESSURL, PORT, SAVEPATH: string);
+//VMESS - Создать и сохранить ~./config/xraygui/config.json
+procedure TMainForm.CreateVMESSConfig(VMESSURL, PORT, SAVEPATH: string);
 var
   S: TStringList;
 begin
@@ -203,9 +204,17 @@ begin
     S.Add('  "log": {');
     S.Add('    "access": "",');
     S.Add('    "error": "",');
-    //LOG LEVEL (debug, info, warning, error)
+  //LOG LEVEL (debug, info, warning, error)
     S.Add('    "loglevel": "info"');
     S.Add('  },');
+    //DNS
+    S.Add('        "dns": {');
+    S.Add('        "servers": [');
+    S.Add('            "1.1.1.1",');
+    S.Add('            "8.8.8.8",');
+    S.Add('            "9.9.9.9"');
+    S.Add('        ]');
+    S.Add('    },');
     S.Add('  "inbounds": [');
     S.Add('    {');
     S.Add('      "tag": "proxy",');
@@ -395,6 +404,200 @@ begin
   end;
 end;
 
+//SS - Декодирование/Нормализация/Поиск
+function TMainForm.SSDecode(URL: string; val: integer): string;
+const
+  URISeparator = '@#&?';
+var
+  i: integer;
+  S: TStringList;
+begin
+  try
+    S := TStringList.Create;
+
+    //Отсекаем ss://
+    URL := Trim(Copy(URL, 6, Length(URL)));
+    //Убираем переводы строк
+    URL := StringReplace(URL, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
+    //Убираем пробелы
+    URL := StringReplace(URL, ' ', '', [rfReplaceAll, rfIgnoreCase]);
+    //Убираем кавычки
+    URL := StringReplace(URL, '"', '', [rfReplaceAll, rfIgnoreCase]);
+
+    //Заменяем символы URI-сепаратора на ','
+    for i := 1 to Length(URL) do
+      if Pos(URL[i], URISeparator) > 0 then
+        URL[i] := ':';
+
+    //Получаем декодированную часть URL
+    Result := DecodeStringBase64(Copy(URL, 1, Pos(':', URL) - 1));
+
+    //Заменяем символы URI-сепаратора на ',' после расшифровки
+    for i := 1 to Length(Result) do
+      if Pos(Result[i], URISeparator) > 0 then
+        Result[i] := ':';
+
+    //Грузим линейный текст
+    S.Text := StringReplace(URL, Copy(URL, 1, Pos(':', URL) - 1),
+      Result, [rfReplaceAll, rfIgnoreCase]);
+
+    //Разделяем значения на Items по (:)
+    S.Delimiter := ':';
+    S.StrictDelimiter := True;
+    S.DelimitedText := S[0];
+
+    Result := S[val];
+  finally
+    S.Free;
+  end;
+end;
+
+//SS - Создать и сохранить ~./config/xraygui/config.json
+procedure TMainForm.CreateSSConfig(SSURL, PORT, SAVEPATH: string);
+var
+  S: TStringList;
+begin
+  try
+    S := TStringList.Create;
+
+    S.Add('    {');
+    S.Add('        "api": {');
+    S.Add('            "services": [');
+    S.Add('                "ReflectionService",');
+    S.Add('                "HandlerService",');
+    S.Add('                "LoggerService",');
+    S.Add('                "StatsService"');
+    S.Add('            ],');
+    S.Add('            "tag": "XRayGUI_API"');
+    S.Add('        },');
+    //DNS
+    S.Add('        "dns": {');
+    S.Add('        "servers": [');
+    S.Add('            "1.1.1.1",');
+    S.Add('            "8.8.8.8",');
+    S.Add('            "9.9.9.9"');
+    S.Add('        ]');
+    S.Add('    },');
+    S.Add('        "inbounds": [');
+    S.Add('            {');
+    S.Add('                "listen": "127.0.0.1",');
+    //LOCAL PORT
+    S.Add('                "port": ' + PORT + ',');
+    S.Add('                "protocol": "socks",');
+    S.Add('                "settings": {');
+    S.Add('                    "auth": "noauth",');
+    S.Add('                    "ip": "127.0.0.1",');
+    S.Add('                    "udp": true');
+    S.Add('                },');
+    S.Add('                "sniffing": {');
+    S.Add('                },');
+    S.Add('                "tag": "socks_IN"');
+    S.Add('            }');
+    S.Add('        ],');
+    S.Add('        "log": {');
+    //LOGLEVEL
+    S.Add('            "loglevel": "info"');
+    S.Add('        },');
+    S.Add('        "outbounds": [');
+    S.Add('            {');
+    S.Add('                "protocol": "shadowsocks",');
+    S.Add('                "sendThrough": "0.0.0.0",');
+    S.Add('                "settings": {');
+    S.Add('                    "servers": [');
+    S.Add('                        {');
+    //SERVER_ADDRESS
+    S.Add('                            "address": "' + SSDecode(SSURL, 2) + '",');
+    //METHOD
+    S.Add('                            "method": "' + SSDecode(SSURL, 0) + '",');
+    //PASSWORD
+    S.Add('                            "password": "' + SSDecode(SSURL, 1) + '",');
+    //SERVER_PORT
+    S.Add('                            "port": ' + SSDecode(SSURL, 3));
+    S.Add('                        }');
+    S.Add('                    ]');
+    S.Add('                },');
+    S.Add('                "streamSettings": {');
+    S.Add('                },');
+    S.Add('                "tag": "PROXY"');
+    S.Add('            },');
+    S.Add('            {');
+    S.Add('                "protocol": "freedom",');
+    S.Add('                "sendThrough": "0.0.0.0",');
+    S.Add('                "settings": {');
+    S.Add('                    "domainStrategy": "AsIs",');
+    S.Add('                    "redirect": ":0"');
+    S.Add('                },');
+    S.Add('                "streamSettings": {');
+    S.Add('                },');
+    S.Add('                "tag": "DIRECT"');
+    S.Add('            },');
+    S.Add('            {');
+    S.Add('                "protocol": "blackhole",');
+    S.Add('                "sendThrough": "0.0.0.0",');
+    S.Add('                "settings": {');
+    S.Add('                    "response": {');
+    S.Add('                        "type": "none"');
+    S.Add('                    }');
+    S.Add('                },');
+    S.Add('                "streamSettings": {');
+    S.Add('                },');
+    S.Add('                "tag": "BLACKHOLE"');
+    S.Add('            }');
+    S.Add('        ],');
+    S.Add('        "policy": {');
+    S.Add('            "system": {');
+    S.Add('                "statsInboundDownlink": true,');
+    S.Add('                "statsInboundUplink": true,');
+    S.Add('                "statsOutboundDownlink": true,');
+    S.Add('                "statsOutboundUplink": true');
+    S.Add('            }');
+    S.Add('        },');
+    S.Add('        "routing": {');
+    S.Add('            "domainMatcher": "mph",');
+    S.Add('            "domainStrategy": "",');
+    S.Add('            "rules": [');
+    S.Add('                {');
+    S.Add('                    "inboundTag": [');
+    S.Add('                        "XRayGUI_API_INBOUND"');
+    S.Add('                    ],');
+    S.Add('                    "outboundTag": "XRayGUI_API",');
+    S.Add('                    "type": "field"');
+    S.Add('                },');
+    S.Add('                {');
+    S.Add('                    "ip": [');
+    S.Add('                        "geoip:private"');
+    S.Add('                    ],');
+    S.Add('                    "outboundTag": "DIRECT",');
+    S.Add('                    "type": "field"');
+    S.Add('                },');
+    S.Add('                {');
+    S.Add('                    "ip": [');
+    S.Add('                        "geoip:cn"');
+    S.Add('                    ],');
+    S.Add('                    "outboundTag": "DIRECT",');
+    S.Add('                    "type": "field"');
+    S.Add('                },');
+    S.Add('                {');
+    S.Add('                    "domain": [');
+    S.Add('                        "geosite:cn"');
+    S.Add('                    ],');
+    S.Add('                    "outboundTag": "DIRECT",');
+    S.Add('                    "type": "field"');
+    S.Add('                }');
+    S.Add('            ]');
+    S.Add('        },');
+    S.Add('        "stats": {');
+    S.Add('        }');
+    S.Add('    }');
+
+    //Сохранение готового конфига
+    S.SaveToFile(SAVEPATH);
+  finally
+    S.Free;
+  end;
+end;
+
+
 //Останов
 procedure TMainForm.StopBtnClick(Sender: TObject);
 begin
@@ -450,7 +653,9 @@ end;
 procedure TMainForm.PasteBtnClick(Sender: TObject);
 begin
   //Только VMESS (поверка)
-  if Pos('vmess://', ClipBoard.AsText) = 0 then
+  if (Copy(Clipboard.AsText, 1, 8) <> 'vmess://') and
+    (Copy(ClipBoard.AsText, 1, 5) <> 'ss://') or
+    (Pos('obfs', Clipboard.AsText) <> 0) then
   begin
     MessageDlg(SVmessOnlyMsg, mtWarning, [mbOK], 0);
     Exit;
@@ -502,9 +707,14 @@ begin
   INIPropStorage1.StoredValue['findex'] := IntToStr(ConfigBox.ItemIndex);
   INIPropStorage1.Save;
 
-  //Создаём/Сохраняем config.json для xray
-  CreateConfig(ConfigBox.Items[ConfigBox.ItemIndex], PortEdit.Text,
-    GetUserDir + '.config/xraygui/config.json');
+  if Pos('vmess://', ConfigBox.Items[ConfigBox.ItemIndex]) > 0 then
+    //VMESS - Создаём/Сохраняем config.json для xray
+    CreateVMESSConfig(ConfigBox.Items[ConfigBox.ItemIndex], PortEdit.Text,
+      GetUserDir + '.config/xraygui/config.json')
+  else
+    //SS - Создаём/Сохраняем config.json для xray
+    CreateSSConfig(ConfigBox.Items[ConfigBox.ItemIndex], PortEdit.Text,
+      GetUserDir + '.config/xraygui/config.json');
 
   //Быстрая очистка вывода перед стартом
   LogMemo.Clear;
@@ -664,7 +874,8 @@ begin
     //Проверяем на валидность (vmess://...)
     for i := 0 to S.Count - 1 do
     begin
-      if Copy(S[i], 1, 8) <> 'vmess://' then
+      if (Copy(S[i], 1, 8) <> 'vmess://') and (Copy(S[i], 1, 5) <> 'ss://') or
+        (Pos('obfs', S[i]) <> 0) then
       begin
         MessageDlg(SNotValidMsg, mtWarning, [mbOK], 0);
         S.Free;
@@ -687,6 +898,7 @@ end;
 //Вставить из буфера
 procedure TMainForm.PasteItemClick(Sender: TObject);
 begin
+  Application.ProcessMessages;
   PasteBtn.Click;
 end;
 

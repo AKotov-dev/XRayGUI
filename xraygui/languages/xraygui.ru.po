@@ -38,8 +38,8 @@ msgid "Delete"
 msgstr "Удалить"
 
 #: tmainform.groupbox1.caption
-msgid "Configurations [vmess]"
-msgstr "Конфигурации [vmess]"
+msgid "Configurations [ss/vmess]"
+msgstr "Конфигурации [ss/vmess]"
 
 #: tmainform.groupbox2.caption
 msgid "Management/Logging"
@@ -60,11 +60,6 @@ msgstr "Вставить"
 
 #: tmainform.pastebtn.hint
 msgctxt "tmainform.pastebtn.hint"
-msgid "Paste from clipboard"
-msgstr "Вставить из буфера"
-
-#: tmainform.pasteitem.caption
-msgctxt "tmainform.pasteitem.caption"
 msgid "Paste from clipboard"
 msgstr "Вставить из буфера"
 
@@ -102,5 +97,6 @@ msgid "The file is not valid!"
 msgstr "Невалидный файл!"
 
 #: unit1.svmessonlymsg
-msgid "Need the vmess://... format!"
-msgstr "Нужен vmess://... формат!"
+msgid "Need the vmess:// or ss:// (without obfs) format!"
+msgstr "Нужен vmess://или ss:// (без obfs) формат!"
+

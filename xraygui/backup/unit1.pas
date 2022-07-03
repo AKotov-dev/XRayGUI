@@ -204,7 +204,7 @@ begin
     S.Add('    "access": "",');
     S.Add('    "error": "",');
     //LOG LEVEL (debug, info, warning, error)
-    S.Add('    "loglevel": "info"');
+    S.Add('    "loglevel": "error"');
     S.Add('  },');
     S.Add('  "inbounds": [');
     S.Add('    {');
@@ -565,7 +565,7 @@ begin
     end
     else
     begin
-      //Список пуст = удаляем автозагрузку
+      //Список пуст = удаляем ярлык автозагрузки
       DeleteFile(GetUserDir + '.config/autostart/xray.desktop');
       AutoStartBox.Checked := CheckAutoStart;
     end;

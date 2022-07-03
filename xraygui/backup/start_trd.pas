@@ -48,7 +48,7 @@ begin
 
     //Если файл лога отсутствует - создаём пустой и читаем до Terminate
     ExProcess.Parameters.Add('[[ -f ~/.config/xraygui/xraygui.log ]] || touch ' +
-      '~/.config/xraygui/xraygui.log && tail -n 100 -f ~/.config/xraygui/xraygui.log');
+      '~/.config/xraygui/xraygui.log && tail -n 100 -f ~/.config/xraygui/xraygui.log 2> >(grep -v truncated >&2)');
 
     ExProcess.Options := [poUsePipes, poStderrToOutPut];
     //, poWaitOnExit (синхронный вывод)

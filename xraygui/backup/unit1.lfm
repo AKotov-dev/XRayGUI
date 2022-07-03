@@ -47,12 +47,12 @@ object MainForm: TMainForm
       object SelAllBtn: TSpeedButton
         AnchorSideLeft.Control = DeleteBtn
         AnchorSideLeft.Side = asrBottom
-        Left = 93
+        Left = 92
         Height = 36
         Hint = 'Select all'
         Top = 8
         Width = 36
-        BorderSpacing.Left = 2
+        BorderSpacing.Left = 1
         Caption = '*'
         OnClick = SelAllBtnClick
         ShowHint = True
@@ -242,9 +242,10 @@ object MainForm: TMainForm
       Font.Name = 'Monospace'
       ParentFont = False
       ReadOnly = True
-      ScrollBars = ssVertical
+      ScrollBars = ssAutoBoth
       TabOrder = 2
       WantReturns = False
+      WordWrap = False
     end
   end
   object StaticText1: TStaticText

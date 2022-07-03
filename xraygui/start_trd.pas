@@ -89,7 +89,7 @@ var
 begin
   //Вывод построчно
   for i := 0 to Result.Count - 1 do
-    MainForm.LogMemo.Lines.Append(Result[i]);
+    MainForm.LogMemo.Lines.Append(' ' + Result[i]);
 
   //Промотать список вниз
   MainForm.LogMemo.SelStart := Length(MainForm.LogMemo.Text);

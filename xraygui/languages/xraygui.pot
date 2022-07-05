@@ -85,6 +85,8 @@ msgid "The file is not valid!"
 msgstr ""
 
 #: unit1.svmessonlymsg
-msgid "VMESS, VLESS and SS protocols are supported!"
+msgid ""
+"Supported protocols:\n"
+"VMESS/VLESS (ws, ws+tls) and SS (without obfs)!"
 msgstr ""
 

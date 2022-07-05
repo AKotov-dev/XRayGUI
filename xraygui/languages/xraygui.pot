@@ -26,7 +26,7 @@ msgid "Delete"
 msgstr ""
 
 #: tmainform.groupbox1.caption
-msgid "Configurations [ss/vmess]"
+msgid "Configurations [vmess/vless/ss]"
 msgstr ""
 
 #: tmainform.groupbox2.caption
@@ -85,6 +85,6 @@ msgid "The file is not valid!"
 msgstr ""
 
 #: unit1.svmessonlymsg
-msgid "Need the vmess:// or ss:// (without obfs) format!"
+msgid "VMESS, VLESS and SS protocols are supported!"
 msgstr ""
 

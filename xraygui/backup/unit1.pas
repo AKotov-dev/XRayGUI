@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
   Buttons, ClipBrd, Spin, IniPropStorage, Process, Base64, DefaultTranslator,
-  CheckLst, Menus;
+  CheckLst, Menus, URIParser, StrUtils;
 
 type
 
@@ -67,6 +67,8 @@ type
     procedure CreateVMESSConfig(VMESSURL, PORT, SAVEPATH: string);
     function SSDecode(URL: string; val: integer): string;
     procedure CreateSSConfig(SSURL, PORT, SAVEPATH: string);
+    function VLESSDecode(URL, val: string): string;
+    procedure CreateVLESSConfig(VLESSURL, PORT, SAVEPATH: string);
 
   private
 
@@ -78,7 +80,7 @@ var
   MainForm: TMainForm;
 
 resourcestring
-  SVmessOnlyMsg = 'Need the vmess:// or ss:// (without obfs) format!';
+  SVmessOnlyMsg = 'VMESS, VLESS and SS are supported!';
   SDeleteMsg = 'Delete the selected configurations?';
   SNotValidMsg = 'The file is not valid!';
 
@@ -204,7 +206,7 @@ begin
     S.Add('  "log": {');
     S.Add('    "access": "",');
     S.Add('    "error": "",');
-  //LOG LEVEL (debug, info, warning, error)
+    //LOG LEVEL (debug, info, warning, error)
     S.Add('    "loglevel": "info"');
     S.Add('  },');
     //DNS
@@ -597,6 +599,268 @@ begin
   end;
 end;
 
+//VLESS - Декодирование/Нормализация/Поиск
+function TMainForm.VLESSDecode(URL, val: string): string;
+const
+  URISeparator = '@#&?';
+var
+  U: TURI;
+  ch: char;
+  posc, skip, i: integer;
+  S: TStringList;
+begin
+  try
+    S := TStringList.Create;
+    Result := '';
+
+    //Нормализация URL; Убираем переводы строк
+    URL := StringReplace(URL, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
+    //Убираем пробелы
+    URL := StringReplace(URL, ' ', '', [rfReplaceAll, rfIgnoreCase]);
+    //Убираем кавычки
+    URL := StringReplace(URL, '"', '', [rfReplaceAll, rfIgnoreCase]);
+
+    //Декодируем и парсим URL (stage-1)
+    U := URIParser.ParseURI(URL, True);
+
+    case val of
+      'id': Result := U.Username;
+      'server': Result := U.Host;
+      'port': Result := IntToStr(U.Port);
+      'comment': Result := U.Bookmark;
+    end;
+
+    if Result = '' then
+    begin
+      //Stage-2; Остальные вводные: security, type, encryption, path; Декодируем URL
+      posc := 0;
+      skip := 0;
+
+      //URI Decoder
+      for ch in URL do
+      begin
+        if skip = 0 then
+        begin
+          if (ch = '%') and (posc < URL.length - 2) then
+          begin
+            skip := 2;
+            Result := Result + ansichar(Hex2Dec('$' + URL[posc + 2] + URL[posc + 3]));
+          end
+          else
+          begin
+            Result := Result + ch;
+          end;
+        end
+        else
+        begin
+          skip := skip - 1;
+        end;
+        posc := posc + 1;
+      end;
+
+      //Result=Decode URI (усекаем)
+      Result := Trim(Copy(Result, 9, Length(Result)));
+
+      //Символы = заменяем на :
+      Result := StringReplace(Result, '=', ':', [rfReplaceAll, rfIgnoreCase]);
+
+      //Заменяем символы URI-сепаратора на ','
+      for i := 1 to Length(Result) do
+        if Pos(Result[i], URISeparator) > 0 then
+          Result[i] := ',';
+
+      //Грузим линейный текст
+      S.Text := Result;
+
+      //Разделяем значения на Items по (,)
+      S.Delimiter := ',';
+      S.StrictDelimiter := True;
+      S.DelimitedText := S[0];
+
+      //Поиск соответствия
+      for i := 0 to S.Count - 1 do
+        if Copy(S[i], 1, Pos(':', S[i]) - 1) = val then
+        begin
+          Result := Copy(S[i], Pos(':', S[i]) + 1, Length(S[i]));
+          Break;
+        end;
+    end;
+
+  finally
+    S.Free;
+  end;
+end;
+
+//VLESS - Создать и сохранить ~./config/xraygui/config.json
+procedure TMainForm.CreateVLESSConfig(VLESSURL, PORT, SAVEPATH: string);
+var
+  S: TStringList;
+begin
+  try
+    S := TStringList.Create;
+
+    S.Add('    {');
+    S.Add('        "api": {');
+    S.Add('            "services": [');
+    S.Add('                "ReflectionService",');
+    S.Add('                "HandlerService",');
+    S.Add('                "LoggerService",');
+    S.Add('                "StatsService"');
+    S.Add('            ],');
+    S.Add('            "tag": "XRayGUI_API"');
+    S.Add('        },');
+    S.Add('        "dns": {');
+    S.Add('            "servers": [');
+    S.Add('                "1.1.1.1",');
+    S.Add('                "8.8.8.8",');
+    S.Add('                "9.9.9.9"');
+    S.Add('            ]');
+    S.Add('        },');
+    S.Add('        "inbounds": [');
+    S.Add('            {');
+    S.Add('                "listen": "127.0.0.1",');
+    //LOCAL_PORT
+    S.Add('                "port": ' + PortEdit.Text + ',');
+    S.Add('                "protocol": "socks",');
+    S.Add('                "settings": {');
+    S.Add('                    "auth": "noauth",');
+    S.Add('                    "ip": "127.0.0.1",');
+    S.Add('                    "udp": true');
+    S.Add('                },');
+    S.Add('                "sniffing": {');
+    S.Add('                },');
+    S.Add('                "tag": "socks_IN"');
+    S.Add('            }');
+    S.Add('        ],');
+    S.Add('        "log": {');
+    S.Add('            "loglevel": "info"');
+    S.Add('        },');
+    S.Add('        "outbounds": [');
+    S.Add('            {');
+    S.Add('                "protocol": "vless",');
+    S.Add('                "settings": {');
+    S.Add('                    "vnext": [');
+    S.Add('                        {');
+    //SERVER
+    S.Add('                            "address": "' +
+      VlessDecode(VLESSURL, 'server') + '",');
+    //PORT
+    S.Add('                            "port": ' + VlessDecode(VLESSURL, 'port') + ',');
+    S.Add('                            "users": [');
+    S.Add('                                {');
+    //ENCRYPTION
+    S.Add('                                    "encryption": "' +
+      VlessDecode(VLESSURL, 'encryption') + '",');
+    //ID
+    S.Add('                                    "id": "' +
+      VlessDecode(VLESSURL, 'id') + '"');
+    S.Add('                                }');
+    S.Add('                            ]');
+    S.Add('                        }');
+    S.Add('                    ]');
+    S.Add('                },');
+    S.Add('                "streamSettings": {');
+    //TYPE
+    S.Add('                    "network": "' + VlessDecode(VLESSURL, 'type') + '",');
+    //SECURITY
+    S.Add('                    "security": "' + VlessDecode(VLESSURL,
+      'security') + '",');
+    S.Add('                    "tlsSettings": {');
+    S.Add('                        "disableSystemRoot": false,');
+    //SERVER
+    S.Add('                        "serverName": "' +
+      VlessDecode(VLESSURL, 'server') + '"');
+    S.Add('                    },');
+    S.Add('                    "wsSettings": {');
+    S.Add('                        "headers": {');
+    //SERVER-HOST
+    S.Add('                            "Host": "' +
+      VlessDecode(VLESSURL, 'server') + '"');
+    S.Add('                        },');
+    //PATH
+    S.Add('                        "path": "' + VlessDecode(VLESSURL, 'path') + '"');
+    S.Add('                    },');
+    S.Add('                    "xtlsSettings": {');
+    S.Add('                        "disableSystemRoot": false');
+    S.Add('                    }');
+    S.Add('                },');
+    S.Add('                "tag": "xtndhxcnmdxhdjn"');
+    S.Add('            },');
+    S.Add('            {');
+    S.Add('                "protocol": "freedom",');
+    S.Add('                "sendThrough": "0.0.0.0",');
+    S.Add('                "settings": {');
+    S.Add('                    "domainStrategy": "AsIs",');
+    S.Add('                    "redirect": ":0"');
+    S.Add('                },');
+    S.Add('                "streamSettings": {');
+    S.Add('                },');
+    S.Add('                "tag": "DIRECT"');
+    S.Add('            },');
+    S.Add('            {');
+    S.Add('                "protocol": "blackhole",');
+    S.Add('                "sendThrough": "0.0.0.0",');
+    S.Add('                "settings": { ');
+    S.Add('                    "response": { ');
+    S.Add('                        "type": "none"');
+    S.Add('                    }');
+    S.Add('                },');
+    S.Add('                "streamSettings": {');
+    S.Add('                },');
+    S.Add('                "tag": "BLACKHOLE"');
+    S.Add('            }');
+    S.Add('        ],');
+    S.Add('        "policy": {');
+    S.Add('            "system": {');
+    S.Add('                "statsInboundDownlink": true,');
+    S.Add('                "statsInboundUplink": true,');
+    S.Add('                "statsOutboundDownlink": true,');
+    S.Add('                "statsOutboundUplink": true');
+    S.Add('            }');
+    S.Add('        },');
+    S.Add('        "routing": {');
+    S.Add('            "domainMatcher": "mph",');
+    S.Add('            "domainStrategy": "",');
+    S.Add('            "rules": [');
+    S.Add('                {');
+    S.Add('                    "inboundTag": [');
+    S.Add('                        "XRayGUI_API_INBOUND"');
+    S.Add('                    ],');
+    S.Add('                    "outboundTag": "XRayGUI_API",');
+    S.Add('                    "type": "field"');
+    S.Add('                },');
+    S.Add('                {');
+    S.Add('                    "ip": [');
+    S.Add('                        "geoip:private"');
+    S.Add('                    ],');
+    S.Add('                    "outboundTag": "DIRECT",');
+    S.Add('                    "type": "field"');
+    S.Add('                },');
+    S.Add('                {');
+    S.Add('                    "ip": [');
+    S.Add('                        "geoip:cn"');
+    S.Add('                    ],');
+    S.Add('                    "outboundTag": "DIRECT",');
+    S.Add('                    "type": "field"');
+    S.Add('                },');
+    S.Add('                {');
+    S.Add('                    "domain": [');
+    S.Add('                        "geosite:cn"');
+    S.Add('                    ],');
+    S.Add('                    "outboundTag": "DIRECT",');
+    S.Add('                    "type": "field"');
+    S.Add('                }');
+    S.Add('            ]');
+    S.Add('        },');
+    S.Add('        "stats": {');
+    S.Add('        }');
+    S.Add('    }');
+
+    //Сохранение готового конфига
+    S.SaveToFile(SAVEPATH);
+  finally
+  end;
+end;
 
 //Останов
 procedure TMainForm.StopBtnClick(Sender: TObject);
@@ -654,6 +918,7 @@ procedure TMainForm.PasteBtnClick(Sender: TObject);
 begin
   //Только VMESS (поверка)
   if (Copy(Clipboard.AsText, 1, 8) <> 'vmess://') and
+    (Copy(ClipBoard.AsText, 1, 8) <> 'vless://') and
     (Copy(ClipBoard.AsText, 1, 5) <> 'ss://') or
     (Pos('obfs', Clipboard.AsText) <> 0) then
   begin
@@ -710,6 +975,11 @@ begin
   if Pos('vmess://', ConfigBox.Items[ConfigBox.ItemIndex]) > 0 then
     //VMESS - Создаём/Сохраняем config.json для xray
     CreateVMESSConfig(ConfigBox.Items[ConfigBox.ItemIndex], PortEdit.Text,
+      GetUserDir + '.config/xraygui/config.json')
+  else
+  if Pos('vless://', ConfigBox.Items[ConfigBox.ItemIndex]) > 0 then
+    //VLESS - Создаём/Сохраняем config.json для xray
+    CreateVLESSConfig(ConfigBox.Items[ConfigBox.ItemIndex], PortEdit.Text,
       GetUserDir + '.config/xraygui/config.json')
   else
     //SS - Создаём/Сохраняем config.json для xray
@@ -874,8 +1144,8 @@ begin
     //Проверяем на валидность (vmess://...)
     for i := 0 to S.Count - 1 do
     begin
-      if (Copy(S[i], 1, 8) <> 'vmess://') and (Copy(S[i], 1, 5) <> 'ss://') or
-        (Pos('obfs', S[i]) <> 0) then
+      if (Copy(S[i], 1, 8) <> 'vmess://') and (Copy(S[i], 1, 8) <> 'vless://') and
+        (Copy(S[i], 1, 5) <> 'ss://') or (Pos('obfs', S[i]) <> 0) then
       begin
         MessageDlg(SNotValidMsg, mtWarning, [mbOK], 0);
         S.Free;
@@ -898,7 +1168,6 @@ end;
 //Вставить из буфера
 procedure TMainForm.PasteItemClick(Sender: TObject);
 begin
-  Application.ProcessMessages;
   PasteBtn.Click;
 end;
 

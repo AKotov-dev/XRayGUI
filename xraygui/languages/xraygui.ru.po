@@ -38,8 +38,8 @@ msgid "Delete"
 msgstr "Удалить"
 
 #: tmainform.groupbox1.caption
-msgid "Configurations [ss/vmess]"
-msgstr "Конфигурации [ss/vmess]"
+msgid "Configurations [vmess/vless/ss]"
+msgstr "Конфигурации [vmess/vless/ss]"
 
 #: tmainform.groupbox2.caption
 msgid "Management/Logging"
@@ -97,6 +97,5 @@ msgid "The file is not valid!"
 msgstr "Невалидный файл!"
 
 #: unit1.svmessonlymsg
-msgid "Need the vmess:// or ss:// (without obfs) format!"
-msgstr "Нужен vmess://или ss:// (без obfs) формат!"
-
+msgid "VMESS, VLESS and SS protocols are supported!"
+msgstr "Поддерживаются протоколы VMESS, VLESS и SS!"

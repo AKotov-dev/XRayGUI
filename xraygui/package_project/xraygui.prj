@@ -11,7 +11,7 @@ release=0.mrx9
 group=Applications/System
 
 [DESCRIPTION]
-0=GUI for XRay (VMESS)
+0=GUI for XRay
 1=---
 2=More information: /usr/share/doc/package_name/repack.txt
 
@@ -22,7 +22,7 @@ maintainer=Alex Kotov
 vendor=alex_q_2000 (C) 2022
 
 [SUMMARY]
-summary=GUI for XRay (VMESS)
+summary=GUI for XRay
 
 [URLCOPY]
 urlcopy=https://github.com/AKotov-dev/XRayGUI

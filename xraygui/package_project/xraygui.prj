@@ -79,7 +79,7 @@ toolversion=2.2.0
 
 [INFO]
 0=v0.5
-1=+ VMESS, VLESS and SS protocols are supported
+1=+ Supported protocols: VMESS/VLESS (ws, ws+tls) and SS (without obfs)
 2=
 3=v0.4
 4=+ Optimization of log output

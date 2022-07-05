@@ -916,11 +916,12 @@ begin
   end;
 end;
 
-//Вставка нового URL vmess://...
+//Вставка нового URL...
 procedure TMainForm.PasteBtnClick(Sender: TObject);
 begin
+
   //Только VMESS (поверка)
-  if (Copy(Clipboard.AsText, 1, 8) <> 'vmess://') and
+  if (ClipBoard.AsText = '') or (Copy(Clipboard.AsText, 1, 8) <> 'vmess://') and
     (Copy(ClipBoard.AsText, 1, 8) <> 'vless://') and
     (Copy(ClipBoard.AsText, 1, 5) <> 'ss://') or
     (Pos('obfs', Clipboard.AsText) <> 0) then

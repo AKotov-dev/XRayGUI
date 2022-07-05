@@ -296,15 +296,15 @@ object MainForm: TMainForm
     end
   end
   object OpenDialog1: TOpenDialog
-    DefaultExt = '.*.vmess'
-    Filter = 'XRayGUI files (*.vmess)|*.vmess'
+    DefaultExt = '.*.proxy'
+    Filter = 'XRayGUI files (*.vmess)|*.proxy'
     Options = [ofNoNetworkButton, ofEnableSizing]
     Left = 64
     Top = 176
   end
   object SaveDialog1: TSaveDialog
-    DefaultExt = '.*.vmess'
-    Filter = 'XRayGUI file (*.vmess)|*.vmess'
+    DefaultExt = '.*.proxy'
+    Filter = 'XRayGUI file (*.proxy)|*.proxy'
     Options = [ofOverwritePrompt, ofEnableSizing]
     Left = 168
     Top = 176

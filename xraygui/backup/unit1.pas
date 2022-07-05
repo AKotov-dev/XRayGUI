@@ -80,7 +80,8 @@ var
   MainForm: TMainForm;
 
 resourcestring
-  SVmessOnlyMsg = 'Supported protocols:' +#13#10+'VMESS/VLESS (ws, ws+tls) and SS (without obfs)!';
+  SVmessOnlyMsg = 'Supported protocols:' + #13#10 +
+    'VMESS/VLESS (ws, ws+tls) and SS (without obfs)!';
   SDeleteMsg = 'Delete the selected configurations?';
   SNotValidMsg = 'The file is not valid!';
 
@@ -915,11 +916,12 @@ begin
   end;
 end;
 
-//Вставка нового URL vmess://...
+//Вставка нового URL...
 procedure TMainForm.PasteBtnClick(Sender: TObject);
 begin
+
   //Только VMESS (поверка)
-  if (Copy(Clipboard.AsText, 1, 8) <> 'vmess://') and
+  if (ClipBoard.AsText = '') or (Copy(Clipboard.AsText, 1, 8) <> 'vmess://') and
     (Copy(ClipBoard.AsText, 1, 8) <> 'vless://') and
     (Copy(ClipBoard.AsText, 1, 5) <> 'ss://') or
     (Pos('obfs', Clipboard.AsText) <> 0) then

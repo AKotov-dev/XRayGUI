@@ -683,7 +683,9 @@ begin
         begin
           Result := Copy(S[i], Pos(':', S[i]) + 1, Length(S[i]));
           Break;
-        end;
+        end
+        else
+          Result := 'none';
     end;
 
   finally

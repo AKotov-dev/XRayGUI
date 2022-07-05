@@ -80,7 +80,7 @@ var
   MainForm: TMainForm;
 
 resourcestring
-  SVmessOnlyMsg = 'VMESS, VLESS and SS are supported!';
+  SVmessOnlyMsg = 'VMESS, VLESS and SS protocols are supported!';
   SDeleteMsg = 'Delete the selected configurations?';
   SNotValidMsg = 'The file is not valid!';
 
@@ -683,7 +683,9 @@ begin
         begin
           Result := Copy(S[i], Pos(':', S[i]) + 1, Length(S[i]));
           Break;
-        end;
+        end
+        else
+          Result := 'null';
     end;
 
   finally

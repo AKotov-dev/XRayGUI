@@ -41,7 +41,6 @@ type
     Splitter2: TSplitter;
     Splitter3: TSplitter;
     StaticText1: TStaticText;
-    Timer1: TTimer;
     procedure AutoStartBoxChange(Sender: TObject);
     procedure ClearBoxChange(Sender: TObject);
     procedure ConfigBoxClickCheck(Sender: TObject);
@@ -61,7 +60,6 @@ type
     procedure StartBtnClick(Sender: TObject);
     procedure StartProcess(command: string);
     procedure StopBtnClick(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
     procedure ButtonStatus;
     function VmessDecode(URL, val: string): string;
     procedure CreateVMESSConfig(VMESSURL, PORT, SAVEPATH: string);
@@ -89,7 +87,7 @@ resourcestring
 
 implementation
 
-uses start_trd;
+uses start_trd, portscan_trd;
 
 {$R *.lfm}
 
@@ -1082,42 +1080,6 @@ begin
     '> /home/$LOGNAME/.config/xraygui/xraygui.log');
 end;
 
-//Ловим порт прокси и выводим индикатор
-procedure TMainForm.Timer1Timer(Sender: TObject);
-var
-  S: TStringList;
-  ExProcess: TProcess;
-begin
-  S := TStringList.Create;
-  ExProcess := TProcess.Create(nil);
-  try
-    ExProcess.Executable := 'bash';
-    ExProcess.Parameters.Add('-c');
-    ExProcess.Options := [poUsePipes];
-
-    ExProcess.Parameters.Add('ss -ltn | grep ' + PortEdit.Text);
-
-    Exprocess.Execute;
-    S.LoadFromStream(ExProcess.Output);
-
-    if S.Count <> 0 then
-    begin
-      Shape1.Brush.Color := clLime;
-      PortEdit.Enabled := False;
-      LoadItem.Enabled := False;
-    end
-    else
-    begin
-      Shape1.Brush.Color := clYellow;
-      PortEdit.Enabled := True;
-      LoadItem.Enabled := True;
-    end;
-  finally
-    S.Free;
-    ExProcess.Free;
-  end;
-end;
-
 //Вставка нового URL...
 procedure TMainForm.PasteBtnClick(Sender: TObject);
 begin
@@ -1208,6 +1170,8 @@ end;
 
 //Создание формы
 procedure TMainForm.FormCreate(Sender: TObject);
+var
+  FPortScanThread: TThread;
 begin
   MainForm.Caption := Application.Title;
 
@@ -1228,6 +1192,10 @@ begin
 
   //Получаем FileName (фиксация); ActiveControl = ConfigBox
   ConfigBox.Click;
+
+    //Поток проверки состояния
+  FPortScanThread := PortScan.Create(False);
+  FPortScanThread.Priority := tpNormal;
 end;
 
 //Удаление выбранных конфигураций из писка

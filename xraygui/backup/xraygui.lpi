@@ -4,7 +4,7 @@
     <Version Value="12"/>
     <General>
       <SessionStorage Value="InProjectDir"/>
-      <Title Value="XRayGUI v0.5"/>
+      <Title Value="XRayGUI v0.6"/>
       <Scaled Value="True"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
@@ -86,6 +86,10 @@
       </Unit>
       <Unit>
         <Filename Value="start_trd.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="portscan_trd.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>

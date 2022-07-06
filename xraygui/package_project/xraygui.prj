@@ -80,7 +80,7 @@ toolversion=2.2.0
 [INFO]
 0=v0.6
 1=+ Trojan protocol support
-2=
+2=+ Proxy launch control in a separate thread
 3=
 4=v0.5
 5=+ Supported protocols: VMESS/VLESS (ws, ws+tls) and SS (without obfs)

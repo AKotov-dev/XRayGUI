@@ -274,11 +274,6 @@ object MainForm: TMainForm
     Left = 320
     Top = 104
   end
-  object Timer1: TTimer
-    OnTimer = Timer1Timer
-    Left = 432
-    Top = 104
-  end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup
     Left = 121

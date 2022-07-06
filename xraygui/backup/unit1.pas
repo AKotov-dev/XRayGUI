@@ -60,7 +60,6 @@ type
     procedure StartBtnClick(Sender: TObject);
     procedure StartProcess(command: string);
     procedure StopBtnClick(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
     procedure ButtonStatus;
     function VmessDecode(URL, val: string): string;
     procedure CreateVMESSConfig(VMESSURL, PORT, SAVEPATH: string);
@@ -82,7 +81,7 @@ var
 
 resourcestring
   SVmessOnlyMsg = 'Supported protocols:' + #13#10 +
-    'VMESS/VLESS (ws, ws+tls) and SS (without obfs)!';
+    'vmess/vless (ws, ws+tls), ss (without obfs) and trojan!';
   SDeleteMsg = 'Delete the selected configurations?';
   SNotValidMsg = 'The file is not valid!';
 

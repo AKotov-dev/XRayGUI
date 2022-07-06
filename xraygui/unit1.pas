@@ -81,7 +81,7 @@ var
 
 resourcestring
   SVmessOnlyMsg = 'Supported protocols:' + #13#10 +
-    'VMESS/VLESS (ws, ws+tls) and SS (without obfs)!';
+    'vmess/vless (ws, ws+tls), ss (without obfs) and trojan!';
   SDeleteMsg = 'Delete the selected configurations?';
   SNotValidMsg = 'The file is not valid!';
 
@@ -1193,7 +1193,7 @@ begin
   //Получаем FileName (фиксация); ActiveControl = ConfigBox
   ConfigBox.Click;
 
-    //Поток проверки состояния
+  //Поток проверки состояния
   FPortScanThread := PortScan.Create(False);
   FPortScanThread.Priority := tpNormal;
 end;

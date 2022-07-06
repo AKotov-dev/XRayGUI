@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 314
+  Left = 313
   Height = 708
-  Top = 125
+  Top = 124
   Width = 990
   ActiveControl = ConfigBox
   Caption = 'XRayGUI'
@@ -18,7 +18,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 267
     Align = alLeft
-    Caption = 'Configurations [vmess/vless/ss]'
+    Caption = 'Configurations [vmess/vless/ss/trojan]'
     ClientHeight = 670
     ClientWidth = 265
     TabOrder = 0

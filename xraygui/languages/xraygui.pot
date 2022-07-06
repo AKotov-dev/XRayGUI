@@ -26,7 +26,7 @@ msgid "Delete"
 msgstr ""
 
 #: tmainform.groupbox1.caption
-msgid "Configurations [vmess/vless/ss]"
+msgid "Configurations [vmess/vless/ss/trojan]"
 msgstr ""
 
 #: tmainform.groupbox2.caption

@@ -69,6 +69,8 @@ type
     procedure CreateSSConfig(SSURL, PORT, SAVEPATH: string);
     function VLESSDecode(URL, val: string): string;
     procedure CreateVLESSConfig(VLESSURL, PORT, SAVEPATH: string);
+    function TrojanDecode(URL, val: string): string;
+    procedure CreateTrojanConfig(TROJANURL, PORT, SAVEPATH: string);
 
   private
 
@@ -427,7 +429,7 @@ begin
     //Убираем кавычки
     URL := StringReplace(URL, '"', '', [rfReplaceAll, rfIgnoreCase]);
 
-    //Заменяем символы URI-сепаратора на ','
+    //Заменяем символы URI-сепаратора на ':'
     for i := 1 to Length(URL) do
       if Pos(URL[i], URISeparator) > 0 then
         URL[i] := ':';
@@ -435,7 +437,7 @@ begin
     //Получаем декодированную часть URL
     Result := DecodeStringBase64(Copy(URL, 1, Pos(':', URL) - 1));
 
-    //Заменяем символы URI-сепаратора на ',' после расшифровки
+    //Заменяем символы URI-сепаратора на ':' после расшифровки
     for i := 1 to Length(Result) do
       if Pos(Result[i], URISeparator) > 0 then
         Result[i] := ':';
@@ -723,7 +725,7 @@ begin
     S.Add('            {');
     S.Add('                "listen": "127.0.0.1",');
     //LOCAL_PORT
-    S.Add('                "port": ' + PortEdit.Text + ',');
+    S.Add('                "port": ' + PORT + ',');
     S.Add('                "protocol": "socks",');
     S.Add('                "settings": {');
     S.Add('                    "auth": "noauth",');
@@ -865,6 +867,206 @@ begin
   end;
 end;
 
+//TROJAN - Декодирование/Нормализация/Поиск
+function TMainForm.TrojanDecode(URL, val: string): string;
+var
+  U: TURI;
+begin
+  try
+    Result := '';
+    //Нормализация URL; Убираем переводы строк
+    URL := StringReplace(URL, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
+    //Убираем пробелы
+    URL := StringReplace(URL, ' ', '', [rfReplaceAll, rfIgnoreCase]);
+    //Убираем кавычки
+    URL := StringReplace(URL, '"', '', [rfReplaceAll, rfIgnoreCase]);
+
+    //Декодируем и парсим URL (stage-1)
+    U := URIParser.ParseURI(URL, True);
+
+    case val of
+      'id': Result := U.Username;
+      'server': Result := U.Host;
+      'port': Result := IntToStr(U.Port)
+      else
+        Result := 'none';
+    end;
+  except;
+    Abort;
+  end;
+end;
+
+//TROJAN - Создать и сохранить ~./config/xraygui/config.json
+procedure TMainForm.CreateTrojanConfig(TROJANURL, PORT, SAVEPATH: string);
+var
+  S: TStringList;
+begin
+  try
+    S := TStringList.Create;
+    S.Add('    {');
+    S.Add('      "log": {');
+    S.Add('        "access": "",');
+    S.Add('        "error": "",');
+    S.Add('        "loglevel": "info"');
+    S.Add('      },');
+    //DNS
+    S.Add('        "dns": {');
+    S.Add('        "servers": [');
+    S.Add('            "1.1.1.1",');
+    S.Add('            "8.8.8.8",');
+    S.Add('            "9.9.9.9"');
+    S.Add('        ]');
+    S.Add('    },');
+
+    S.Add('      "inbounds": [');
+    S.Add('        {');
+    S.Add('          "tag": "socks",');
+    //PORT
+    S.Add('          "port": ' + PORT + ',');
+    S.Add('          "listen": "127.0.0.1",');
+    S.Add('          "protocol": "socks",');
+    S.Add('          "sniffing": {');
+    S.Add('            "enabled": true,');
+    S.Add('            "destOverride": [');
+    S.Add('              "http",');
+    S.Add('              "tls"');
+    S.Add('            ]');
+    S.Add('          },');
+    S.Add('          "settings": {');
+    S.Add('            "auth": "noauth",');
+    S.Add('            "udp": true,');
+    S.Add('            "allowTransparent": false');
+    S.Add('          }');
+    S.Add('        },');
+    S.Add('        {');
+    S.Add('          "tag": "http",');
+    //HTTP PORT + 1
+    S.Add('          "port": ' + IntToStr(PortEdit.Value + 1) + ',');
+    S.Add('          "listen": "127.0.0.1",');
+    S.Add('          "protocol": "http",');
+    S.Add('          "sniffing": { ');
+    S.Add('            "enabled": true,');
+    S.Add('            "destOverride": [');
+    S.Add('              "http",');
+    S.Add('              "tls"');
+    S.Add('            ]');
+    S.Add('          },');
+    S.Add('          "settings": {');
+    S.Add('            "auth": "noauth",');
+    S.Add('            "udp": true,');
+    S.Add('            "allowTransparent": false');
+    S.Add('          }');
+    S.Add('        }');
+    S.Add('      ],');
+    S.Add('      "outbounds": [');
+    S.Add('        {');
+    S.Add('          "tag": "proxy",');
+    S.Add('          "protocol": "trojan",');
+    S.Add('          "settings": {');
+    S.Add('            "servers": [');
+    S.Add('              {');
+    //SERVER
+    S.Add('                "address": "' + TrojanDecode(TrojanURL, 'server') + '",');
+    S.Add('                "method": "chacha20",');
+    S.Add('                "ota": false,');
+    //ID
+    S.Add('                "password": "' + TrojanDecode(TrojanURL, 'id') + '",');
+    //PORT
+    S.Add('                "port": ' + TrojanDecode(TrojanURL, 'port') + ',');
+    S.Add('                "level": 1,');
+    S.Add('                "flow": ""');
+    S.Add('              }');
+    S.Add('            ]');
+    S.Add('          },');
+    S.Add('          "streamSettings": {');
+    S.Add('            "network": "tcp",');
+    S.Add('            "security": "tls",');
+    S.Add('            "tlsSettings": {');
+    S.Add('              "allowInsecure": false');
+    S.Add('            }');
+    S.Add('          },');
+    S.Add('          "mux": {');
+    S.Add('            "enabled": false,');
+    S.Add('            "concurrency": -1');
+    S.Add('          }');
+    S.Add('        },');
+    S.Add('        {');
+    S.Add('          "tag": "direct",');
+    S.Add('          "protocol": "freedom",');
+    S.Add('          "settings": {}');
+    S.Add('        },');
+    S.Add('        {');
+    S.Add('          "tag": "block",');
+    S.Add('          "protocol": "blackhole",');
+    S.Add('          "settings": {');
+    S.Add('            "response": {');
+    S.Add('              "type": "http"');
+    S.Add('            }');
+    S.Add('          }');
+    S.Add('        }');
+    S.Add('      ],');
+    S.Add('      "routing": {');
+    S.Add('        "domainStrategy": "IPIfNonMatch",');
+    S.Add('        "domainMatcher": "linear",');
+    S.Add('        "rules": [');
+    S.Add('          {');
+    S.Add('            "type": "field",');
+    S.Add('            "inboundTag": [');
+    S.Add('              "api"');
+    S.Add('            ],');
+    S.Add('            "outboundTag": "api",');
+    S.Add('            "enabled": true');
+    S.Add('          },');
+    S.Add('          {');
+    S.Add('            "type": "field",');
+    S.Add('            "outboundTag": "direct",');
+    S.Add('            "domain": [');
+    S.Add('              "domain:example-example.com",');
+    S.Add('              "domain:example-example2.com"');
+    S.Add('            ],');
+    S.Add('            "enabled": true');
+    S.Add('          },');
+    S.Add('          {');
+    S.Add('            "type": "field",');
+    S.Add('            "outboundTag": "block",');
+    S.Add('            "domain": [');
+    S.Add('              "geosite:category-ads-all"');
+    S.Add('            ],');
+    S.Add('            "enabled": true');
+    S.Add('          },');
+    S.Add('          {');
+    S.Add('            "type": "field",');
+    S.Add('            "outboundTag": "direct",');
+    S.Add('            "domain": [');
+    S.Add('              "geosite:cn"');
+    S.Add('            ],');
+    S.Add('            "enabled": true');
+    S.Add('          },');
+    S.Add('          {');
+    S.Add('            "type": "field",');
+    S.Add('            "outboundTag": "direct",');
+    S.Add('            "ip": [');
+    S.Add('              "geoip:private",');
+    S.Add('              "geoip:cn"');
+    S.Add('            ],');
+    S.Add('            "enabled": true');
+    S.Add('          },');
+    S.Add('          {');
+    S.Add('            "type": "field",');
+    S.Add('            "port": "0-65535",');
+    S.Add('            "outboundTag": "proxy",');
+    S.Add('            "enabled": true');
+    S.Add('          }');
+    S.Add('        ]');
+    S.Add('      }');
+    S.Add('    }');
+
+    //Сохранение готового конфига
+    S.SaveToFile(SAVEPATH);
+  finally
+  end;
+end;
+
 //Останов
 procedure TMainForm.StopBtnClick(Sender: TObject);
 begin
@@ -919,11 +1121,11 @@ end;
 //Вставка нового URL...
 procedure TMainForm.PasteBtnClick(Sender: TObject);
 begin
-
   //Только VMESS (поверка)
   if (ClipBoard.AsText = '') or (Copy(Clipboard.AsText, 1, 8) <> 'vmess://') and
     (Copy(ClipBoard.AsText, 1, 8) <> 'vless://') and
-    (Copy(ClipBoard.AsText, 1, 5) <> 'ss://') or
+    (Copy(ClipBoard.AsText, 1, 5) <> 'ss://') and
+    (Copy(ClipBoard.AsText, 1, 9) <> 'trojan://') or
     (Pos('obfs', Clipboard.AsText) <> 0) then
   begin
     MessageDlg(SVmessOnlyMsg, mtWarning, [mbOK], 0);
@@ -986,8 +1188,12 @@ begin
     CreateVLESSConfig(ConfigBox.Items[ConfigBox.ItemIndex], PortEdit.Text,
       GetUserDir + '.config/xraygui/config.json')
   else
+  if Pos('ss://', ConfigBox.Items[ConfigBox.ItemIndex]) > 0 then
     //SS - Создаём/Сохраняем config.json для xray
     CreateSSConfig(ConfigBox.Items[ConfigBox.ItemIndex], PortEdit.Text,
+      GetUserDir + '.config/xraygui/config.json')
+  else
+    CreateTrojanConfig(ConfigBox.Items[ConfigBox.ItemIndex], PortEdit.Text,
       GetUserDir + '.config/xraygui/config.json');
 
   //Быстрая очистка вывода перед стартом
@@ -1149,7 +1355,8 @@ begin
     for i := 0 to S.Count - 1 do
     begin
       if (Copy(S[i], 1, 8) <> 'vmess://') and (Copy(S[i], 1, 8) <> 'vless://') and
-        (Copy(S[i], 1, 5) <> 'ss://') or (Pos('obfs', S[i]) <> 0) then
+        (Copy(S[i], 1, 5) <> 'ss://') and (Copy(S[i], 1, 9) <> 'trojan://') or
+        (Pos('obfs', S[i]) <> 0) then
       begin
         MessageDlg(SNotValidMsg, mtWarning, [mbOK], 0);
         S.Free;

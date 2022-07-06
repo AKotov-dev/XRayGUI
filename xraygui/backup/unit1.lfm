@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 314
+  Left = 313
   Height = 708
-  Top = 125
+  Top = 124
   Width = 990
   ActiveControl = ConfigBox
   Caption = 'XRayGUI'
@@ -18,7 +18,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 267
     Align = alLeft
-    Caption = 'Configurations [vmess/vless/ss]'
+    Caption = 'Configurations [vmess/vless/ss/trojan]'
     ClientHeight = 670
     ClientWidth = 265
     TabOrder = 0
@@ -296,15 +296,15 @@ object MainForm: TMainForm
     end
   end
   object OpenDialog1: TOpenDialog
-    DefaultExt = '.*.vmess'
-    Filter = 'XRayGUI files (*.vmess)|*.vmess'
+    DefaultExt = '.*.proxy'
+    Filter = 'XRayGUI files (*.vmess)|*.proxy'
     Options = [ofNoNetworkButton, ofEnableSizing]
     Left = 64
     Top = 176
   end
   object SaveDialog1: TSaveDialog
-    DefaultExt = '.*.vmess'
-    Filter = 'XRayGUI file (*.vmess)|*.vmess'
+    DefaultExt = '.*.proxy'
+    Filter = 'XRayGUI file (*.proxy)|*.proxy'
     Options = [ofOverwritePrompt, ofEnableSizing]
     Left = 168
     Top = 176

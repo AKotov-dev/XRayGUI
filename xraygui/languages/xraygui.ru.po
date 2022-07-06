@@ -38,7 +38,9 @@ msgid "Delete"
 msgstr "Удалить"
 
 #: tmainform.groupbox1.caption
-msgid "Configurations [vmess/vless/ss]"
+#, fuzzy
+#| msgid "Configurations [vmess/vless/ss]"
+msgid "Configurations [vmess/vless/ss/trojan]"
 msgstr "Конфигурации [vmess/vless/ss]"
 
 #: tmainform.groupbox2.caption
@@ -103,3 +105,4 @@ msgid ""
 msgstr ""
 "Поддерживаемые протоколы:\n"
 "VMESS/VLESS (ws, ws+tls) и SS (без obfs)!"
+

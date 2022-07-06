@@ -1,6 +1,6 @@
 {"version":1,"strings":[
 {"hash":227073225,"name":"tmainform.caption","sourcebytes":[88,82,97,121,71,85,73],"value":"XRayGUI"},
-{"hash":59133597,"name":"tmainform.groupbox1.caption","sourcebytes":[67,111,110,102,105,103,117,114,97,116,105,111,110,115,32,91,118,109,101,115,115,47,118,108,101,115,115,47,115,115,93],"value":"Configurations [vmess/vless/ss]"},
+{"hash":66249581,"name":"tmainform.groupbox1.caption","sourcebytes":[67,111,110,102,105,103,117,114,97,116,105,111,110,115,32,91,118,109,101,115,115,47,118,108,101,115,115,47,115,115,47,116,114,111,106,97,110,93],"value":"Configurations [vmess/vless/ss/trojan]"},
 {"hash":78392485,"name":"tmainform.deletebtn.caption","sourcebytes":[68,101,108,101,116,101],"value":"Delete"},
 {"hash":195296268,"name":"tmainform.selallbtn.hint","sourcebytes":[83,101,108,101,99,116,32,97,108,108],"value":"Select all"},
 {"hash":42,"name":"tmainform.selallbtn.caption","sourcebytes":[42],"value":"*"},

@@ -211,13 +211,13 @@ begin
     S.Add('    "loglevel": "info"');
     S.Add('  },');
     //DNS
-    S.Add('        "dns": {');
-    S.Add('        "servers": [');
-    S.Add('            "1.1.1.1",');
-    S.Add('            "8.8.8.8",');
-    S.Add('            "9.9.9.9"');
-    S.Add('        ]');
-    S.Add('    },');
+//    S.Add('        "dns": {');
+//    S.Add('        "servers": [');
+//    S.Add('            "1.1.1.1",');
+//    S.Add('            "8.8.8.8",');
+//    S.Add('            "9.9.9.9"');
+//    S.Add('        ]');
+//    S.Add('    },');
     S.Add('  "inbounds": [');
     S.Add('    {');
     S.Add('      "tag": "proxy",');
@@ -474,13 +474,13 @@ begin
     S.Add('            "tag": "XRayGUI_API"');
     S.Add('        },');
     //DNS
-    S.Add('        "dns": {');
-    S.Add('        "servers": [');
-    S.Add('            "1.1.1.1",');
-    S.Add('            "8.8.8.8",');
-    S.Add('            "9.9.9.9"');
-    S.Add('        ]');
-    S.Add('    },');
+//    S.Add('        "dns": {');
+//    S.Add('        "servers": [');
+//    S.Add('            "1.1.1.1",');
+//    S.Add('            "8.8.8.8",');
+//    S.Add('            "9.9.9.9"');
+//    S.Add('        ]');
+//    S.Add('    },');
     S.Add('        "inbounds": [');
     S.Add('            {');
     S.Add('                "listen": "127.0.0.1",');
@@ -712,13 +712,14 @@ begin
     S.Add('            ],');
     S.Add('            "tag": "XRayGUI_API"');
     S.Add('        },');
-    S.Add('        "dns": {');
-    S.Add('            "servers": [');
-    S.Add('                "1.1.1.1",');
-    S.Add('                "8.8.8.8",');
-    S.Add('                "9.9.9.9"');
-    S.Add('            ]');
-    S.Add('        },');
+    //DNS
+//    S.Add('        "dns": {');
+//    S.Add('            "servers": [');
+//    S.Add('                "1.1.1.1",');
+//    S.Add('                "8.8.8.8",');
+//    S.Add('                "9.9.9.9"');
+//    S.Add('            ]');
+//    S.Add('        },');
     S.Add('        "inbounds": [');
     S.Add('            {');
     S.Add('                "listen": "127.0.0.1",');
@@ -908,14 +909,13 @@ begin
     S.Add('        "loglevel": "info"');
     S.Add('      },');
     //DNS
-    S.Add('        "dns": {');
-    S.Add('        "servers": [');
-    S.Add('            "1.1.1.1",');
-    S.Add('            "8.8.8.8",');
-    S.Add('            "9.9.9.9"');
-    S.Add('        ]');
-    S.Add('    },');
-
+//    S.Add('        "dns": {');
+//    S.Add('        "servers": [');
+//    S.Add('            "1.1.1.1",');
+//    S.Add('            "8.8.8.8",');
+//    S.Add('            "9.9.9.9"');
+//    S.Add('        ]');
+//    S.Add('    },');
     S.Add('      "inbounds": [');
     S.Add('        {');
     S.Add('          "tag": "socks",');
@@ -935,26 +935,27 @@ begin
     S.Add('            "udp": true,');
     S.Add('            "allowTransparent": false');
     S.Add('          }');
-    S.Add('        },');
-    S.Add('        {');
-    S.Add('          "tag": "http",');
-    //HTTP PORT + 1
-    S.Add('          "port": ' + IntToStr(PortEdit.Value + 1) + ',');
-    S.Add('          "listen": "127.0.0.1",');
-    S.Add('          "protocol": "http",');
-    S.Add('          "sniffing": { ');
-    S.Add('            "enabled": true,');
-    S.Add('            "destOverride": [');
-    S.Add('              "http",');
-    S.Add('              "tls"');
-    S.Add('            ]');
-    S.Add('          },');
-    S.Add('          "settings": {');
-    S.Add('            "auth": "noauth",');
-    S.Add('            "udp": true,');
-    S.Add('            "allowTransparent": false');
-    S.Add('          }');
+//    S.Add('        },');
     S.Add('        }');
+    //HTTP PORT + 1
+//    S.Add('        {');
+//    S.Add('          "tag": "http",');
+//    S.Add('          "port": ' + IntToStr(PortEdit.Value + 1) + ',');
+//    S.Add('          "listen": "127.0.0.1",');
+//    S.Add('          "protocol": "http",');
+//    S.Add('          "sniffing": { ');
+//    S.Add('            "enabled": true,');
+//    S.Add('            "destOverride": [');
+//    S.Add('              "http",');
+//    S.Add('              "tls"');
+//    S.Add('            ]');
+//    S.Add('          },');
+//    S.Add('          "settings": {');
+//    S.Add('            "auth": "noauth",');
+//    S.Add('            "udp": true,');
+//    S.Add('            "allowTransparent": false');
+//    S.Add('          }');
+//    S.Add('        }');
     S.Add('      ],');
     S.Add('      "outbounds": [');
     S.Add('        {');
@@ -1193,7 +1194,7 @@ begin
   //Получаем FileName (фиксация); ActiveControl = ConfigBox
   ConfigBox.Click;
 
-    //Поток проверки состояния
+  //Поток проверки состояния
   FPortScanThread := PortScan.Create(False);
   FPortScanThread.Priority := tpNormal;
 end;

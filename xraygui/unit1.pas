@@ -115,7 +115,7 @@ procedure TMainForm.StartProcess(command: string);
 var
   ExProcess: TProcess;
 begin
-  Application.ProcessMessages;
+  //  Application.ProcessMessages;
   ExProcess := TProcess.Create(nil);
   try
     ExProcess.Executable := '/bin/bash';
@@ -152,8 +152,8 @@ var
   i: integer;
   S: TStringList;
 begin
-  URL := Trim(URL);
   try
+    URL := Trim(URL);
     S := TStringList.Create;
 
     if (Pos('vmess://', URL) <> 0) or (Pos('ss://', URL) <> 0) then
@@ -611,8 +611,8 @@ var
   S: TStringList;
 begin
   try
-    S := TStringList.Create;
     Result := '';
+    S := TStringList.Create;
 
     //Нормализация URL; Убираем переводы строк
     URL := StringReplace(URL, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
@@ -872,7 +872,6 @@ var
   U: TURI;
 begin
   try
-    Result := '';
     //Нормализация URL; Убираем переводы строк
     URL := StringReplace(URL, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем пробелы
@@ -1106,8 +1105,10 @@ begin
   ConfigBox.Items.Append(Trim(ClipBoard.AsText));
   ConfigBox.ItemIndex := ConfigBox.Count - 1;
   ConfigBox.Click;
+
   //Сохраняем новый список
   ConfigBox.Items.SaveToFile(GetUserDir + '.config/xraygui/configlist');
+
   //Проверяем статус панелей и кнопок
   ButtonStatus;
 end;
@@ -1156,6 +1157,7 @@ begin
     CreateSSConfig(ConfigBox.Items[ConfigBox.ItemIndex], PortEdit.Text,
       GetUserDir + '.config/xraygui/config.json')
   else
+    //Trojan - Создаём/Сохраняем config.json для xray
     CreateTrojanConfig(ConfigBox.Items[ConfigBox.ItemIndex], PortEdit.Text,
       GetUserDir + '.config/xraygui/config.json');
 
@@ -1194,7 +1196,7 @@ begin
   //Получаем FileName (фиксация); ActiveControl = ConfigBox
   ConfigBox.Click;
 
-  //Поток проверки состояния
+  //Поток проверки состояния локального порта
   FPortScanThread := PortScan.Create(False);
   FPortScanThread.Priority := tpNormal;
 end;
@@ -1271,9 +1273,9 @@ begin
       'cp -f /usr/share/xraygui/xray.desktop ~/.config/autostart/xray.desktop'], S);
 end;
 
+//Масштабирование для Plasma
 procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-  //Масштабирование для Plasma
   IniPropStorage1.Save;
 end;
 

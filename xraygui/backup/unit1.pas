@@ -115,7 +115,7 @@ procedure TMainForm.StartProcess(command: string);
 var
   ExProcess: TProcess;
 begin
-  Application.ProcessMessages;
+  //  Application.ProcessMessages;
   ExProcess := TProcess.Create(nil);
   try
     ExProcess.Executable := '/bin/bash';
@@ -152,8 +152,8 @@ var
   i: integer;
   S: TStringList;
 begin
-  URL := Trim(URL);
   try
+    URL := Trim(URL);
     S := TStringList.Create;
 
     if (Pos('vmess://', URL) <> 0) or (Pos('ss://', URL) <> 0) then
@@ -211,13 +211,13 @@ begin
     S.Add('    "loglevel": "info"');
     S.Add('  },');
     //DNS
-//    S.Add('        "dns": {');
-//    S.Add('        "servers": [');
-//    S.Add('            "1.1.1.1",');
-//    S.Add('            "8.8.8.8",');
-//    S.Add('            "9.9.9.9"');
-//    S.Add('        ]');
-//    S.Add('    },');
+    //    S.Add('        "dns": {');
+    //    S.Add('        "servers": [');
+    //    S.Add('            "1.1.1.1",');
+    //    S.Add('            "8.8.8.8",');
+    //    S.Add('            "9.9.9.9"');
+    //    S.Add('        ]');
+    //    S.Add('    },');
     S.Add('  "inbounds": [');
     S.Add('    {');
     S.Add('      "tag": "proxy",');
@@ -474,13 +474,13 @@ begin
     S.Add('            "tag": "XRayGUI_API"');
     S.Add('        },');
     //DNS
-//    S.Add('        "dns": {');
-//    S.Add('        "servers": [');
-//    S.Add('            "1.1.1.1",');
-//    S.Add('            "8.8.8.8",');
-//    S.Add('            "9.9.9.9"');
-//    S.Add('        ]');
-//    S.Add('    },');
+    //    S.Add('        "dns": {');
+    //    S.Add('        "servers": [');
+    //    S.Add('            "1.1.1.1",');
+    //    S.Add('            "8.8.8.8",');
+    //    S.Add('            "9.9.9.9"');
+    //    S.Add('        ]');
+    //    S.Add('    },');
     S.Add('        "inbounds": [');
     S.Add('            {');
     S.Add('                "listen": "127.0.0.1",');
@@ -611,8 +611,8 @@ var
   S: TStringList;
 begin
   try
-    S := TStringList.Create;
     Result := '';
+    S := TStringList.Create;
 
     //Нормализация URL; Убираем переводы строк
     URL := StringReplace(URL, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
@@ -713,13 +713,13 @@ begin
     S.Add('            "tag": "XRayGUI_API"');
     S.Add('        },');
     //DNS
-//    S.Add('        "dns": {');
-//    S.Add('            "servers": [');
-//    S.Add('                "1.1.1.1",');
-//    S.Add('                "8.8.8.8",');
-//    S.Add('                "9.9.9.9"');
-//    S.Add('            ]');
-//    S.Add('        },');
+    //    S.Add('        "dns": {');
+    //    S.Add('            "servers": [');
+    //    S.Add('                "1.1.1.1",');
+    //    S.Add('                "8.8.8.8",');
+    //    S.Add('                "9.9.9.9"');
+    //    S.Add('            ]');
+    //    S.Add('        },');
     S.Add('        "inbounds": [');
     S.Add('            {');
     S.Add('                "listen": "127.0.0.1",');
@@ -909,13 +909,13 @@ begin
     S.Add('        "loglevel": "info"');
     S.Add('      },');
     //DNS
-//    S.Add('        "dns": {');
-//    S.Add('        "servers": [');
-//    S.Add('            "1.1.1.1",');
-//    S.Add('            "8.8.8.8",');
-//    S.Add('            "9.9.9.9"');
-//    S.Add('        ]');
-//    S.Add('    },');
+    //    S.Add('        "dns": {');
+    //    S.Add('        "servers": [');
+    //    S.Add('            "1.1.1.1",');
+    //    S.Add('            "8.8.8.8",');
+    //    S.Add('            "9.9.9.9"');
+    //    S.Add('        ]');
+    //    S.Add('    },');
     S.Add('      "inbounds": [');
     S.Add('        {');
     S.Add('          "tag": "socks",');
@@ -935,27 +935,27 @@ begin
     S.Add('            "udp": true,');
     S.Add('            "allowTransparent": false');
     S.Add('          }');
-//    S.Add('        },');
+    //    S.Add('        },');
     S.Add('        }');
     //HTTP PORT + 1
-//    S.Add('        {');
-//    S.Add('          "tag": "http",');
-//    S.Add('          "port": ' + IntToStr(PortEdit.Value + 1) + ',');
-//    S.Add('          "listen": "127.0.0.1",');
-//    S.Add('          "protocol": "http",');
-//    S.Add('          "sniffing": { ');
-//    S.Add('            "enabled": true,');
-//    S.Add('            "destOverride": [');
-//    S.Add('              "http",');
-//    S.Add('              "tls"');
-//    S.Add('            ]');
-//    S.Add('          },');
-//    S.Add('          "settings": {');
-//    S.Add('            "auth": "noauth",');
-//    S.Add('            "udp": true,');
-//    S.Add('            "allowTransparent": false');
-//    S.Add('          }');
-//    S.Add('        }');
+    //    S.Add('        {');
+    //    S.Add('          "tag": "http",');
+    //    S.Add('          "port": ' + IntToStr(PortEdit.Value + 1) + ',');
+    //    S.Add('          "listen": "127.0.0.1",');
+    //    S.Add('          "protocol": "http",');
+    //    S.Add('          "sniffing": { ');
+    //    S.Add('            "enabled": true,');
+    //    S.Add('            "destOverride": [');
+    //    S.Add('              "http",');
+    //    S.Add('              "tls"');
+    //    S.Add('            ]');
+    //    S.Add('          },');
+    //    S.Add('          "settings": {');
+    //    S.Add('            "auth": "noauth",');
+    //    S.Add('            "udp": true,');
+    //    S.Add('            "allowTransparent": false');
+    //    S.Add('          }');
+    //    S.Add('        }');
     S.Add('      ],');
     S.Add('      "outbounds": [');
     S.Add('        {');

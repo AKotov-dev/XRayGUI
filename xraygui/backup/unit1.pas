@@ -80,7 +80,7 @@ var
   MainForm: TMainForm;
 
 resourcestring
-  SVmessOnlyMsg = 'Supported protocols:' + #13#10 +
+  SVmessOnlyMsg = 'Supported protocols:' + sLineBreak +
     'vmess/vless (ws, ws+tls), ss (without obfs) and trojan!';
   SDeleteMsg = 'Delete the selected configurations?';
   SNotValidMsg = 'The file is not valid!';
@@ -115,7 +115,6 @@ procedure TMainForm.StartProcess(command: string);
 var
   ExProcess: TProcess;
 begin
-  //  Application.ProcessMessages;
   ExProcess := TProcess.Create(nil);
   try
     ExProcess.Executable := '/bin/bash';
@@ -146,7 +145,7 @@ begin
     Result := False;
 end;
 
-//VMESS - Декодирование/Нормализация/Поиск URL из конфигурации VMESS
+//VMESS - Декодирование/Нормализация/Поиск
 function TMainForm.VmessDecode(URL, val: string): string;
 var
   i: integer;
@@ -156,34 +155,31 @@ begin
     URL := Trim(URL);
     S := TStringList.Create;
 
-    if (Pos('vmess://', URL) <> 0) or (Pos('ss://', URL) <> 0) then
-    begin
-      //Преобразуем всё содержимое Base64 после "//"
-      Result := DecodeStringBase64(Copy(URL, Pos('//', URL) + 2));
-      //Убираем скобки {}
-      Result := Copy(Result, 2, Length(Result) - 2);
-      //Убираем переводы строк
-      Result := StringReplace(Result, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
-      //Убираем пробелы
-      Result := StringReplace(Result, ' ', '', [rfReplaceAll, rfIgnoreCase]);
-      //Убираем кавычки
-      Result := StringReplace(Result, '"', '', [rfReplaceAll, rfIgnoreCase]);
-      //Грузим линейный текст
-      S.Text := (Result);
+    //Преобразуем всё содержимое Base64 после "//"
+    Result := DecodeStringBase64(Copy(URL, Pos('//', URL) + 2));
+    //Убираем скобки {}
+    Result := Copy(Result, 2, Length(Result) - 2);
+    //Убираем переводы строк
+    Result := StringReplace(Result, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
+    //Убираем пробелы
+    Result := StringReplace(Result, ' ', '', [rfReplaceAll, rfIgnoreCase]);
+    //Убираем кавычки
+    Result := StringReplace(Result, '"', '', [rfReplaceAll, rfIgnoreCase]);
+    //Грузим линейный текст
+    S.Text := (Result);
 
-      //Разделяем значения на Items по (,)
-      S.Delimiter := ',';
-      S.StrictDelimiter := True;
-      S.DelimitedText := S[0];
+    //Разделяем значения на Items по (,)
+    S.Delimiter := ',';
+    S.StrictDelimiter := True;
+    S.DelimitedText := S[0];
 
-      //Поиск соответствия (add, port, id, net и т.д.)
-      for i := 0 to S.Count - 1 do
-        if Copy(S[i], 1, Pos(':', S[i]) - 1) = val then
-        begin
-          Result := Copy(S[i], Pos(':', S[i]) + 1, Length(S[i]));
-          Break;
-        end;
-    end;
+    //Поиск соответствия (add, port, id, net и т.д.)
+    for i := 0 to S.Count - 1 do
+      if Copy(S[i], 1, Pos(':', S[i]) - 1) = val then
+      begin
+        Result := Copy(S[i], Pos(':', S[i]) + 1, Length(S[i]));
+        Break;
+      end;
   finally
     S.Free;
   end;
@@ -207,7 +203,7 @@ begin
     S.Add('  "log": {');
     S.Add('    "access": "",');
     S.Add('    "error": "",');
-    //LOG LEVEL (debug, info, warning, error)
+    //LOGLEVEL (debug, info, warning, error)
     S.Add('    "loglevel": "info"');
     S.Add('  },');
     //DNS
@@ -498,7 +494,7 @@ begin
     S.Add('            }');
     S.Add('        ],');
     S.Add('        "log": {');
-    //LOGLEVEL
+    //LOGLEVEL (debug, info, warning, error)
     S.Add('            "loglevel": "info"');
     S.Add('        },');
     S.Add('        "outbounds": [');
@@ -737,6 +733,7 @@ begin
     S.Add('            }');
     S.Add('        ],');
     S.Add('        "log": {');
+    //LOGLEVEL (debug, info, warning, error)
     S.Add('            "loglevel": "info"');
     S.Add('        },');
     S.Add('        "outbounds": [');
@@ -872,7 +869,6 @@ var
   U: TURI;
 begin
   try
-    Result := '';
     //Нормализация URL; Убираем переводы строк
     URL := StringReplace(URL, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем пробелы
@@ -906,6 +902,7 @@ begin
     S.Add('      "log": {');
     S.Add('        "access": "",');
     S.Add('        "error": "",');
+    //LOGLEVEL (debug, info, warning, error)
     S.Add('        "loglevel": "info"');
     S.Add('      },');
     //DNS
@@ -919,7 +916,7 @@ begin
     S.Add('      "inbounds": [');
     S.Add('        {');
     S.Add('          "tag": "socks",');
-    //PORT
+    //LOCAL PORT
     S.Add('          "port": ' + PORT + ',');
     S.Add('          "listen": "127.0.0.1",');
     S.Add('          "protocol": "socks",');
@@ -1106,8 +1103,10 @@ begin
   ConfigBox.Items.Append(Trim(ClipBoard.AsText));
   ConfigBox.ItemIndex := ConfigBox.Count - 1;
   ConfigBox.Click;
+
   //Сохраняем новый список
   ConfigBox.Items.SaveToFile(GetUserDir + '.config/xraygui/configlist');
+
   //Проверяем статус панелей и кнопок
   ButtonStatus;
 end;
@@ -1119,6 +1118,7 @@ begin
     SaveItem.Enabled := True;
 end;
 
+//Сохранение в файл *.proxy
 procedure TMainForm.SaveItemClick(Sender: TObject);
 begin
   if SaveDialog1.Execute then ConfigBox.Items.SaveToFile(SaveDialog1.FileName);
@@ -1141,6 +1141,7 @@ begin
   INIPropStorage1.StoredValue['findex'] := IntToStr(ConfigBox.ItemIndex);
   INIPropStorage1.Save;
 
+  //Выбор типа конфигурации (vmess/vless/ss/trojan)
   if Pos('vmess://', ConfigBox.Items[ConfigBox.ItemIndex]) > 0 then
     //VMESS - Создаём/Сохраняем config.json для xray
     CreateVMESSConfig(ConfigBox.Items[ConfigBox.ItemIndex], PortEdit.Text,
@@ -1156,6 +1157,7 @@ begin
     CreateSSConfig(ConfigBox.Items[ConfigBox.ItemIndex], PortEdit.Text,
       GetUserDir + '.config/xraygui/config.json')
   else
+    //Trojan - Создаём/Сохраняем config.json для xray
     CreateTrojanConfig(ConfigBox.Items[ConfigBox.ItemIndex], PortEdit.Text,
       GetUserDir + '.config/xraygui/config.json');
 
@@ -1171,8 +1173,6 @@ end;
 
 //Создание формы
 procedure TMainForm.FormCreate(Sender: TObject);
-var
-  FPortScanThread: TThread;
 begin
   MainForm.Caption := Application.Title;
 
@@ -1193,10 +1193,6 @@ begin
 
   //Получаем FileName (фиксация); ActiveControl = ConfigBox
   ConfigBox.Click;
-
-  //Поток проверки состояния
-  FPortScanThread := PortScan.Create(False);
-  FPortScanThread.Priority := tpNormal;
 end;
 
 //Удаление выбранных конфигураций из писка
@@ -1223,24 +1219,26 @@ begin
       ConfigBox.Click;
     end
     else
-    begin
       //Список пуст = удаляем ярлык автозагрузки
-      DeleteFile(GetUserDir + '.config/autostart/xray.desktop');
-      AutoStartBox.Checked := CheckAutoStart;
-    end;
+      AutoStartBox.Checked := False;
   end;
 
   //Запоминаем позицию чекера
   if ConfigBox.Count = 0 then
     INIPropStorage1.StoredValue['findex'] := '100' //UnCheck = 100
   else
-    INIPropStorage1.StoredValue['findex'] := IntToStr(ConfigBox.ItemIndex);
+  begin
+    for i := 0 to ConfigBox.Count - 1 do
+      if ConfigBox.Checked[i] then
+        INIPropStorage1.StoredValue['findex'] := IntToStr(ConfigBox.ItemIndex);
+  end;
+
   INIPropStorage1.Save;
 
   ButtonStatus;
 end;
 
-//Исключаем включение всех кроме одного чекера
+//Исключаем включение всех чекеров кроме одного
 procedure TMainForm.ConfigBoxClickCheck(Sender: TObject);
 begin
   ConfigBox.CheckAll(cbUnchecked, False, False);
@@ -1271,15 +1269,17 @@ begin
       'cp -f /usr/share/xraygui/xray.desktop ~/.config/autostart/xray.desktop'], S);
 end;
 
+//Масштабирование для Plasma
 procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-  //Масштабирование для Plasma
   IniPropStorage1.Save;
 end;
 
+//Показать MainForm, запуск основных потоков
 procedure TMainForm.FormShow(Sender: TObject);
 var
   FShowLogTRD: TThread;
+  FPortScanThread: TThread;
 begin
   //Масштабирование для Plasma
   IniPropStorage1.Restore;
@@ -1289,7 +1289,11 @@ begin
   ClearBox.Checked := CheckClear;
   AutoStartBox.Checked := CheckAutoStart;
 
-  //Процесс непрерывного чтения лога
+  //Запуск потока проверки состояния локального порта
+  FPortScanThread := PortScan.Create(False);
+  FPortScanThread.Priority := tpNormal;
+
+  //Запуск поток непрерывного чтения лога
   FShowLogTRD := ShowLogTRD.Create(False);
   FShowLogTRD.Priority := tpNormal;
 end;
@@ -1301,7 +1305,7 @@ begin
     ConfigBox.Checked[IniPropStorage1.ReadInteger('findex', 100)] := True;
 end;
 
-//Загрузка/Нормализация/Валидация на vmess://...
+//Загрузка/Нормализация/Валидация
 procedure TMainForm.LoadItemClick(Sender: TObject);
 var
   i: integer;
@@ -1320,7 +1324,7 @@ begin
       if S[i] = '' then S.Delete(i);
     end;
 
-    //Проверяем на валидность (vmess://...)
+    //Проверяем на валидность (vmess/vless/ss/trojan)
     for i := 0 to S.Count - 1 do
     begin
       if (Copy(S[i], 1, 8) <> 'vmess://') and (Copy(S[i], 1, 8) <> 'vless://') and
@@ -1333,6 +1337,11 @@ begin
       end;
     end;
 
+    //Снимаем автостарт (новый список)
+    AutostartBox.Checked := False;
+    INIPropStorage1.StoredValue['findex'] := '100'; //UnCheck = 100
+    INIPropStorage1.Save;
+
     //Создаём новый список конфигураций
     ConfigBox.Items.Assign(S);
     ConfigBox.Items.SaveToFile(GetUserDir + '.config/xraygui/configlist');
@@ -1340,12 +1349,17 @@ begin
 
     //Фиксация
     if ConfigBox.Count <> 0 then ConfigBox.ItemIndex := 0;
+  {  else
+    begin
+      INIPropStorage1.StoredValue['findex'] := '100'; //UnCheck = 100
+      INIPropStorage1.Save;
+    end;}
 
     S.Free;
   end;
 end;
 
-//Вставить из буфера
+//Вставить URL из буфера
 procedure TMainForm.PasteItemClick(Sender: TObject);
 begin
   PasteBtn.Click;

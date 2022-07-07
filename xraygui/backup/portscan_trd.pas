@@ -73,7 +73,8 @@ begin
       PortEdit.Enabled := True;
       LoadItem.Enabled := True;
     end;
-    MainForm.Shape1.Repaint;
+
+    Shape1.Repaint;
   end;
 end;
 

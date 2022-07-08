@@ -97,14 +97,9 @@ msgid "The file is not valid!"
 msgstr "Невалидный файл!"
 
 #: unit1.svmessonlymsg
-#, fuzzy
-#| msgid ""
-#| "Supported protocols:\n"
-#| "vmess/vless (ws, ws+tls), ss (without obfs) and trojan!"
 msgid ""
 "Supported protocols:\n"
 "vmess, vless, ss (without obfs) and trojan!"
 msgstr ""
 "Поддерживаемые протоколы:\n"
-"vmess/vless (ws, ws+tls), ss (без obfs) и trojan!"
-
+"vmess, vless, ss (без obfs) и trojan!"

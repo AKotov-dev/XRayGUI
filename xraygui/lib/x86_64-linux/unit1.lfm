@@ -292,7 +292,7 @@ object MainForm: TMainForm
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = '.*.proxy'
-    Filter = 'XRayGUI files (*.vmess)|*.proxy'
+    Filter = 'XRayGUI files (*.proxy)|*.proxy'
     Options = [ofNoNetworkButton, ofEnableSizing]
     Left = 64
     Top = 176

@@ -1349,11 +1349,6 @@ begin
 
     //Фиксация
     if ConfigBox.Count <> 0 then ConfigBox.ItemIndex := 0;
-  {  else
-    begin
-      INIPropStorage1.StoredValue['findex'] := '100'; //UnCheck = 100
-      INIPropStorage1.Save;
-    end;}
 
     S.Free;
   end;

@@ -40,7 +40,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="26" Y="14"/>
-        <UsageCount Value="45"/>
+        <UsageCount Value="46"/>
       </Unit>
       <Unit>
         <Filename Value="unit1.pas"/>
@@ -50,8 +50,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="44" Y="991"/>
-        <UsageCount Value="45"/>
+        <CursorPos X="39" Y="458"/>
+        <UsageCount Value="46"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -60,14 +60,14 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="55" Y="43"/>
-        <UsageCount Value="44"/>
+        <UsageCount Value="45"/>
       </Unit>
       <Unit>
         <Filename Value="portscan_trd.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="31" Y="3"/>
-        <UsageCount Value="24"/>
+        <UsageCount Value="25"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="2">

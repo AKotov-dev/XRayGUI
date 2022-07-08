@@ -999,8 +999,8 @@ begin
     if Pos('type=grpc', TROJANURL) <> 0 then
     begin
       S.Add('          "grpcSettings": {');
-      S.Add('               "serviceName": "grpc",');
-      S.Add('               "multiMode": false');
+      S.Add('              "serviceName": "grpc",');
+      S.Add('              "multiMode": false');
       S.Add('        }');
       S.Add('        },');
     end;

@@ -2,7 +2,7 @@
 name=xraygui
 
 [VERSION]
-version=0.6
+version=0.7
 
 [RELEASE]
 release=0.mrx9
@@ -78,26 +78,30 @@ devtool=Lazarus
 toolversion=2.2.0
 
 [INFO]
-0=v0.6
-1=+ Trojan protocol support
-2=+ Proxy launch control in a separate thread
-3=+ Optimization of Vmess/Vless/SS/Trojan configurations
-4=
-5=v0.5
-6=+ Supported protocols: VMESS/VLESS (ws, ws+tls) and SS (without obfs)
-7=+ Changed the file type of uploading/saving the list of configurations  to *.proxy
-8=+ Excluded URL insertion from PopUp menu to save duplicate search
-9=
-10=v0.4
-11=+ Optimization of log output
-12=+ Optimization of general perception (visual load)
+0=v0.7
+1=+ Trojan+gRPC protocol support
+2=+ Cosmetic edits
+3=
+4=v0.6
+5=+ Trojan protocol support
+6=+ Proxy launch control in a separate thread
+7=+ Optimization of Vmess/Vless/SS/Trojan configurations
+8=
+9=v0.5
+10=+ Supported protocols: VMESS/VLESS (ws, ws+tls) and SS (without obfs)
+11=+ Changed the file type of uploading/saving the list of configurations  to *.proxy
+12=+ Excluded URL insertion from PopUp menu to save duplicate search
 13=
-14=v0.3
-15=+ Autostart proxy after reboot
-16=+ Disabling xray before updating/deleting rpm/deb (spec)
+14=v0.4
+15=+ Optimization of log output
+16=+ Optimization of general perception (visual load)
 17=
-18=v0.2
-19=+ PopUp menu: Paste from clipboard
-20=+ Cosmetic edits, hints, etc...
+18=v0.3
+19=+ Autostart proxy after reboot
+20=+ Disabling xray before updating/deleting rpm/deb (spec)
 21=
-22=v0.1 - initial release
+22=v0.2
+23=+ PopUp menu: Paste from clipboard
+24=+ Cosmetic edits, hints, etc...
+25=
+26=v0.1 - initial release

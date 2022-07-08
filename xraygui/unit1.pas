@@ -81,7 +81,7 @@ var
 
 resourcestring
   SVmessOnlyMsg = 'Supported protocols:' + sLineBreak +
-    'vmess/vless (ws, ws+tls), ss (without obfs) and trojan!';
+    'vmess, vless, ss (without obfs) and trojan!';
   SDeleteMsg = 'Delete the selected configurations?';
   SNotValidMsg = 'The file is not valid!';
 

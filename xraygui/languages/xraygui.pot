@@ -87,6 +87,6 @@ msgstr ""
 #: unit1.svmessonlymsg
 msgid ""
 "Supported protocols:\n"
-"vmess/vless (ws, ws+tls), ss (without obfs) and trojan!"
+"vmess, vless, ss (without obfs) and trojan!"
 msgstr ""
 

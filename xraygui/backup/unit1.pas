@@ -761,6 +761,15 @@ begin
     S.Add('                    ]');
     S.Add('                },');
     S.Add('                "streamSettings": {');
+    //if gRPC
+    if Pos('type=grpc', VLESSURL) <> 0 then
+    begin
+      S.Add('                    "grpcSettings": {');
+      S.Add('                    "multiMode": false,');
+      S.Add('                    "serviceName": "grpc"');
+      S.Add('                },');
+    end;
+
     //TYPE
     S.Add('                    "network": "' + VlessDecode(VLESSURL, 'type') + '",');
     //SECURITY
@@ -772,15 +781,19 @@ begin
     S.Add('                        "serverName": "' +
       VlessDecode(VLESSURL, 'server') + '"');
     S.Add('                    },');
-    S.Add('                    "wsSettings": {');
-    S.Add('                        "headers": {');
-    //SERVER-HOST
-    S.Add('                            "Host": "' +
-      VlessDecode(VLESSURL, 'server') + '"');
-    S.Add('                        },');
-    //PATH
-    S.Add('                        "path": "' + VlessDecode(VLESSURL, 'path') + '"');
-    S.Add('                    },');
+    //IF gRPC
+    if Pos('type=grpc', VLESSURL) = 0 then
+    begin
+      S.Add('                    "wsSettings": {');
+      S.Add('                        "headers": {');
+      //SERVER-HOST
+      S.Add('                            "Host": "' +
+        VlessDecode(VLESSURL, 'server') + '"');
+      S.Add('                        },');
+      //PATH
+      S.Add('                        "path": "' + VlessDecode(VLESSURL, 'path') + '"');
+      S.Add('                    },');
+    end;
     S.Add('                    "xtlsSettings": {');
     S.Add('                        "disableSystemRoot": false');
     S.Add('                    }');

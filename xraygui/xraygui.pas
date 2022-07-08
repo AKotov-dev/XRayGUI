@@ -17,7 +17,7 @@ uses
 
 begin
   RequireDerivedFormResource := True;
-  Application.Title:='XRayGUI v0.6';
+  Application.Title:='XRayGUI v0.7';
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);

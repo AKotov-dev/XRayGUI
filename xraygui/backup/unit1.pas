@@ -975,12 +975,35 @@ begin
     S.Add('            ]');
     S.Add('          },');
     S.Add('          "streamSettings": {');
-    S.Add('            "network": "tcp",');
+    //IF gRPC
+    if Pos('type=grpc', TROJANURL) = 0 then
+      S.Add('            "network": "tcp",')
+    else
+      S.Add('            "network": "grpc",');
     S.Add('            "security": "tls",');
     S.Add('            "tlsSettings": {');
-    S.Add('              "allowInsecure": false');
-    S.Add('            }');
-    S.Add('          },');
+    //IF gRPC
+    if Pos('type=grpc', TROJANURL) <> 0 then
+    begin
+      S.Add('              "serverName": "' + TrojanDecode(TrojanURL, 'server') + '",');
+      S.Add('              "allowInsecure": false');
+      S.Add('          },');
+    end
+    else
+    begin
+      S.Add('              "allowInsecure": false');
+      S.Add('            }');
+      S.Add('          },');
+    end;
+    //IF gRPC
+    if Pos('type=grpc', TROJANURL) <> 0 then
+    begin
+      S.Add('          "grpcSettings": {');
+      S.Add('               "serviceName": "grpc",');
+      S.Add('               "multiMode": false');
+      S.Add('        }');
+      S.Add('        },');
+    end;
     S.Add('          "mux": {');
     S.Add('            "enabled": false,');
     S.Add('            "concurrency": -1');

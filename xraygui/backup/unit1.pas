@@ -1217,7 +1217,7 @@ begin
  { if not DirectoryExists(GetUserDir + '.config/autostart') then
     MkDir(GetUserDir + '.config/autostart');}
 
-    //Удаляем автозапуск предыдущих версий (переход на systemd --user)
+  //Удаляем автозапуск предыдущих версий (переход на systemd --user)
   if FileExists(GetUserDir + '.config/autostart/xray.desktop') then
     DeleteFile(GetUserDir + '.config/autostart/xray.desktop');
 

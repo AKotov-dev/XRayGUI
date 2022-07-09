@@ -6,7 +6,6 @@ After=network.target nss-lookup.target
 [Service]
 WorkingDirectory=/usr/share/xraygui/xray
 ExecStart=bash -c './xray run -config ~/.config/xraygui/config.json > ~/.config/xraygui/xraygui.log'
-#ExecStop=bash -c 'killall xray; > ~/.config/xraygui/xraygui.log'
 ExecStop=killall xray
 #Restart=on-failure
 #RestartPreventExitStatus=23

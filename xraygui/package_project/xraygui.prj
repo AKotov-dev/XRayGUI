@@ -2,7 +2,7 @@
 name=xraygui
 
 [VERSION]
-version=0.7
+version=0.8
 
 [RELEASE]
 release=0.mrx9
@@ -51,6 +51,17 @@ deb=1
 2=/usr/share/xraygui/
 3=/usr/share/applications/xraygui.desktop
 4=/usr/share/icons/xraygui.png
+5=/etc/systemd/user/xray.service
+
+[AFTERINSTALL]
+0=#!/bin/bash
+1=
+2=systemctl daemon-reload
+
+[AFTERREMOVE]
+0=#!/bin/bash
+1=
+2=systemctl daemon-reload
 
 [BEFOREINSTALL]
 0=#!/bin/bash
@@ -78,42 +89,46 @@ devtool=Lazarus
 toolversion=2.2.0
 
 [INFO]
-0=v0.7
-1=+ Vless+gRPC and Trojan+gRPC support
-2=+ General test:
-3=VMESS TLS - passed
-4=VMESS non TLS - passed
-5=
-6=VLESS TLS - passed
-7=VLESS non TLS - passed
-8=VLESS + WS TLS - passed
-9=VLESS + WS non TLS - passed
-10=VLESS + gRPC - passed
-11=
-12=Trojan - passed
-13=Trojan + WS - passed
-14=Trojan + gRPC - passed
+0=v0.8
+1=+ Switching to systemd (autorun from the user)
+2=+ Correction of the spec file (rpm/deb)
+3=
+4=v0.7
+5=+ Vless+gRPC and Trojan+gRPC support
+6=+ General test:
+7=VMESS TLS - passed
+8=VMESS non TLS - passed
+9=
+10=VLESS TLS - passed
+11=VLESS non TLS - passed
+12=VLESS + WS TLS - passed
+13=VLESS + WS non TLS - passed
+14=VLESS + gRPC - passed
 15=
-16=v0.6
-17=+ Trojan protocol support
-18=+ Proxy launch control in a separate thread
-19=+ Optimization of Vmess/Vless/SS/Trojan configurations
-20=
-21=v0.5
-22=+ Supported protocols: VMESS/VLESS (ws, ws+tls) and SS (without obfs)
-23=+ Changed the file type of uploading/saving the list of configurations  to *.proxy
-24=+ Excluded URL insertion from PopUp menu to save duplicate search
-25=
-26=v0.4
-27=+ Optimization of log output
-28=+ Optimization of general perception (visual load)
+16=Trojan - passed
+17=Trojan + WS - passed
+18=Trojan + gRPC - passed
+19=
+20=v0.6
+21=+ Trojan protocol support
+22=+ Proxy launch control in a separate thread
+23=+ Optimization of Vmess/Vless/SS/Trojan configurations
+24=
+25=v0.5
+26=+ Supported protocols: VMESS/VLESS (ws, ws+tls) and SS (without obfs)
+27=+ Changed the file type of uploading/saving the list of configurations  to *.proxy
+28=+ Excluded URL insertion from PopUp menu to save duplicate search
 29=
-30=v0.3
-31=+ Autostart proxy after reboot
-32=+ Disabling xray before updating/deleting rpm/deb (spec)
+30=v0.4
+31=+ Optimization of log output
+32=+ Optimization of general perception (visual load)
 33=
-34=v0.2
-35=+ PopUp menu: Paste from clipboard
-36=+ Cosmetic edits, hints, etc...
+34=v0.3
+35=+ Autostart proxy after reboot
+36=+ Disabling xray before updating/deleting rpm/deb (spec)
 37=
-38=v0.1 - initial release
+38=v0.2
+39=+ PopUp menu: Paste from clipboard
+40=+ Cosmetic edits, hints, etc...
+41=
+42=v0.1 - initial release

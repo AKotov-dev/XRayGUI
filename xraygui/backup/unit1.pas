@@ -81,7 +81,7 @@ var
 
 resourcestring
   SVmessOnlyMsg = 'Supported protocols:' + sLineBreak +
-    'vmess/vless (ws, ws+tls), ss (without obfs) and trojan!';
+    'vmess, vless, ss (without obfs) and trojan!';
   SDeleteMsg = 'Delete the selected configurations?';
   SNotValidMsg = 'The file is not valid!';
 
@@ -138,8 +138,13 @@ end;
 
 //Проверка чекбокса AutoStart
 function CheckAutoStart: boolean;
+var
+  S: ansistring;
 begin
-  if FileExists(GetUserDir + '.config/autostart/xray.desktop') then
+  RunCommand('/bin/bash', ['-c',
+    '[[ -n $(systemctl --user is-enabled xray | grep "enabled") ]] && echo "yes"'], S);
+
+  if Trim(S) = 'yes' then
     Result := True
   else
     Result := False;
@@ -201,8 +206,7 @@ begin
     S.Add('    }');
     S.Add('  },');
     S.Add('  "log": {');
-    S.Add('    "access": "",');
-    S.Add('    "error": "",');
+    //S.Add('    "access": "' + GetUserDir + '.config/xraygui/xraygui.log",');
     //LOGLEVEL (debug, info, warning, error)
     S.Add('    "loglevel": "info"');
     S.Add('  },');
@@ -494,6 +498,7 @@ begin
     S.Add('            }');
     S.Add('        ],');
     S.Add('        "log": {');
+    //S.Add('            "access": "' + GetUserDir + '.config/xraygui/xraygui.log",');
     //LOGLEVEL (debug, info, warning, error)
     S.Add('            "loglevel": "info"');
     S.Add('        },');
@@ -733,6 +738,7 @@ begin
     S.Add('            }');
     S.Add('        ],');
     S.Add('        "log": {');
+    //S.Add('            "access": "' + GetUserDir + '.config/xraygui/xraygui.log",');
     //LOGLEVEL (debug, info, warning, error)
     S.Add('            "loglevel": "info"');
     S.Add('        },');
@@ -913,8 +919,7 @@ begin
     S := TStringList.Create;
     S.Add('    {');
     S.Add('      "log": {');
-    S.Add('        "access": "",');
-    S.Add('        "error": "",');
+    //S.Add('        "access": "' + GetUserDir + '.config/xraygui/xraygui.log",');
     //LOGLEVEL (debug, info, warning, error)
     S.Add('        "loglevel": "info"');
     S.Add('      },');
@@ -1108,10 +1113,8 @@ begin
   INIPropStorage1.StoredValue['findex'] := '100';
   INIPropStorage1.Save;
 
-  //Останавливаем XRay и удаляем лог чтобы не копить размер
-  StartProcess('while [[ $(ss -ltn | grep ' + PortEdit.Text +
-    ') ]]; do killall xray; sleep 1; done; ' +
-    '> /home/$LOGNAME/.config/xraygui/xraygui.log');
+  //Останавливаем XRay и удаляем лог чтобы не копить размер (прописано в /etc/systemd/user/xray.service)
+  StartProcess('systemctl --user stop xray.service');
 end;
 
 //Вставка нового URL...
@@ -1200,11 +1203,9 @@ begin
   //Быстрая очистка вывода перед стартом
   LogMemo.Clear;
 
-  //Старт XRay: Завершаем предыдущий и выводим лог (каждый запуск - новый лог)
-  SetCurrentDir(ExtractFilePath(Application.ExeName));
-  StartProcess('killall xray; cd ./xray; ' +
-    'nohup ./xray -config=/home/$LOGNAME/.config/xraygui/config.json > ' +
-    '~/.config/xraygui/xraygui.log &');
+  //Старт XRay и выводим лог (каждый restart - новый лог)
+  //Сервис от юзера /etc/systemd/user/xray.service
+  StartProcess('systemctl --user restart xray.service');
 end;
 
 //Создание формы
@@ -1212,9 +1213,13 @@ procedure TMainForm.FormCreate(Sender: TObject);
 begin
   MainForm.Caption := Application.Title;
 
-  //Директория ссылок Автозапуска
-  if not DirectoryExists(GetUserDir + '.config/autostart') then
-    MkDir(GetUserDir + '.config/autostart');
+  //Директория ссылок Автозапуска (перевод на systemd --user)
+ { if not DirectoryExists(GetUserDir + '.config/autostart') then
+    MkDir(GetUserDir + '.config/autostart');}
+
+    //Удаляем автозапуск предыдущих версий (переход на systemd --user)
+  if FileExists(GetUserDir + '.config/autostart/xray.desktop') then
+    DeleteFile(GetUserDir + '.config/autostart/xray.desktop');
 
   //Рабочая директория (конфигурации + лог)
   if not DirectoryExists(GetUserDir + '.config/xraygui') then
@@ -1298,11 +1303,14 @@ procedure TMainForm.AutoStartBoxChange(Sender: TObject);
 var
   S: ansistring;
 begin
+  Screen.Cursor := crHourGlass;
+  Application.ProcessMessages;
+
   if not AutoStartBox.Checked then
-    RunCommand('/bin/bash', ['-c', 'rm -f ~/.config/autostart/xray.desktop'], S)
+    RunCommand('/bin/bash', ['-c', 'systemctl --user disable xray'], S)
   else
-    RunCommand('/bin/bash', ['-c',
-      'cp -f /usr/share/xraygui/xray.desktop ~/.config/autostart/xray.desktop'], S);
+    RunCommand('/bin/bash', ['-c', 'systemctl --user enable xray'], S);
+  Screen.Cursor := crDefault;
 end;
 
 //Масштабирование для Plasma

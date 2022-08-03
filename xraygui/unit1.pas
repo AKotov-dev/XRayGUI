@@ -80,6 +80,7 @@ var
   MainForm: TMainForm;
 
 resourcestring
+  SAppRunning = 'The program is already running!';
   SVmessOnlyMsg = 'Supported protocols:' + sLineBreak +
     'vmess, vless, ss (without obfs) and trojan!';
   SDeleteMsg = 'Delete the selected configurations?';

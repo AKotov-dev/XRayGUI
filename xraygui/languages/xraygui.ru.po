@@ -88,6 +88,10 @@ msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https:
 msgid "Stop"
 msgstr "Стоп"
 
+#: unit1.sapprunning
+msgid "The program is already running!"
+msgstr "Программа уже запущена!"
+
 #: unit1.sdeletemsg
 msgid "Delete the selected configurations?"
 msgstr "Удалить выбранные конфигурации?"

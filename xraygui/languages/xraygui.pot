@@ -76,6 +76,10 @@ msgstr ""
 msgid "Stop"
 msgstr ""
 
+#: unit1.sapprunning
+msgid "The program is already running!"
+msgstr ""
+
 #: unit1.sdeletemsg
 msgid "Delete the selected configurations?"
 msgstr ""

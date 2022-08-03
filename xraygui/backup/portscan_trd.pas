@@ -57,6 +57,7 @@ begin
     end;
 end;
 
+//Отображение статуса
 procedure PortScan.ShowStatus;
 begin
   with MainForm do

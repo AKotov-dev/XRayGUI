@@ -31,7 +31,7 @@ urlcopy=https://github.com/AKotov-dev/XRayGUI
 license=GPLv3
 
 [DEPS]
-deps=
+deps=systemd procps-ng
 
 [META]
 meta=0

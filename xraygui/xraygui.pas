@@ -15,7 +15,7 @@ uses
   Forms,
   Unit1,
   start_trd,
-  portscan_trd { you can add units after this };
+  portscan_trd, update_trd { you can add units after this };
 
 {$R *.res}
 
@@ -53,7 +53,7 @@ begin
   //---
 
   RequireDerivedFormResource := True;
-  Application.Title:='XRayGUI v0.9';
+  Application.Title:='XRayGUI v1.0';
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);

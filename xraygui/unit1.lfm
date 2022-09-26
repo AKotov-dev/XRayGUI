@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 312
+  Left = 298
   Height = 708
-  Top = 124
+  Top = 123
   Width = 990
   ActiveControl = ConfigBox
   Caption = 'XRayGUI'
@@ -146,7 +146,7 @@ object MainForm: TMainForm
         AnchorSideRight.Control = AutoStartBox
         AnchorSideBottom.Side = asrBottom
         Left = 164
-        Height = 36
+        Height = 37
         Top = 8
         Width = 88
         Anchors = [akTop, akRight]

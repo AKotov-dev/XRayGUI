@@ -88,7 +88,7 @@ resourcestring
 
 implementation
 
-uses start_trd, portscan_trd;
+uses start_trd, portscan_trd, update_trd;
 
 {$R *.lfm}
 
@@ -1325,6 +1325,7 @@ procedure TMainForm.FormShow(Sender: TObject);
 var
   FShowLogTRD: TThread;
   FPortScanThread: TThread;
+  FUpdateThread: TThread;
 begin
   //Масштабирование для Plasma
   IniPropStorage1.Restore;
@@ -1341,6 +1342,10 @@ begin
   //Запуск поток непрерывного чтения лога
   FShowLogTRD := ShowLogTRD.Create(False);
   FShowLogTRD.Priority := tpNormal;
+
+  //Поток проверки обновлений Xray-Core
+  FUpdateThread := CheckUpdate.Create(False);
+  FUpdateThread.Priority := tpNormal;
 end;
 
 //Восстанавливаем индекс Check

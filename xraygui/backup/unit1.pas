@@ -80,6 +80,7 @@ var
   MainForm: TMainForm;
 
 resourcestring
+  SAppRunning = 'The program is already running!';
   SVmessOnlyMsg = 'Supported protocols:' + sLineBreak +
     'vmess, vless, ss (without obfs) and trojan!';
   SDeleteMsg = 'Delete the selected configurations?';
@@ -87,7 +88,7 @@ resourcestring
 
 implementation
 
-uses start_trd, portscan_trd;
+uses start_trd, portscan_trd, update_trd;
 
 {$R *.lfm}
 

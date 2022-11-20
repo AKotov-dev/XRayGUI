@@ -2,10 +2,10 @@
 name=xraygui
 
 [VERSION]
-version=1.0
+version=1.1
 
 [RELEASE]
-release=1.mrx9
+release=0.mrx9
 
 [GROUP]
 group=Applications/System
@@ -65,15 +65,14 @@ deb=0
 1=
 2=systemctl daemon-reload
 
-[BEFOREINSTALL]
-0=#!/bin/bash
-1=
-2=if [[ $(pidof xray) ]]; then killall xray; fi
-
 [BEFOREREMOVE]
 0=#!/bin/bash
 1=
-2=if [[ $(pidof xray) ]]; then killall xray; fi
+2=#Окончательное удаление
+3=if [ $1 -eq 0 ]; then
+4=if [[ $(pidof xray) ]]; then killall xray; fi
+5=systemctl daemon-reload
+6=fi
 
 [URL32]
 url32=https://github.com/AKotov-dev/XRayGUI
@@ -91,59 +90,64 @@ devtool=Lazarus
 toolversion=2.2.0
 
 [INFO]
-0=v1.0
-1=+ Update Xray-core v1.6.0
-2=+ Auto-update Xray-Core at GUI startup
+0=v1.1
+1=+ Installing xray-core from the GitHub
+2=+ xray-core installation/update directory ~/.config/xraygui/xray
 3=+ RPM packages for Mageia-8 and Mageia-9
 4=
-5=v0.9
-6=+ Improved startup control (xray/port)
-7=+ Prevention the launch of the second copy of the program
-8=
-9=v0.8-1
-10=+ Update: Xray-core v1.5.9
-11=
-12=v0.8
-13=+ Switching to systemd (autostart from the user)
-14=+ Correction of the spec file (rpm/deb)
-15=+ Autostart testing in Mageia/LUbuntu - passed
+5=v1.0
+6=+ Update Xray-core v1.6.0
+7=+ Auto-update Xray-Core at GUI startup
+8=+ RPM packages for Mageia-8 and Mageia-9
+9=
+10=v0.9
+11=+ Improved startup control (xray/port)
+12=+ Prevention the launch of the second copy of the program
+13=
+14=v0.8-1
+15=+ Update: Xray-core v1.5.9
 16=
-17=v0.7
-18=+ Vless+gRPC and Trojan+gRPC support
-19=+ General test:
-20=VMESS TLS - passed
-21=VMESS non TLS - passed
-22=
-23=VLESS TLS - passed
-24=VLESS non TLS - passed
-25=VLESS + WS TLS - passed
-26=VLESS + WS non TLS - passed
-27=VLESS + gRPC - passed
-28=
-29=Trojan - passed
-30=Trojan + WS - passed
-31=Trojan + gRPC - passed
-32=
-33=v0.6
-34=+ Trojan protocol support
-35=+ Proxy launch control in a separate thread
-36=+ Optimization of Vmess/Vless/SS/Trojan configurations
+17=v0.8
+18=+ Switching to systemd (autostart from the user)
+19=+ Correction of the spec file (rpm/deb)
+20=+ Autostart testing in Mageia/LUbuntu - passed
+21=
+22=v0.7
+23=+ Vless+gRPC and Trojan+gRPC support
+24=+ General test:
+25=VMESS TLS - passed
+26=VMESS non TLS - passed
+27=
+28=VLESS TLS - passed
+29=VLESS non TLS - passed
+30=VLESS + WS TLS - passed
+31=VLESS + WS non TLS - passed
+32=VLESS + gRPC - passed
+33=
+34=Trojan - passed
+35=Trojan + WS - passed
+36=Trojan + gRPC - passed
 37=
-38=v0.5
-39=+ Supported protocols: VMESS/VLESS (ws, ws+tls) and SS (without obfs)
-40=+ Changed the file type of uploading/saving the list of configurations  to *.proxy
-41=+ Excluded URL insertion from PopUp menu to save duplicate search
+38=v0.6
+39=+ Trojan protocol support
+40=+ Proxy launch control in a separate thread
+41=+ Optimization of Vmess/Vless/SS/Trojan configurations
 42=
-43=v0.4
-44=+ Optimization of log output
-45=+ Optimization of general perception (visual load)
-46=
-47=v0.3
-48=+ Autostart proxy after reboot
-49=+ Disabling xray before updating/deleting rpm/deb (spec)
-50=
-51=v0.2
-52=+ PopUp menu: Paste from clipboard
-53=+ Cosmetic edits, hints, etc...
-54=
-55=v0.1 - initial release
+43=v0.5
+44=+ Supported protocols: VMESS/VLESS (ws, ws+tls) and SS (without obfs)
+45=+ Changed the file type of uploading/saving the list of configurations  to *.proxy
+46=+ Excluded URL insertion from PopUp menu to save duplicate search
+47=
+48=v0.4
+49=+ Optimization of log output
+50=+ Optimization of general perception (visual load)
+51=
+52=v0.3
+53=+ Autostart proxy after reboot
+54=+ Disabling xray before updating/deleting rpm/deb (spec)
+55=
+56=v0.2
+57=+ PopUp menu: Paste from clipboard
+58=+ Cosmetic edits, hints, etc...
+59=
+60=v0.1 - initial release

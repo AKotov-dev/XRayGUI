@@ -31,7 +31,7 @@ urlcopy=https://github.com/AKotov-dev/XRayGUI
 license=GPLv3
 
 [DEPS]
-deps=systemd gtk2 fping curl wget p7zip zenity
+deps=systemd gtk2 fping wget p7zip zenity
 
 [META]
 meta=0
@@ -48,12 +48,12 @@ deb=0
 [FILES]
 0=/usr/share/doc/xraygui/
 1=/usr/bin/xraygui
-2=/usr/share/xraygui/
-3=/usr/share/applications/xraygui.desktop
-4=/usr/share/icons/xraygui.png
-5=/etc/systemd/user/xray.service
-6=/etc/systemd/user/xray-update.service
-7=/usr/bin/xray-update
+2=/usr/bin/xray-update
+3=/usr/share/xraygui/
+4=/usr/share/applications/xraygui.desktop
+5=/usr/share/icons/xraygui.png
+6=/etc/systemd/user/xray.service
+7=/etc/systemd/user/xray-update.service
 
 [AFTERINSTALL]
 0=#!/bin/bash

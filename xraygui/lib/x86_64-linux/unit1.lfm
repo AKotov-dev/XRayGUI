@@ -154,7 +154,7 @@ object MainForm: TMainForm
         MinValue = 1000
         ParentShowHint = False
         TabOrder = 0
-        Value = 1089
+        Value = 1080
       end
       object StopBtn: TSpeedButton
         AnchorSideRight.Control = StartBtn

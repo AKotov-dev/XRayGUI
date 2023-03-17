@@ -167,12 +167,14 @@ begin
     Result := Copy(Result, 2, Length(Result) - 2);
     //Убираем переводы строк
     Result := StringReplace(Result, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
+    Result := StringReplace(Result, #10, '', [rfReplaceAll, rfIgnoreCase]);
+    Result := StringReplace(Result, #13, '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем пробелы
     Result := StringReplace(Result, ' ', '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем кавычки
     Result := StringReplace(Result, '"', '', [rfReplaceAll, rfIgnoreCase]);
     //Грузим линейный текст
-    S.Text := (Result);
+    S.Text := Trim(Result);
 
     //Разделяем значения на Items по (,)
     S.Delimiter := ',';
@@ -199,207 +201,150 @@ begin
   try
     S := TStringList.Create;
 
-    S.Add('{');
-    S.Add('  "policy": {');
-    S.Add('    "system": {');
-    S.Add('      "statsInboundUplink": true,');
-    S.Add('      "statsInboundDownlink": true');
-    S.Add('    }');
-    S.Add('  },');
-    S.Add('  "log": {');
-    //S.Add('    "access": "' + GetUserDir + '.config/xraygui/xraygui.log",');
-    //LOGLEVEL (debug, info, warning, error)
-    S.Add('    "loglevel": "info"');
-    S.Add('  },');
-    //DNS
-    //    S.Add('        "dns": {');
-    //    S.Add('        "servers": [');
-    //    S.Add('            "1.1.1.1",');
-    //    S.Add('            "8.8.8.8",');
-    //    S.Add('            "9.9.9.9"');
-    //    S.Add('        ]');
-    //    S.Add('    },');
-    S.Add('  "inbounds": [');
-    S.Add('    {');
-    S.Add('      "tag": "proxy",');
-    S.Add('      "port": ' + PORT + ',');
-    S.Add('      "listen": "0.0.0.0",');
-    S.Add('      "protocol": "socks",');
-    S.Add('      "sniffing": {');
-    S.Add('        "enabled": true,');
-    S.Add('        "destOverride": [');
-    S.Add('          "http",');
-    S.Add('          "tls"');
-    S.Add('        ]');
-    S.Add('      },');
-    S.Add('      "settings": {');
-    S.Add('        "auth": "noauth",');
-    S.Add('        "udp": true,');
-    S.Add('        "ip": null,');
-    S.Add('        "address": null,');
-    S.Add('        "clients": null');
-    S.Add('      },');
-    S.Add('      "streamSettings": null');
-    S.Add('    }');
-    S.Add('  ],');
-    S.Add('  "outbounds": [');
-    S.Add('    {');
-    //Tag
-    S.Add('      "tag": "' + VmessDecode(VMESSURL, 'ps') + ' ' +
-      VmessDecode(VMESSURL, 'add') + ' ' + VmessDecode(VMESSURL, 'port') + '",');
-    S.Add('      "protocol": "vmess",');
-    S.Add('      "settings": {');
-    S.Add('        "vnext": [');
-    S.Add('          {');
-    S.Add('            "users": [');
-    S.Add('              {');
-    S.Add('                "email": "t@t.tt",');
-    S.Add('                "security": "auto",');
-    //ID
-    S.Add('                "id": "' + VmessDecode(VMESSURL, 'id') + '",');
-    //AID
-    S.Add('                "alterId": ' + VmessDecode(VMESSURL, 'aid'));
-    S.Add('              }');
-    S.Add('            ],');
-    //ADD (ADDRESS)
-    S.Add('            "address": "' + VmessDecode(VMESSURL, 'add') + '",');
-    //PORT
-    S.Add('            "port": ' + VmessDecode(VMESSURL, 'port'));
-    S.Add('          }');
-    S.Add('        ],');
-    S.Add('        "servers": null,');
-    S.Add('        "response": null');
-    S.Add('      },');
-    S.Add('      "streamSettings": {');
+    S.Add(' {');
+    S.Add('     "api": {');
+    S.Add('         "services": [');
+    S.Add('             "ReflectionService",');
+    S.Add('             "HandlerService",');
+    S.Add('             "LoggerService",');
+    S.Add('             "StatsService"');
+    S.Add('         ],');
+    S.Add('         "tag": "QV2RAY_API"');
+    S.Add('     },');
+    S.Add('     "inbounds": [');
+    S.Add('        {');
+    S.Add('             "listen": "127.0.0.1",');
+    S.Add('             "port": ' + PORT + ',');
+    S.Add('            "protocol": "socks",');
+    S.Add('            "settings": {');
+    S.Add('                "auth": "noauth",');
+    S.Add('                "ip": "127.0.0.1",');
+    S.Add('                "udp": true ');
+    S.Add('            },');
+    S.Add('            "sniffing": {');
+    S.Add('            },');
+    S.Add('            "tag": "socks_IN"');
+    S.Add('         }');
+    S.Add('    ],');
+    S.Add('    "log": {');
+    S.Add('        "loglevel": "info"');
+    S.Add('    },');
+    S.Add('    "outbounds": [');
+    S.Add('        {');
+    S.Add('            "protocol": "vmess",');
+    S.Add('             "sendThrough": "0.0.0.0",');
+    S.Add('             "settings": {');
+    S.Add('                "vnext": [');
+    S.Add('                    {');
+    S.Add('                        "address": "' + VmessDecode(VMESSURL, 'add') + '",');
+    S.Add('                        "port": ' + VmessDecode(VMESSURL, 'port') + ',');
+    S.Add('                        "users": [');
+    S.Add('                            {');
+    S.Add('                                "id": "' +
+      VmessDecode(VMESSURL, 'id') + '",');
+    S.Add('                                "security": "auto"');
+    S.Add('                             }');
+    S.Add('                        ]');
+    S.Add('                    }');
+    S.Add('                 ]');
+    S.Add('             },');
+    S.Add('            "streamSettings": {');
+
     //NETWORK
-    S.Add('        "network": "' + VmessDecode(VMESSURL, 'net') + '",');
+    if VmessDecode(VMESSURL, 'net') = 'ws' then
+    begin
+      S.Add('        "network": "' + VmessDecode(VMESSURL, 'net') + '",');
+      S.Add('        "wsSettings": {');
+      S.Add('        "headers": {');
+      S.Add('          "Host": "' + VmessDecode(VMESSURL, 'host') + '"');
+      S.Add('        },');
+      S.Add('        "path": "' + VmessDecode(VMESSURL, 'path') + '"');
+      S.Add('        },');
+    end;
     //TLS
     if VmessDecode(VMESSURL, 'tls') = '' then
       S.Add('        "security": null,')
     else
       S.Add('        "security": "' + VmessDecode(VMESSURL, 'tls') + '",');
-    S.Add('        "tlsSettings": {');
-    S.Add('          "allowInsecure": true');
+
+    S.Add('                "tlsSettings": {');
+    S.Add('                    "disableSystemRoot": false');
+    S.Add('                },');
+    S.Add('                "xtlsSettings": {');
+    S.Add('                    "disableSystemRoot": false');
+    S.Add('                }');
+    S.Add('            },');
+    S.Add('            "tag": "PROXY"');
     S.Add('        },');
-    S.Add('        "kcpSettings": {');
-    S.Add('          "mtu": 1350,');
-    S.Add('          "tti": 50,');
-    S.Add('          "uplinkCapacity": 12,');
-    S.Add('          "downlinkCapacity": 100,');
-    S.Add('          "congestion": false,');
-    S.Add('          "readBufferSize": 2,');
-    S.Add('          "writeBufferSize": 2,');
-    S.Add('          "header": {');
-    S.Add('            "type": "wechat-video"');
-    S.Add('          }');
+    S.Add('        {');
+    S.Add('            "protocol": "freedom",');
+    S.Add('            "sendThrough": "0.0.0.0",');
+    S.Add('            "settings": {');
+    S.Add('                "domainStrategy": "AsIs",');
+    S.Add('                "redirect": ":0"');
+    S.Add('            },');
+    S.Add('            "streamSettings": {');
+    S.Add('            },');
+    S.Add('            "tag": "DIRECT"');
     S.Add('        },');
-    S.Add('        "wsSettings": {');
-    S.Add('          "connectionReuse": true,');
-    //PATH
-    S.Add('          "path": "' + VmessDecode(VMESSURL, 'path') + '",');
-    S.Add('          "headers": {');
-    //HOST
-    S.Add('            "Host": "' + VmessDecode(VMESSURL, 'host') + '"');
-    S.Add('          }');
-    S.Add('        },');
-    S.Add('        "httpSettings": {');
-    S.Add('          "host": [');
-    S.Add('            "host.com"');
-    S.Add('          ],');
-    S.Add('          "path": "/host"');
-    S.Add('        },');
-    S.Add('        "quicSettings": {');
-    S.Add('          "security": "none",');
-    S.Add('          "key": "",');
-    S.Add('          "header": {');
-    //TYPE
-    if VmessDecode(VMESSURL, 'type') = '' then
-      S.Add('            "type": "none"')
-    else
-      S.Add('            "type": "' + VmessDecode(VMESSURL, 'type') + '"');
-    S.Add('          }');
-    S.Add('        },');
-    S.Add('        "tcpSettings": {');
-    S.Add('          "connectionReuse": true,');
-    S.Add('          "header": {');
-    S.Add('            "type": "http",');
-    S.Add('            "request": {');
-    S.Add('              "version": "1.1",');
-    S.Add('              "method": "GET",');
-    S.Add('              "path": [');
-    S.Add('                "/"');
-    S.Add('              ],');
-    S.Add('              "headers": {');
-    S.Add('                "Host": [');
-    S.Add('                  ""');
-    S.Add('                ],');
-    S.Add('                "User-Agent": [');
-    S.Add('                  "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36",');
-    S.Add('                  "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0_2 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) CriOS/53.0.2785.109 Mobile/14A456 Safari/601.1.46"');
-    S.Add('                ],');
-    S.Add('                "Accept-Encoding": [');
-    S.Add('                  "gzip, deflate"');
-    S.Add('                ],');
-    S.Add('                "Connection": [');
-    S.Add('                  "keep-alive"');
-    S.Add('                ],');
-    S.Add('                "Pragma": "no-cache"');
-    S.Add('              }');
-    S.Add('            }');
-    S.Add('          }');
+    S.Add('        {');
+    S.Add('            "protocol": "blackhole",');
+    S.Add('            "sendThrough": "0.0.0.0",');
+    S.Add('            "settings": {');
+    S.Add('                "response": {');
+    S.Add('                    "type": "none"');
+    S.Add('                }');
+    S.Add('             },');
+    S.Add('            "streamSettings": {');
+    S.Add('            },');
+    S.Add('            "tag": "BLACKHOLE"');
     S.Add('        }');
-    S.Add('      },');
-    S.Add('      "mux": {');
-    S.Add('        "enabled": false');
-    S.Add('      }');
-    S.Add('    },');
-    S.Add('    {');
-    S.Add('      "tag": "direct",');
-    S.Add('      "protocol": "freedom",');
-    S.Add('      "settings": {');
-    S.Add('        "vnext": null,');
-    S.Add('        "servers": null,');
-    S.Add('        "response": null');
-    S.Add('      },');
-    S.Add('      "streamSettings": null,');
-    S.Add('      "mux": null');
-    S.Add('    },');
-    S.Add('    {');
-    S.Add('      "tag": "block",');
-    S.Add('      "protocol": "blackhole",');
-    S.Add('      "settings": {');
-    S.Add('        "vnext": null,');
-    S.Add('        "servers": null,');
-    S.Add('        "response": {');
-    S.Add('          "type": "http"');
+    S.Add('    ],');
+    S.Add('    "policy": {');
+    S.Add('        "system": {');
+    S.Add('            "statsInboundDownlink": true,');
+    S.Add('            "statsInboundUplink": true,');
+    S.Add('             "statsOutboundDownlink": true,');
+    S.Add('            "statsOutboundUplink": true');
     S.Add('        }');
-    S.Add('      },');
-    S.Add('      "streamSettings": null,');
-    S.Add('      "mux": null');
+    S.Add('    },');
+    S.Add('    "routing": {');
+    S.Add('        "domainMatcher": "mph",');
+    S.Add('        "domainStrategy": "AsIs",');
+    S.Add('        "rules": [');
+    S.Add('            {');
+    S.Add('                "inboundTag": [');
+    S.Add('                    "QV2RAY_API_INBOUND"');
+    S.Add('                ],');
+    S.Add('                "outboundTag": "QV2RAY_API",');
+    S.Add('               "type": "field"');
+    S.Add('            },');
+    S.Add('            {');
+    S.Add('                "ip": [');
+    S.Add('                    "geoip:private"');
+    S.Add('                ],');
+    S.Add('                "outboundTag": "DIRECT",');
+    S.Add('                "type": "field"');
+    S.Add('            },');
+    S.Add('            {');
+    S.Add('                "ip": [');
+    S.Add('                    "geoip:cn"');
+    S.Add('                ],');
+    S.Add('                "outboundTag": "DIRECT",');
+    S.Add('                "type": "field"');
+    S.Add('             },');
+    S.Add('            {');
+    S.Add('                 "domain": [');
+    S.Add('                    "geosite:cn"');
+    S.Add('                ],');
+    S.Add('                "outboundTag": "DIRECT",');
+    S.Add('                 "type": "field"');
+    S.Add('             }');
+    S.Add('        ]');
+    S.Add('    },');
+    S.Add('    "stats": {');
     S.Add('    }');
-    S.Add('  ],');
-    S.Add('  "stats": {},');
-    S.Add('  "api": {');
-    S.Add('    "tag": "api",');
-    S.Add('    "services": [');
-    S.Add('      "StatsService"');
-    S.Add('    ]');
-    S.Add('  },');
-    S.Add('  "dns": null,');
-    S.Add('  "routing": {');
-    S.Add('    "domainStrategy": "IPIfNonMatch",');
-    S.Add('    "rules": [');
-    S.Add('      {');
-    S.Add('        "type": "field",');
-    S.Add('        "port": null,');
-    S.Add('        "inboundTag": "api",');
-    S.Add('        "outboundTag": "api",');
-    S.Add('        "ip": null,');
-    S.Add('        "domain": null');
-    S.Add('      }');
-    S.Add('    ]');
-    S.Add('  }');
-    S.Add('}');
+    S.Add(' }');
 
     //Сохранение готового конфига
     S.SaveToFile(SAVEPATH);
@@ -423,6 +368,7 @@ begin
     URL := Trim(Copy(URL, 6, Length(URL)));
     //Убираем переводы строк
     URL := StringReplace(URL, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
+    //  URL := StringReplace(Result, #10, '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем пробелы
     URL := StringReplace(URL, ' ', '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем кавычки
@@ -618,6 +564,7 @@ begin
 
     //Нормализация URL; Убираем переводы строк
     URL := StringReplace(URL, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
+    // URL := StringReplace(Result, #10, '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем пробелы
     URL := StringReplace(URL, ' ', '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем кавычки
@@ -717,11 +664,11 @@ begin
     //DNS
     //    S.Add('        "dns": {');
     //    S.Add('            "servers": [');
-    //    S.Add('                "1.1.1.1",');
-    //    S.Add('                "8.8.8.8",');
-    //    S.Add('                "9.9.9.9"');
-    //    S.Add('            ]');
-    //    S.Add('        },');
+    //     S.Add('                "1.1.1.1",');
+    //     S.Add('                "8.8.8.8",');
+    //     S.Add('                "9.9.9.9"');
+    //     S.Add('            ]');
+    //     S.Add('        },');
     S.Add('        "inbounds": [');
     S.Add('            {');
     S.Add('                "listen": "127.0.0.1",');
@@ -759,15 +706,21 @@ begin
     //ENCRYPTION
     S.Add('                                    "encryption": "' +
       VlessDecode(VLESSURL, 'encryption') + '",');
+
+    if VlessDecode(VLESSURL, 'security') = 'xtls' then
+      S.Add('                                    "flow": "xtls-rprx-direct",');
+
     //ID
     S.Add('                                    "id": "' +
       VlessDecode(VLESSURL, 'id') + '"');
+
     S.Add('                                }');
     S.Add('                            ]');
     S.Add('                        }');
     S.Add('                    ]');
     S.Add('                },');
     S.Add('                "streamSettings": {');
+
     //if gRPC
     if Pos('type=grpc', VLESSURL) <> 0 then
     begin
@@ -784,6 +737,7 @@ begin
       'security') + '",');
     S.Add('                    "tlsSettings": {');
     S.Add('                        "disableSystemRoot": false,');
+    S.Add('                        "allowInsecure": true,');
     //SERVER
     S.Add('                        "serverName": "' +
       VlessDecode(VLESSURL, 'server') + '"');
@@ -891,6 +845,7 @@ begin
   try
     //Нормализация URL; Убираем переводы строк
     URL := StringReplace(URL, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
+    // URL := StringReplace(Result, #10, '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем пробелы
     URL := StringReplace(URL, ' ', '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем кавычки
@@ -1005,12 +960,12 @@ begin
     if Pos('type=grpc', TROJANURL) <> 0 then
     begin
       S.Add('              "serverName": "' + TrojanDecode(TrojanURL, 'server') + '",');
-      S.Add('              "allowInsecure": false');
+      S.Add('              "allowInsecure": true');
       S.Add('          },');
     end
     else
     begin
-      S.Add('              "allowInsecure": false');
+      S.Add('              "allowInsecure": true');
       S.Add('            }');
       S.Add('          },');
     end;

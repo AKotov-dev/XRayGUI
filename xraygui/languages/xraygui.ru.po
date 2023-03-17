@@ -107,3 +107,4 @@ msgid ""
 msgstr ""
 "Поддерживаемые протоколы:\n"
 "vmess, vless, ss (без obfs) и trojan!"
+

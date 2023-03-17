@@ -1,5 +1,5 @@
 object MainForm: TMainForm
-  Left = 312
+  Left = 286
   Height = 708
   Top = 124
   Width = 990
@@ -11,7 +11,7 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnShow = FormShow
   SessionProperties = 'ConfigBox.ItemIndex;GroupBox1.Width;Height;Left;Panel1.Height;PortEdit.Value;Top;Width;OpenDialog1.InitialDir;SaveDialog1.InitialDir'
-  LCLVersion = '2.2.0.4'
+  LCLVersion = '2.2.4.0'
   object GroupBox1: TGroupBox
     Left = 0
     Height = 688
@@ -207,6 +207,7 @@ object MainForm: TMainForm
         Anchors = [akTop, akRight]
         BorderSpacing.Right = 3
         Caption = 'Port:'
+        ParentColor = False
       end
       object AutoStartBox: TCheckBox
         AnchorSideTop.Control = ClearBox
@@ -248,7 +249,6 @@ object MainForm: TMainForm
       ScrollBars = ssAutoBoth
       TabOrder = 2
       WantReturns = False
-      WordWrap = False
     end
   end
   object StaticText1: TStaticText

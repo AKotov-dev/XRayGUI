@@ -142,7 +142,7 @@ function CheckAutoStart: boolean;
 var
   S: ansistring;
 begin
-  RunCommand('/bin/bash', ['-c',
+  RunCommand('bash', ['-c',
     '[[ -n $(systemctl --user is-enabled xray | grep "enabled") ]] && echo "yes"'], S);
 
   if Trim(S) = 'yes' then
@@ -227,7 +227,7 @@ begin
     S.Add('         }');
     S.Add('    ],');
     S.Add('    "log": {');
-    S.Add('        "loglevel": "info"');
+    S.Add('        "loglevel": "warning"');
     S.Add('    },');
     S.Add('    "outbounds": [');
     S.Add('        {');
@@ -447,7 +447,7 @@ begin
     S.Add('        "log": {');
     //S.Add('            "access": "' + GetUserDir + '.config/xraygui/xraygui.log",');
     //LOGLEVEL (debug, info, warning, error)
-    S.Add('            "loglevel": "info"');
+    S.Add('            "loglevel": "warning"');
     S.Add('        },');
     S.Add('        "outbounds": [');
     S.Add('            {');
@@ -662,8 +662,8 @@ begin
     S.Add('            "tag": "XRayGUI_API"');
     S.Add('        },');
     //DNS
-    //    S.Add('        "dns": {');
-    //    S.Add('            "servers": [');
+    //     S.Add('        "dns": {');
+    //     S.Add('            "servers": [');
     //     S.Add('                "1.1.1.1",');
     //     S.Add('                "8.8.8.8",');
     //     S.Add('                "9.9.9.9"');
@@ -688,7 +688,7 @@ begin
     S.Add('        "log": {');
     //S.Add('            "access": "' + GetUserDir + '.config/xraygui/xraygui.log",');
     //LOGLEVEL (debug, info, warning, error)
-    S.Add('            "loglevel": "info"');
+    S.Add('            "loglevel": "warning"');
     S.Add('        },');
     S.Add('        "outbounds": [');
     S.Add('            {');
@@ -877,7 +877,7 @@ begin
     S.Add('      "log": {');
     //S.Add('        "access": "' + GetUserDir + '.config/xraygui/xraygui.log",');
     //LOGLEVEL (debug, info, warning, error)
-    S.Add('        "loglevel": "info"');
+    S.Add('        "loglevel": "warning"');
     S.Add('      },');
     //DNS
     //    S.Add('        "dns": {');

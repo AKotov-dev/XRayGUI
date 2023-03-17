@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 286
+  Left = 285
   Height = 708
-  Top = 124
+  Top = 123
   Width = 990
   ActiveControl = ConfigBox
   Caption = 'XRayGUI'
@@ -246,7 +246,7 @@ object MainForm: TMainForm
       Font.Name = 'Monospace'
       ParentFont = False
       ReadOnly = True
-      ScrollBars = ssAutoBoth
+      ScrollBars = ssVertical
       TabOrder = 2
       WantReturns = False
     end

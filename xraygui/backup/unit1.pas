@@ -256,7 +256,7 @@ begin
       S.Add('        "network": "' + VmessDecode(VMESSURL, 'net') + '",');
       S.Add('        "wsSettings": {');
       S.Add('        "headers": {');
-      S.Add('          "Host": "' + VmessDecode(VMESSURL, 'host') + '",');
+      S.Add('          "Host": "' + VmessDecode(VMESSURL, 'host') + '"');
       S.Add('        },');
       S.Add('        "path": "' + VmessDecode(VMESSURL, 'path') + '"');
       S.Add('        },');

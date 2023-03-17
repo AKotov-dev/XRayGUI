@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# XRay-Core update script
+# Dependencies: fping wget p7zip zenity
+
+#Если сайт доступен - продолжить
+[[ $(fping github.com) ]] || exit;
+
+#Language select
+case $LANG in
+     ru_RU.UTF-8)
+          str=('Обновление XRay-Core' 'Обновить XRay-Core до последней версии?' \
+          '1. Обновление займёт примерно 10-15 секунд' \
+          '2. Программа будет открыта после обновления')
+          ;;
+     *)
+          str=('XRay-Core Update' 'Update XRay-Core to the latest version?' \
+          '1. The update will take about 10-15 seconds' \
+          '2. The program will be opened after the update')
+          ;;
+esac
+
+#Версия локального xray-core (цифры = число)
+test -f ~/.config/xraygui/xray/xray && lversion=$(~/.config/xraygui/xray/xray --version | head -n1 | awk '{print $2}') || lversion="0"
+
+#Имя новейшего архива Xray-linux-64.zip на GitHub
+cd ~/.config/xraygui; wget -N https://api.github.com/repos/XTLS/Xray-core/releases/latest
+archurl=$(cat ./latest | tr -d '"' | tr ' ' '\n' | grep '/Xray-linux-64.zip' | grep -v ".dgst")
+#echo $archurl
+
+#Версия xray-core на сайте (цифры = число)
+rversion=$(echo $archurl | cut -d "/" -f8 | sed 's/[[:alpha:]]*//g')
+#echo $rversion
+
+#Сравнение версий и обновление
+if [[ -n $rversion && $lversion != $rversion ]]; then
+zenity --question --title="${str[0]}" --text="${str[1]}\n\n${str[2]}\n${str[3]}" --no-wrap
+    if [[ $? -eq 0 ]]; then
+    [ -d ~/.config/xraygui/xray ] || mkdir ~/.config/xraygui/xray
+	killall xraygui xray
+
+	cd ~/.config/xraygui/xray
+	wget $archurl
+	7z e -y ./*.zip
+	rm -f ./*.zip
+
+	sleep 2 && [[ $(pidof xraygui) ]] || xraygui
+    fi;
+fi;
+
+exit 0

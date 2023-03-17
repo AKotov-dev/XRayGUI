@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ -f "/home/$LOGNAME/.config/xraygui/clear" ]; then
+#zenity --question --no-wrap --title="Browser Сleaner" \
+#       --text="Clear the Cache and Cookies of installed Browsers?"
+
+#if [ "$?" -eq "0" ]; then
+# Caches (Mozilla, Chrome, Opera, Chromium, Palemoon)
+rm -rf ~/.cache/mozilla/* \
+       ~/.cache/google-chrome/* \
+       ~/.cache/opera/* \
+       ~/.cache/chromium/* \
+       ~/.cache/moonchild\ productions/*
+
+# Cookies
+rm -f $(find ~/.mozilla/* -type f -name "cookies.sqlite") \
+      ~/.config/google-chrome/Default/Cookies* \
+      ~/.config/opera/Cookies* \
+      ~/.config/chromium/Default/Cookies* \
+      "$(find ~/.moonchild\ productions/pale\ moon/* -type f -name "cookies.sqlite")"
+#fi;
+fi;
+# ---
+
+/usr/share/xraygui/xraygui
+
+exit 0;

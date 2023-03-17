@@ -1,0 +1,15 @@
+[Unit]
+Description=XRay Service
+Documentation=https://github.com/xtls
+After=network.target nss-lookup.target
+
+[Service]
+ExecStart=/bin/bash -c 'cd ~/.config/xraygui/xray && \
+./xray run -config ~/.config/xraygui/config.json > ~/.config/xraygui/xraygui.log'
+
+ExecStop=killall xray
+#Restart=on-failure
+#RestartPreventExitStatus=23
+
+[Install]
+WantedBy=default.target

@@ -15,6 +15,8 @@ type
 
   TMainForm = class(TForm)
     AutoStartBox: TCheckBox;
+    Button1: TButton;
+    Button2: TButton;
     ClearBox: TCheckBox;
     ConfigBox: TCheckListBox;
     GroupBox1: TGroupBox;
@@ -42,6 +44,8 @@ type
     Splitter3: TSplitter;
     StaticText1: TStaticText;
     procedure AutoStartBoxChange(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
     procedure ClearBoxChange(Sender: TObject);
     procedure ConfigBoxClickCheck(Sender: TObject);
     procedure DeleteBtnClick(Sender: TObject);
@@ -261,13 +265,64 @@ begin
       S.Add('        "path": "' + VmessDecode(VMESSURL, 'path') + '"');
       S.Add('        },');
     end;
+     if VmessDecode(VMESSURL, 'net') = 'kcp' then
+    begin
+     S.Add('                 "network": "kcp",');
+     S.Add('                 "kcpSettings": {');
+     S.Add('                 "mtu": 1350,');
+     S.Add('                 "tti": 50,');
+     S.Add('                 "uplinkCapacity": 12,');
+     S.Add('                 "downlinkCapacity": 100,');
+     S.Add('                 "congestion": false,');
+     S.Add('                 "readBufferSize": 2,');
+     S.Add('                 "writeBufferSize": 2,');
+     S.Add('                 "header": {');
+     S.Add('                 "type": "none"');
+     S.Add('                           },');
+     S.Add('                 "seed": "' + VmessDecode(VMESSURL, 'path')  +'"');
+     S.Add('                 },');
+    end;
+    if VmessDecode(VMESSURL, 'type') = 'http' then
+    begin
+    S.Add('                 "network": "'+VmessDecode(VMESSURL, 'net')+'",');
+        S.Add('                 "tcpSettings": {');
+          S.Add('                 "header": {');
+            S.Add('                 "type": "http",');
+            S.Add('                 "request": {');
+              S.Add('                 "version": "1.1",');
+              S.Add('                 "method": "GET",');
+              S.Add('                 "path": [');
+              S.Add('                  "'+VmessDecode(VMESSURL, 'path')+'"');
+              S.Add('                 ],');
+              S.Add('                 "headers": {');
+              S.Add('                   "Host": [');
+              S.Add('                     "'+VmessDecode(VMESSURL, 'host')+'"');
+              S.Add('                   ],');
+              S.Add('                   "User-Agent": [');
+              S.Add('                     ""');
+              S.Add('                   ],');
+              S.Add('                   "Accept-Encoding": [');
+              S.Add('                     "gzip, deflate"');
+              S.Add('                   ],');
+              S.Add('                   "Connection": [');
+              S.Add('                     "keep-alive"');
+              S.Add('                   ],');
+              S.Add('                   "Pragma": "no-cache"');
+              S.Add('                 }');
+            S.Add('                 }');
+          S.Add('                 }');
+        //S.Add('                 }');
+      S.Add('                 },');
+
+    end;
+
+
     //TLS
-    if VmessDecode(VMESSURL, 'tls') = '' then
-      S.Add('        "security": null,')
-    else
-      S.Add('        "security": "' + VmessDecode(VMESSURL, 'tls') + '",');
+    if VmessDecode(VMESSURL, 'tls') <> '' then
+      S.Add('             "security": "' + VmessDecode(VMESSURL, 'tls') + '",');
 
     S.Add('                "tlsSettings": {');
+    S.Add('                "allowInsecure": true,');
     S.Add('                    "disableSystemRoot": false');
     S.Add('                },');
     S.Add('                "xtlsSettings": {');
@@ -368,7 +423,6 @@ begin
     URL := Trim(Copy(URL, 6, Length(URL)));
     //Убираем переводы строк
     URL := StringReplace(URL, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
-    //  URL := StringReplace(Result, #10, '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем пробелы
     URL := StringReplace(URL, ' ', '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем кавычки
@@ -550,21 +604,17 @@ end;
 
 //VLESS - Декодирование/Нормализация/Поиск
 function TMainForm.VLESSDecode(URL, val: string): string;
-const
-  URISeparator = '@#&?';
 var
   U: TURI;
-  ch: char;
-  posc, skip, i: integer;
+  i: integer;
   S: TStringList;
 begin
   try
-    Result := '';
+    Result := 'none';
     S := TStringList.Create;
 
     //Нормализация URL; Убираем переводы строк
     URL := StringReplace(URL, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
-    // URL := StringReplace(Result, #10, '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем пробелы
     URL := StringReplace(URL, ' ', '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем кавычки
@@ -580,62 +630,28 @@ begin
       'comment': Result := U.Bookmark;
     end;
 
-    if Result = '' then
+    //Если не найден выше...
+    if (Result = 'none') and (U.Params <> '') then
     begin
-      //Stage-2; Остальные вводные: security, type, encryption, path; Декодируем URL
-      posc := 0;
-      skip := 0;
-
-      //URI Decoder
-      for ch in URL do
-      begin
-        if skip = 0 then
-        begin
-          if (ch = '%') and (posc < URL.length - 2) then
-          begin
-            skip := 2;
-            Result := Result + ansichar(Hex2Dec('$' + URL[posc + 2] + URL[posc + 3]));
-          end
-          else
-          begin
-            Result := Result + ch;
-          end;
-        end
-        else
-        begin
-          skip := skip - 1;
-        end;
-        posc := posc + 1;
-      end;
-
-      //Result=Decode URI (усекаем)
-      Result := Trim(Copy(Result, 9, Length(Result)));
-
-      //Символы = заменяем на :
-      Result := StringReplace(Result, '=', ':', [rfReplaceAll, rfIgnoreCase]);
-
-      //Заменяем символы URI-сепаратора на ','
-      for i := 1 to Length(Result) do
-        if Pos(Result[i], URISeparator) > 0 then
-          Result[i] := ',';
+      //Stage-2; Остальные параметры: security, type, encryption, path
 
       //Грузим линейный текст
-      S.Text := Result;
+      S.Text := U.Params;
 
-      //Разделяем значения на Items по (,)
-      S.Delimiter := ',';
+      //Разделяем значения на Items по (&)
+      S.Delimiter := '&';
       S.StrictDelimiter := True;
       S.DelimitedText := S[0];
 
       //Поиск соответствия
       for i := 0 to S.Count - 1 do
-        if Copy(S[i], 1, Pos(':', S[i]) - 1) = val then
+        if Copy(S[i], 1, Pos('=', S[i]) - 1) = val then
         begin
-          Result := Copy(S[i], Pos(':', S[i]) + 1, Length(S[i]));
+          Result := Copy(S[i], Pos('=', S[i]) + 1, Length(S[i]));
           Break;
-        end
-        else
-          Result := 'none';
+        end;
+        {else
+          Result := 'none';}
     end;
 
   finally
@@ -733,8 +749,9 @@ begin
     //TYPE
     S.Add('                    "network": "' + VlessDecode(VLESSURL, 'type') + '",');
     //SECURITY
-    S.Add('                    "security": "' + VlessDecode(VLESSURL,
-      'security') + '",');
+    if VlessDecode(VLESSURL, 'security') <> 'none' then
+      S.Add('                    "security": "' + VlessDecode(VLESSURL,
+        'security') + '",');
     S.Add('                    "tlsSettings": {');
     S.Add('                        "disableSystemRoot": false,');
     S.Add('                        "allowInsecure": true,');
@@ -742,19 +759,24 @@ begin
     S.Add('                        "serverName": "' +
       VlessDecode(VLESSURL, 'server') + '"');
     S.Add('                    },');
-    //IF gRPC
-    if Pos('type=grpc', VLESSURL) = 0 then
+
+    //IF WS
+    if VlessDecode(VLESSURL, 'type') = 'ws' then
     begin
       S.Add('                    "wsSettings": {');
-      S.Add('                        "headers": {');
-      //SERVER-HOST
-      S.Add('                            "Host": "' +
-        VlessDecode(VLESSURL, 'server') + '"');
-      S.Add('                        },');
+      if VlessDecode(VLESSURL, 'host') <> 'none' then
+      begin
+        S.Add('                        "headers": {');
+        //SERVER-HOST
+        S.Add('                            "Host": "' +
+          VlessDecode(VLESSURL, 'host') + '"');
+        S.Add('                        },');
+      end;
       //PATH
       S.Add('                        "path": "' + VlessDecode(VLESSURL, 'path') + '"');
       S.Add('                    },');
     end;
+
     S.Add('                    "xtlsSettings": {');
     S.Add('                        "disableSystemRoot": false');
     S.Add('                    }');
@@ -841,11 +863,15 @@ end;
 function TMainForm.TrojanDecode(URL, val: string): string;
 var
   U: TURI;
+  i: integer;
+  S: TStringList;
 begin
   try
+    Result := 'none';
+    S := TStringList.Create;
+
     //Нормализация URL; Убираем переводы строк
     URL := StringReplace(URL, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
-    // URL := StringReplace(Result, #10, '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем пробелы
     URL := StringReplace(URL, ' ', '', [rfReplaceAll, rfIgnoreCase]);
     //Убираем кавычки
@@ -857,12 +883,36 @@ begin
     case val of
       'id': Result := U.Username;
       'server': Result := U.Host;
-      'port': Result := IntToStr(U.Port)
-      else
-        Result := 'none';
+      'port': Result := IntToStr(U.Port);
+      'comment': Result := U.Bookmark;
     end;
-  except;
-    Abort;
+
+    //Если не найден выше...
+    if (Result = 'none') and (U.Params <> '') then
+    begin
+      //Stage-2; Остальные параметры: security, type, encryption, path
+
+      //Грузим линейный текст
+      S.Text := U.Params;
+
+      //Разделяем значения на Items по (&)
+      S.Delimiter := '&';
+      S.StrictDelimiter := True;
+      S.DelimitedText := S[0];
+
+      //Поиск соответствия
+      for i := 0 to S.Count - 1 do
+        if Copy(S[i], 1, Pos('=', S[i]) - 1) = val then
+        begin
+          Result := Copy(S[i], Pos('=', S[i]) + 1, Length(S[i]));
+          Break;
+        end;
+        {else
+          Result := 'none';}
+    end;
+
+  finally
+    S.Free;
   end;
 end;
 
@@ -879,14 +929,6 @@ begin
     //LOGLEVEL (debug, info, warning, error)
     S.Add('        "loglevel": "warning"');
     S.Add('      },');
-    //DNS
-    //    S.Add('        "dns": {');
-    //    S.Add('        "servers": [');
-    //    S.Add('            "1.1.1.1",');
-    //    S.Add('            "8.8.8.8",');
-    //    S.Add('            "9.9.9.9"');
-    //    S.Add('        ]');
-    //    S.Add('    },');
     S.Add('      "inbounds": [');
     S.Add('        {');
     S.Add('          "tag": "socks",');
@@ -906,27 +948,7 @@ begin
     S.Add('            "udp": true,');
     S.Add('            "allowTransparent": false');
     S.Add('          }');
-    //    S.Add('        },');
     S.Add('        }');
-    //HTTP PORT + 1
-    //    S.Add('        {');
-    //    S.Add('          "tag": "http",');
-    //    S.Add('          "port": ' + IntToStr(PortEdit.Value + 1) + ',');
-    //    S.Add('          "listen": "127.0.0.1",');
-    //    S.Add('          "protocol": "http",');
-    //    S.Add('          "sniffing": { ');
-    //    S.Add('            "enabled": true,');
-    //    S.Add('            "destOverride": [');
-    //    S.Add('              "http",');
-    //    S.Add('              "tls"');
-    //    S.Add('            ]');
-    //    S.Add('          },');
-    //    S.Add('          "settings": {');
-    //    S.Add('            "auth": "noauth",');
-    //    S.Add('            "udp": true,');
-    //    S.Add('            "allowTransparent": false');
-    //    S.Add('          }');
-    //    S.Add('        }');
     S.Add('      ],');
     S.Add('      "outbounds": [');
     S.Add('        {');
@@ -948,16 +970,19 @@ begin
     S.Add('              }');
     S.Add('            ]');
     S.Add('          },');
+
     S.Add('          "streamSettings": {');
-    //IF gRPC
-    if Pos('type=grpc', TROJANURL) = 0 then
-      S.Add('            "network": "tcp",')
+    //TYPE
+    if TrojanDecode(TrojanURL, 'type') <> 'none' then
+      S.Add('            "network": "' + TrojanDecode(TrojanURL, 'type') + '",')
     else
-      S.Add('            "network": "grpc",');
+      S.Add('            "network": "tcp",');
+
     S.Add('            "security": "tls",');
     S.Add('            "tlsSettings": {');
+
     //IF gRPC
-    if Pos('type=grpc', TROJANURL) <> 0 then
+    if (Pos('type=grpc', TROJANURL) <> 0) or (Pos('type=ws', TROJANURL) <> 0) then
     begin
       S.Add('              "serverName": "' + TrojanDecode(TrojanURL, 'server') + '",');
       S.Add('              "allowInsecure": true');
@@ -978,6 +1003,17 @@ begin
       S.Add('        }');
       S.Add('        },');
     end;
+    if Pos('type=ws', TROJANURL) <> 0 then
+    begin
+      S.Add('          "wsSettings": {');
+      S.Add('              "path": "' + TrojanDecode(TrojanURL, 'path') + '",');
+      S.Add('              "headers": {');
+      S.Add('                "Host": "' + TrojanDecode(TrojanURL, 'host') + '"');
+      S.Add('               }');
+      S.Add('        }');
+      S.Add('        },');
+    end;
+
     S.Add('          "mux": {');
     S.Add('            "enabled": false,');
     S.Add('            "concurrency": -1');
@@ -1267,6 +1303,17 @@ begin
   else
     RunCommand('/bin/bash', ['-c', 'systemctl --user enable xray'], S);
   Screen.Cursor := crDefault;
+end;
+
+procedure TMainForm.Button1Click(Sender: TObject);
+begin
+  ClipBoard.AsText := ConfigBox.Items[ConfigBox.ItemIndex];
+end;
+
+procedure TMainForm.Button2Click(Sender: TObject);
+begin
+  ShowMessage(TrojanDecode(
+    'trojan://d47bade5-410b-4db4-9bb4-26cbd041dd41@frt1.sshocean.net:443?host=frt1.sshocean.net&path=%2Fwebsocket&sni=frt1.sshocean.net&type=ws#sshocean-marsik_trojan_ws', 'server'));
 end;
 
 //Масштабирование для Plasma

@@ -226,6 +226,26 @@ object MainForm: TMainForm
         ShowHint = True
         TabOrder = 2
       end
+      object Button1: TButton
+        Left = 40
+        Height = 25
+        Top = 29
+        Width = 75
+        Caption = 'copy'
+        OnClick = Button1Click
+        TabOrder = 3
+        Visible = False
+      end
+      object Button2: TButton
+        Left = 40
+        Height = 25
+        Top = 4
+        Width = 75
+        Caption = 'dec'
+        OnClick = Button2Click
+        TabOrder = 4
+        Visible = False
+      end
     end
     object Splitter3: TSplitter
       Cursor = crVSplit

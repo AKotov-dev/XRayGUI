@@ -9,6 +9,14 @@ msgstr ""
 msgid "Start proxy after reboot"
 msgstr ""
 
+#: tmainform.button1.caption
+msgid "copy"
+msgstr ""
+
+#: tmainform.button2.caption
+msgid "dec"
+msgstr ""
+
 #: tmainform.caption
 msgid "XRayGUI"
 msgstr ""

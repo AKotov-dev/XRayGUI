@@ -44,7 +44,7 @@ zenity --question --title="${str[0]}" --text="${str[1]}\n\n${str[2]}\n${str[3]}"
 	7z e -y ./*.zip
 	rm -f ./*.zip
 
-	sleep 2 && [[ $(pidof xraygui) ]] || xraygui
+	sleep 2; if [[ -z $(pidof xraygui) ]]; then systemctl --user restart xray; xraygui; fi;
     fi;
 fi;
 

@@ -12,7 +12,7 @@ URL the sources + binaries of the author: https://github.com/AKotov-dev/XRayGUI
 Information about the rpm-package:
 ---
 Build method: Portable RPM
-Time stamp: 17-3-23 19:28:22
+Time stamp: 17-3-23 23:04:25
 
 Name: xraygui
 Version: 1.2
@@ -38,7 +38,9 @@ systemd gtk2 fping wget p7zip zenity
 Additionally information:
 ---
 v1.2
++ Default connection: 127.0.0.1:1080
 + Improved configuration recognition
++ Switching logging to the "warning" level
 + RPM packages for Mageia-8 and Mageia-9
 
 v1.1

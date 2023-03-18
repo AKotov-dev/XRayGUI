@@ -37,7 +37,7 @@ if [[ -n $rversion && $lversion != $rversion ]]; then
 zenity --question --title="${str[0]}" --text="${str[1]}\n\n${str[2]}\n${str[3]}" --no-wrap
     if [[ $? -eq 0 ]]; then
     [ -d ~/.config/xraygui/xray ] || mkdir ~/.config/xraygui/xray
-	killall xraygui xray
+	killall xraygui; systemctl --user stop xray;
 
 	cd ~/.config/xraygui/xray
 	wget $archurl

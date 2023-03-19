@@ -15,7 +15,6 @@ type
 
   TMainForm = class(TForm)
     AutoStartBox: TCheckBox;
-    Button1: TButton;
     Button2: TButton;
     ClearBox: TCheckBox;
     ConfigBox: TCheckListBox;
@@ -25,6 +24,7 @@ type
     Label1: TLabel;
     LogMemo: TMemo;
     LoadItem: TMenuItem;
+    CopyItem: TMenuItem;
     OpenDialog1: TOpenDialog;
     SaveDialog1: TSaveDialog;
     SaveItem: TMenuItem;
@@ -44,10 +44,9 @@ type
     Splitter3: TSplitter;
     StaticText1: TStaticText;
     procedure AutoStartBoxChange(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
     procedure ClearBoxChange(Sender: TObject);
     procedure ConfigBoxClickCheck(Sender: TObject);
+    procedure CopyItemClick(Sender: TObject);
     procedure DeleteBtnClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -311,11 +310,8 @@ begin
       S.Add('                 }');
       S.Add('                 }');
       S.Add('                 }');
-      //S.Add('                 }');
       S.Add('                 },');
-
     end;
-
 
     //TLS
     if VmessDecode(VMESSURL, 'tls') <> '' then
@@ -1279,6 +1275,12 @@ begin
     ConfigBox.Checked[IniPropStorage1.ReadInteger('findex', 100)] := True;
 end;
 
+//Копирование в буфер
+procedure TMainForm.CopyItemClick(Sender: TObject);
+begin
+  ClipBoard.AsText := ConfigBox.Items[ConfigBox.ItemIndex];
+end;
+
 //Файл-флаг автоочистки кеша и кукисов
 procedure TMainForm.ClearBoxChange(Sender: TObject);
 var
@@ -1303,17 +1305,6 @@ begin
   else
     RunCommand('/bin/bash', ['-c', 'systemctl --user enable xray'], S);
   Screen.Cursor := crDefault;
-end;
-
-procedure TMainForm.Button1Click(Sender: TObject);
-begin
-  ClipBoard.AsText := ConfigBox.Items[ConfigBox.ItemIndex];
-end;
-
-procedure TMainForm.Button2Click(Sender: TObject);
-begin
-  ShowMessage(TrojanDecode(
-    'trojan://d47bade5-410b-4db4-9bb4-26cbd041dd41@frt1.sshocean.net:443?host=frt1.sshocean.net&path=%2Fwebsocket&sni=frt1.sshocean.net&type=ws#sshocean-marsik_trojan_ws', 'server'));
 end;
 
 //Масштабирование для Plasma

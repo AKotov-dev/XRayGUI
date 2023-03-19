@@ -20,14 +20,6 @@ msgstr "Автостарт"
 msgid "Start proxy after reboot"
 msgstr "Старт прокси после перезагрузки"
 
-#: tmainform.button1.caption
-msgid "copy"
-msgstr ""
-
-#: tmainform.button2.caption
-msgid "dec"
-msgstr ""
-
 #: tmainform.caption
 msgid "XRayGUI"
 msgstr ""
@@ -40,6 +32,10 @@ msgstr "Очистить кеш и cookies"
 #: tmainform.clearbox.hint
 msgid "Clean up the GUI at startup (Mageia only)"
 msgstr "Очищать при старте GUI (только Mageia)"
+
+#: tmainform.copyitem.caption
+msgid "Copy"
+msgstr ""
 
 #: tmainform.deletebtn.caption
 msgid "Delete"

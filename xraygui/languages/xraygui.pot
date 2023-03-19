@@ -9,14 +9,6 @@ msgstr ""
 msgid "Start proxy after reboot"
 msgstr ""
 
-#: tmainform.button1.caption
-msgid "copy"
-msgstr ""
-
-#: tmainform.button2.caption
-msgid "dec"
-msgstr ""
-
 #: tmainform.caption
 msgid "XRayGUI"
 msgstr ""
@@ -27,6 +19,10 @@ msgstr ""
 
 #: tmainform.clearbox.hint
 msgid "Clean up the GUI at startup (Mageia only)"
+msgstr ""
+
+#: tmainform.copyitem.caption
+msgid "Copy"
 msgstr ""
 
 #: tmainform.deletebtn.caption

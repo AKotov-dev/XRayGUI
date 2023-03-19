@@ -311,11 +311,8 @@ begin
       S.Add('                 }');
       S.Add('                 }');
       S.Add('                 }');
-      //S.Add('                 }');
       S.Add('                 },');
-
     end;
-
 
     //TLS
     if VmessDecode(VMESSURL, 'tls') <> '' then

@@ -265,53 +265,53 @@ begin
       S.Add('        "path": "' + VmessDecode(VMESSURL, 'path') + '"');
       S.Add('        },');
     end;
-     if VmessDecode(VMESSURL, 'net') = 'kcp' then
+    if VmessDecode(VMESSURL, 'net') = 'kcp' then
     begin
-     S.Add('                 "network": "kcp",');
-     S.Add('                 "kcpSettings": {');
-     S.Add('                 "mtu": 1350,');
-     S.Add('                 "tti": 50,');
-     S.Add('                 "uplinkCapacity": 12,');
-     S.Add('                 "downlinkCapacity": 100,');
-     S.Add('                 "congestion": false,');
-     S.Add('                 "readBufferSize": 2,');
-     S.Add('                 "writeBufferSize": 2,');
-     S.Add('                 "header": {');
-     S.Add('                 "type": "none"');
-     S.Add('                           },');
-     S.Add('                 "seed": "' + VmessDecode(VMESSURL, 'path')  +'"');
-     S.Add('                 },');
+      S.Add('                 "network": "kcp",');
+      S.Add('                 "kcpSettings": {');
+      S.Add('                 "mtu": 1350,');
+      S.Add('                 "tti": 50,');
+      S.Add('                 "uplinkCapacity": 12,');
+      S.Add('                 "downlinkCapacity": 100,');
+      S.Add('                 "congestion": false,');
+      S.Add('                 "readBufferSize": 2,');
+      S.Add('                 "writeBufferSize": 2,');
+      S.Add('                 "header": {');
+      S.Add('                 "type": "none"');
+      S.Add('                           },');
+      S.Add('                 "seed": "' + VmessDecode(VMESSURL, 'path') + '"');
+      S.Add('                 },');
     end;
     if VmessDecode(VMESSURL, 'type') = 'http' then
     begin
-    S.Add('                 "network": "'+VmessDecode(VMESSURL, 'net')+'",');
-        S.Add('                 "tcpSettings": {');
-          S.Add('                 "header": {');
-            S.Add('                 "type": "http",');
-            S.Add('                 "request": {');
-              S.Add('                 "version": "1.1",');
-              S.Add('                 "method": "GET",');
-              S.Add('                 "path": [');
-              S.Add('                  "'+VmessDecode(VMESSURL, 'path')+'"');
-              S.Add('                 ],');
-              S.Add('                 "headers": {');
-              S.Add('                   "Host": [');
-              S.Add('                     "'+VmessDecode(VMESSURL, 'host')+'"');
-              S.Add('                   ],');
-              S.Add('                   "User-Agent": [');
-              S.Add('                     ""');
-              S.Add('                   ],');
-              S.Add('                   "Accept-Encoding": [');
-              S.Add('                     "gzip, deflate"');
-              S.Add('                   ],');
-              S.Add('                   "Connection": [');
-              S.Add('                     "keep-alive"');
-              S.Add('                   ],');
-              S.Add('                   "Pragma": "no-cache"');
-              S.Add('                 }');
-            S.Add('                 }');
-          S.Add('                 }');
-        //S.Add('                 }');
+      S.Add('                 "network": "' + VmessDecode(VMESSURL, 'net') + '",');
+      S.Add('                 "tcpSettings": {');
+      S.Add('                 "header": {');
+      S.Add('                 "type": "http",');
+      S.Add('                 "request": {');
+      S.Add('                 "version": "1.1",');
+      S.Add('                 "method": "GET",');
+      S.Add('                 "path": [');
+      S.Add('                  "' + VmessDecode(VMESSURL, 'path') + '"');
+      S.Add('                 ],');
+      S.Add('                 "headers": {');
+      S.Add('                   "Host": [');
+      S.Add('                     "' + VmessDecode(VMESSURL, 'host') + '"');
+      S.Add('                   ],');
+      S.Add('                   "User-Agent": [');
+      S.Add('                     ""');
+      S.Add('                   ],');
+      S.Add('                   "Accept-Encoding": [');
+      S.Add('                     "gzip, deflate"');
+      S.Add('                   ],');
+      S.Add('                   "Connection": [');
+      S.Add('                     "keep-alive"');
+      S.Add('                   ],');
+      S.Add('                   "Pragma": "no-cache"');
+      S.Add('                 }');
+      S.Add('                 }');
+      S.Add('                 }');
+      //S.Add('                 }');
       S.Add('                 },');
 
     end;
@@ -750,8 +750,8 @@ begin
     S.Add('                    "network": "' + VlessDecode(VLESSURL, 'type') + '",');
     //SECURITY
     if VlessDecode(VLESSURL, 'security') <> 'none' then
-      S.Add('                    "security": "' + VlessDecode(VLESSURL,
-        'security') + '",');
+      S.Add('                    "security": "' +
+        VlessDecode(VLESSURL, 'security') + '",');
     S.Add('                    "tlsSettings": {');
     S.Add('                        "disableSystemRoot": false,');
     S.Add('                        "allowInsecure": true,');

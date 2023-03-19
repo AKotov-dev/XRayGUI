@@ -5,9 +5,9 @@ program xraygui;
 uses
  {$IFDEF UNIX}
   cthreads,
-    {$ENDIF} {$IFDEF HASAMIGA}
+     {$ENDIF} {$IFDEF HASAMIGA}
   athreads,
-    {$ENDIF}
+     {$ENDIF}
   Process,
   Classes,
   Dialogs,
@@ -15,7 +15,8 @@ uses
   Forms,
   Unit1,
   start_trd,
-  portscan_trd, update_trd { you can add units after this };
+  portscan_trd,
+  update_trd { you can add units after this };
 
 {$R *.res}
 
@@ -53,8 +54,8 @@ begin
   //---
 
   RequireDerivedFormResource := True;
-  Application.Title:='XRayGUI v1.2';
-  Application.Scaled:=True;
+  Application.Title := 'XRayGUI v1.2';
+  Application.Scaled := True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
   Application.Run;

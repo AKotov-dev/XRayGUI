@@ -38,8 +38,9 @@
       <Unit>
         <Filename Value="xraygui.pas"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="44" Y="33"/>
-        <UsageCount Value="61"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="63" Y="39"/>
+        <UsageCount Value="62"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -49,11 +50,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="1344"/>
-        <CursorPos X="3" Y="1347"/>
-        <UsageCount Value="61"/>
+        <CursorPos X="13"/>
+        <UsageCount Value="62"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -62,7 +61,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="37" Y="3"/>
-        <UsageCount Value="60"/>
+        <UsageCount Value="61"/>
       </Unit>
       <Unit>
         <Filename Value="portscan_trd.pas"/>
@@ -70,7 +69,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="49"/>
         <CursorPos X="27" Y="67"/>
-        <UsageCount Value="40"/>
+        <UsageCount Value="41"/>
       </Unit>
       <Unit>
         <Filename Value="update_trd.pas"/>
@@ -78,7 +77,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos Y="19"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="35"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="10">

@@ -19,6 +19,7 @@ type
     ConfigBox: TCheckListBox;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
+    ImageList1: TImageList;
     IniPropStorage1: TIniPropStorage;
     Label1: TLabel;
     LogMemo: TMemo;

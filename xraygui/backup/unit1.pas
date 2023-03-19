@@ -15,11 +15,11 @@ type
 
   TMainForm = class(TForm)
     AutoStartBox: TCheckBox;
-    Button2: TButton;
     ClearBox: TCheckBox;
     ConfigBox: TCheckListBox;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
+    ImageList1: TImageList;
     IniPropStorage1: TIniPropStorage;
     Label1: TLabel;
     LogMemo: TMemo;

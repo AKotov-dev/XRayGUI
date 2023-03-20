@@ -40,7 +40,7 @@ meta=0
 noarch=0
 
 [DEB]
-deb=0
+deb=1
 
 [FILES]
 0=/usr/share/doc/xraygui/

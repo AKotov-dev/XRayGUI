@@ -167,7 +167,10 @@ begin
     //Преобразуем всё содержимое Base64 после "//"
     Result := DecodeStringBase64(Copy(URL, Pos('//', URL) + 2));
     //Убираем скобки {}
-    Result := Copy(Result, 2, Length(Result) - 2);
+   // Result := Copy(Result, 2, Length(Result) - 2);
+    Result := StringReplace(Result, '{', '', [rfReplaceAll, rfIgnoreCase]);
+    Result := StringReplace(Result, '}', '', [rfReplaceAll, rfIgnoreCase]);
+
     //Убираем переводы строк
     Result := StringReplace(Result, #13#10, '', [rfReplaceAll, rfIgnoreCase]);
     Result := StringReplace(Result, #10, '', [rfReplaceAll, rfIgnoreCase]);
@@ -218,8 +221,8 @@ begin
     S.Add('        {');
     S.Add('             "listen": "127.0.0.1",');
     S.Add('             "port": ' + PORT + ',');
-    S.Add('            "protocol": "socks",');
-    S.Add('            "settings": {');
+    S.Add('             "protocol": "socks",');
+    S.Add('             "settings": {');
     S.Add('                "auth": "noauth",');
     S.Add('                "ip": "127.0.0.1",');
     S.Add('                "udp": true ');
@@ -256,13 +259,13 @@ begin
     //NETWORK
     if VmessDecode(VMESSURL, 'net') = 'ws' then
     begin
-      S.Add('        "network": "' + VmessDecode(VMESSURL, 'net') + '",');
-      S.Add('        "wsSettings": {');
-      S.Add('        "headers": {');
-      S.Add('          "Host": "' + VmessDecode(VMESSURL, 'host') + '"');
-      S.Add('        },');
-      S.Add('        "path": "' + VmessDecode(VMESSURL, 'path') + '"');
-      S.Add('        },');
+      S.Add('                "network": "' + VmessDecode(VMESSURL, 'net') + '",');
+      S.Add('                "wsSettings": {');
+      S.Add('                "headers": {');
+      S.Add('                "Host": "' + VmessDecode(VMESSURL, 'host') + '"');
+      S.Add('                           },');
+      S.Add('                "path": "' + VmessDecode(VMESSURL, 'path') + '"');
+      S.Add('                           },');
     end;
     if VmessDecode(VMESSURL, 'net') = 'kcp' then
     begin
@@ -314,11 +317,13 @@ begin
     end;
 
     //TLS
-    if VmessDecode(VMESSURL, 'tls') <> '' then
-      S.Add('             "security": "' + VmessDecode(VMESSURL, 'tls') + '",');
+    if VmessDecode(VMESSURL, 'tls') = 'tls' then
+      S.Add('             "security": "' + VmessDecode(VMESSURL, 'tls') + '",') else
+      S.Add('             "security": "none",');
 
     S.Add('                "tlsSettings": {');
     S.Add('                "allowInsecure": true,');
+    S.Add('                "fingerprint": "chrome",');
     S.Add('                    "disableSystemRoot": false');
     S.Add('                },');
     S.Add('                "xtlsSettings": {');
@@ -750,6 +755,7 @@ begin
         VlessDecode(VLESSURL, 'security') + '",');
     S.Add('                    "tlsSettings": {');
     S.Add('                        "disableSystemRoot": false,');
+    S.Add('                        "fingerprint": "chrome",');
     S.Add('                        "allowInsecure": true,');
     //SERVER
     S.Add('                        "serverName": "' +
@@ -981,11 +987,13 @@ begin
     if (Pos('type=grpc', TROJANURL) <> 0) or (Pos('type=ws', TROJANURL) <> 0) then
     begin
       S.Add('              "serverName": "' + TrojanDecode(TrojanURL, 'server') + '",');
+      S.Add('              "fingerprint": "chrome",');
       S.Add('              "allowInsecure": true');
       S.Add('          },');
     end
     else
     begin
+      S.Add('              "fingerprint": "chrome",');
       S.Add('              "allowInsecure": true');
       S.Add('            }');
       S.Add('          },');

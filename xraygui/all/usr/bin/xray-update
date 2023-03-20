@@ -33,7 +33,7 @@ rversion=$(echo $archurl | cut -d "/" -f8 | sed 's/[[:alpha:]]*//g')
 #echo $rversion
 
 #Сравнение версий и обновление
-if [[ -n $rversion && $lversion -lt $rversion ]]; then
+if [[ -n $rversion && $lversion != $rversion ]]; then
 zenity --question --title="${str[0]}" --text="${str[1]}\n\n${str[2]}\n${str[3]}" --no-wrap
     if [[ $? -eq 0 ]]; then
     [ -d ~/.config/xraygui/xray ] || mkdir ~/.config/xraygui/xray

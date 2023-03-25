@@ -167,7 +167,7 @@ begin
     //Преобразуем всё содержимое Base64 после "//"
     Result := DecodeStringBase64(Copy(URL, Pos('//', URL) + 2));
     //Убираем скобки {}
-   // Result := Copy(Result, 2, Length(Result) - 2);
+    // Result := Copy(Result, 2, Length(Result) - 2);
     Result := StringReplace(Result, '{', '', [rfReplaceAll, rfIgnoreCase]);
     Result := StringReplace(Result, '}', '', [rfReplaceAll, rfIgnoreCase]);
 
@@ -318,7 +318,8 @@ begin
 
     //TLS
     if VmessDecode(VMESSURL, 'tls') = 'tls' then
-      S.Add('             "security": "' + VmessDecode(VMESSURL, 'tls') + '",') else
+      S.Add('             "security": "' + VmessDecode(VMESSURL, 'tls') + '",')
+    else
       S.Add('             "security": "none",');
 
     S.Add('                "tlsSettings": {');
@@ -1146,11 +1147,19 @@ begin
   ButtonStatus;
 end;
 
+//Состояние пунктов PopUp-меню
 procedure TMainForm.PopupMenu1Popup(Sender: TObject);
 begin
-  if ConfigBox.Count = 0 then SaveItem.Enabled := False
+  if ConfigBox.Count = 0 then
+  begin
+    CopyItem.Enabled := False;
+    SaveItem.Enabled := False;
+  end
   else
+  begin
+    CopyItem.Enabled := True;
     SaveItem.Enabled := True;
+  end;
 end;
 
 //Сохранение в файл *.proxy

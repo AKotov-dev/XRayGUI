@@ -755,6 +755,7 @@ begin
         VlessDecode(VLESSURL, 'security') + '",');
     S.Add('                    "tlsSettings": {');
     S.Add('                        "disableSystemRoot": false,');
+    S.Add('                        "fingerprint": "chrome",');
     S.Add('                        "allowInsecure": true,');
     //SERVER
     S.Add('                        "serverName": "' +
@@ -986,11 +987,13 @@ begin
     if (Pos('type=grpc', TROJANURL) <> 0) or (Pos('type=ws', TROJANURL) <> 0) then
     begin
       S.Add('              "serverName": "' + TrojanDecode(TrojanURL, 'server') + '",');
+      S.Add('              "fingerprint": "chrome",');
       S.Add('              "allowInsecure": true');
       S.Add('          },');
     end
     else
     begin
+      S.Add('              "fingerprint": "chrome",');
       S.Add('              "allowInsecure": true');
       S.Add('            }');
       S.Add('          },');

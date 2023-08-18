@@ -5,7 +5,7 @@ A small and nimble GUI + [XRay-core](https://github.com/XTLS/Xray-core) - all in
 
 **Support:**
 + Shadowsocks
-+ VMESS, VMESS TLS
++ VMESS, VMESS TLS, VMESS + WS, VMESS + WS + TLS
 + VLESS, VLESS TLS, VLESS + WS, VLESS + WS TLS, VLESS + gRPC, VLESS + KCP
 + Trojan, Trojan + WS, Trojan + gRPC
   

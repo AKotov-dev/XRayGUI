@@ -85,7 +85,7 @@ toolversion=2.2.4
 
 [INFO]
 0=v1.4
-1=+  Support VLESS + KCP
+1=+ Support VLESS + KCP
 2=+ Packages for Mageia-9 and Ubuntu
 3=
 4=v1.2

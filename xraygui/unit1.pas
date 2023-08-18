@@ -724,9 +724,10 @@ begin
     //ENCRYPTION
     S.Add('                                    "encryption": "' +
       VlessDecode(VLESSURL, 'encryption') + '",');
-    //Deprecate xtls-rprx-direct #445: https://github.com/wulabing/Xray_onekey/issues/445
+    //Deprecate xtls-rprx-direct/xtls-rprx-vision #445: https://github.com/wulabing/Xray_onekey/issues/445
+    //Не все серверы перешли на эту опцию, временно оставляем (direct) для совместимости
     if VlessDecode(VLESSURL, 'security') = 'xtls' then
-      S.Add('                                    "flow": "xtls-rprx-vision",');
+      S.Add('                                    "flow": "xtls-rprx-direct",');
 
     //ID
     S.Add('                                    "id": "' +

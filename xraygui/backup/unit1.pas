@@ -167,7 +167,7 @@ begin
     //Преобразуем всё содержимое Base64 после "//"
     Result := DecodeStringBase64(Copy(URL, Pos('//', URL) + 2));
     //Убираем скобки {}
-   // Result := Copy(Result, 2, Length(Result) - 2);
+    // Result := Copy(Result, 2, Length(Result) - 2);
     Result := StringReplace(Result, '{', '', [rfReplaceAll, rfIgnoreCase]);
     Result := StringReplace(Result, '}', '', [rfReplaceAll, rfIgnoreCase]);
 
@@ -318,7 +318,8 @@ begin
 
     //TLS
     if VmessDecode(VMESSURL, 'tls') = 'tls' then
-      S.Add('             "security": "' + VmessDecode(VMESSURL, 'tls') + '",') else
+      S.Add('             "security": "' + VmessDecode(VMESSURL, 'tls') + '",')
+    else
       S.Add('             "security": "none",');
 
     S.Add('                "tlsSettings": {');
@@ -725,7 +726,7 @@ begin
       VlessDecode(VLESSURL, 'encryption') + '",');
 
     if VlessDecode(VLESSURL, 'security') = 'xtls' then
-      S.Add('                                    "flow": "xtls-rprx-direct",');
+      S.Add('                                    "flow": "xtls-rprx-vision",');
 
     //ID
     S.Add('                                    "id": "' +
@@ -744,6 +745,14 @@ begin
       S.Add('                    "grpcSettings": {');
       S.Add('                    "multiMode": false,');
       S.Add('                    "serviceName": "grpc"');
+      S.Add('                },');
+    end;
+
+    //if KCP
+    if Pos('type=kcp', VLESSURL) <> 0 then
+    begin
+      S.Add('                    "kcpSettings": {');
+      S.Add('                    "seed": "' + VlessDecode(VLESSURL, 'seed') + '"');
       S.Add('                },');
     end;
 

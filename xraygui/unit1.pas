@@ -724,9 +724,9 @@ begin
     //ENCRYPTION
     S.Add('                                    "encryption": "' +
       VlessDecode(VLESSURL, 'encryption') + '",');
-
+    //Deprecate xtls-rprx-direct #445: https://github.com/wulabing/Xray_onekey/issues/445
     if VlessDecode(VLESSURL, 'security') = 'xtls' then
-      S.Add('                                    "flow": "xtls-rprx-direct",');
+      S.Add('                                    "flow": "xtls-rprx-vision",');
 
     //ID
     S.Add('                                    "id": "' +
@@ -745,6 +745,14 @@ begin
       S.Add('                    "grpcSettings": {');
       S.Add('                    "multiMode": false,');
       S.Add('                    "serviceName": "grpc"');
+      S.Add('                },');
+    end;
+
+    //if KCP
+    if Pos('type=kcp', VLESSURL) <> 0 then
+    begin
+      S.Add('                    "kcpSettings": {');
+      S.Add('                    "seed": "' + VlessDecode(VLESSURL, 'seed') + '"');
       S.Add('                },');
     end;
 
@@ -1147,19 +1155,11 @@ begin
   ButtonStatus;
 end;
 
-//Состояние пунктов PopUp-меню
 procedure TMainForm.PopupMenu1Popup(Sender: TObject);
 begin
-  if ConfigBox.Count = 0 then
-  begin
-    CopyItem.Enabled := False;
-    SaveItem.Enabled := False;
-  end
+  if ConfigBox.Count = 0 then SaveItem.Enabled := False
   else
-  begin
-    CopyItem.Enabled := True;
     SaveItem.Enabled := True;
-  end;
 end;
 
 //Сохранение в файл *.proxy

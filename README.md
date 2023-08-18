@@ -5,8 +5,8 @@ A small and nimble GUI + [XRay-core](https://github.com/XTLS/Xray-core) - all in
 
 **Support:**
 + Shadowsocks
-+ VMESS TLS, VMESS non TLS
-+ VLESS TLS, VLESS non TLS, VLESS + WS TLS, VLESS + WS non TLS, VLESS + gRPC, VLESS + mKCP
++ VMESS, VMESS TLS
++ VLESS, VLESS TLS, VLESS + WS, VLESS + WS TLS, VLESS + gRPC, VLESS + mKCP
 + Trojan, Trojan + WS, Trojan + gRPC
   
 **Note:** Starting with XRayGUI-v1.1, the binary `xray-core` removed from the rpm package is downloaded and updated directly from the developer's GitHub to the directory `~/.config/xraygui/xray`.  

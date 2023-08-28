@@ -8,9 +8,13 @@ A small and nimble GUI + [XRay-core](https://github.com/XTLS/Xray-core) - all in
 + VMESS, + TLS, + WS, + WS + TLS, + KCP
 + VLESS, + TLS, + WS, + WS + TLS, + gRPC, + gPRC + TLS, + KCP
 + Trojan, + WS, + gRPC
+
+System-Wide Proxy
+--
+Starting from `XRayGUI-v1.5`, it became possible to use the connection as a global proxy for the entire system (`SWP` checkbox). This allows you to redirect all traffic through Socks5 without manually interfering with browser settings. The mode is guaranteed to work in GNOME-like DEs, an attempt is also made to configure it in KDE-5 (see the Proxy system settings in your KDE), but as practice has shown at the moment, the global proxy is not enabled in KDE-5. If you find a way, please contact me: https://linuxforum.ru/viewtopic.php?id=39704
   
 **Note:** Starting with XRayGUI-v1.1, the binary `xray-core` removed from the rpm package is downloaded and updated directly from the developer's GitHub to the directory `~/.config/xraygui/xray`.  
   
 ![](https://github.com/AKotov-dev/XRayGUI/blob/main/ScreenShots/XRayGUI-4.png)  
   
-Tested in Mageia-8/9 and LUbuntu-22.04.
+Tested in Mageia-8/9 and Linux Mint.

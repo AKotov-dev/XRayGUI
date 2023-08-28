@@ -217,8 +217,11 @@ begin
   else
   begin
     CreateSWProxy;
+    //Автозапуск System-Wide Proxy
     RunCommand('/bin/bash', ['-c', 'systemctl --user enable xray-swproxy'], S);
-    RunCommand('/bin/bash', ['-c', 'systemctl --user start xray-swproxy'], S);
+    //Если прокси уже запущен, иначе - настройки не менять; они изменятся при запуске (Start)
+    if Shape1.Brush.Color = clLime then
+      RunCommand('/bin/bash', ['-c', 'systemctl --user start xray-swproxy'], S);
   end;
   Screen.Cursor := crDefault;
 end;

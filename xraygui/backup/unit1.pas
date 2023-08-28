@@ -218,7 +218,9 @@ begin
   begin
     CreateSWProxy;
     RunCommand('/bin/bash', ['-c', 'systemctl --user enable xray-swproxy'], S);
-    RunCommand('/bin/bash', ['-c', 'systemctl --user start xray-swproxy'], S);
+    //Если прокси уже запущен, иначе - настройки не менять; они изменятся при запуске (Start)
+    if Shape1.Brush.Color = clLime then
+      RunCommand('/bin/bash', ['-c', 'systemctl --user start xray-swproxy'], S);
   end;
   Screen.Cursor := crDefault;
 end;
@@ -1296,7 +1298,7 @@ procedure TMainForm.StopBtnClick(Sender: TObject);
 var
   S: ansistring;
 begin
-  //Если SWP - Выключаем глобальный прокси (НЕ ENABLE)
+  //Если SWP (xray-wsproxy.service disabled) - Выключаем глобальный прокси
   Application.ProcessMessages;
   if SWPBox.Checked then RunCommand('/bin/bash',
       ['-c', 'systemctl --user stop xray-swproxy'], S);

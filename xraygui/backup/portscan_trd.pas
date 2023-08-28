@@ -44,7 +44,9 @@ begin
       ScanProcess.Options := [poUsePipes, poWaitOnExit];
 
       ScanProcess.Parameters.Add(
-        'ss -ltn | grep ' + MainForm.PortEdit.Text);
+        'if [[ $(ss -ltn | grep ' + MainForm.PortEdit.Text +
+        ') && $(pidof xray) ]]; then echo "yes"; else echo "no"; fi');
+
       ScanProcess.Execute;
 
       ResultStr.LoadFromStream(ScanProcess.Output);
@@ -62,16 +64,18 @@ procedure PortScan.ShowStatus;
 begin
   with MainForm do
   begin
-    if ResultStr.Count <> 0 then
+    if ResultStr[0] = 'yes' then
     begin
       Shape1.Brush.Color := clLime;
       PortEdit.Enabled := False;
+      SWPBox.Enabled := False;
       LoadItem.Enabled := False;
     end
     else
     begin
       Shape1.Brush.Color := clYellow;
       PortEdit.Enabled := True;
+      SWPBox.Enabled := True;
       LoadItem.Enabled := True;
     end;
 

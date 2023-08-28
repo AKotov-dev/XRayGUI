@@ -114,20 +114,20 @@ begin
     A.Add('if [ "$1" == "set" ]; then');
     A.Add('echo "set proxy..."');
     A.Add('# SET SYSTEM-WIDE PROXY');
-    A.Add('export all_proxy="socks://127.0.0.1:' + PortEdit.Text + '/"');
-    A.Add('export ftp_proxy="http://127.0.0.1:8889/"');
-    A.Add('export http_proxy="http://127.0.0.1:8889/"');
-    A.Add('export https_proxy="http://127.0.0.1:8889/"');
-    A.Add('export no_proxy="localhost,127.0.0.0/8,::1"');
+//    A.Add('export all_proxy="socks://127.0.0.1:' + PortEdit.Text + '/"');
+//    A.Add('export ftp_proxy="http://127.0.0.1:8889/"');
+//    A.Add('export http_proxy="http://127.0.0.1:8889/"');
+//    A.Add('export https_proxy="http://127.0.0.1:8889/"');
+//    A.Add('export no_proxy="localhost,127.0.0.0/8,::1"');
+//    A.Add('');
+//    A.Add('export ALL_PROXY="socks://127.0.0.1:' + PortEdit.Text + '/"');
+//    A.Add('export FTP_PROXY="http://127.0.0.1:8889/"');
+//    A.Add('export HTTP_PROXY="http://127.0.0.1:8889/"');
+//    A.Add('export HTTPS_PROXY="http://127.0.0.1:8889/"');
+//    A.Add('export NO_PROXY="localhost,127.0.0.0/8,::1"');
     A.Add('');
-    A.Add('export ALL_PROXY="socks://127.0.0.1:' + PortEdit.Text + '/"');
-    A.Add('export FTP_PROXY="http://127.0.0.1:8889/"');
-    A.Add('export HTTP_PROXY="http://127.0.0.1:8889/"');
-    A.Add('export HTTPS_PROXY="http://127.0.0.1:8889/"');
-    A.Add('export NO_PROXY="localhost,127.0.0.0/8,::1"');
-    A.Add('');
-    A.Add('# GNOME or gsettings');
-    A.Add('if [[ $(echo $XDG_CURRENT_DESKTOP | grep -E "GNOME|Budgie|Cinnamon") ]]; then');
+    A.Add('# GNOME');
+    A.Add('if [[ $(echo $XDG_CURRENT_DESKTOP | grep -E "GNOME|Budgie|Cinnamon|MATE") ]]; then');
     A.Add('	gsettings set org.gnome.system.proxy mode "manual"');
     A.Add('	gsettings set org.gnome.system.proxy.http host "127.0.0.1"');
     A.Add('	gsettings set org.gnome.system.proxy.http port "8889"');
@@ -150,20 +150,20 @@ begin
     A.Add('	    else');
     A.Add('echo "unset proxy..."');
     A.Add('# UNSET SYSTEM-WIDE PROXY');
-    A.Add('unset all_proxy');
-    A.Add('unset ftp_proxy');
-    A.Add('unset http_proxy');
-    A.Add('unset https_proxy');
-    A.Add('unset no_proxy');
+//    A.Add('unset all_proxy');
+//    A.Add('unset ftp_proxy');
+//    A.Add('unset http_proxy');
+//    A.Add('unset https_proxy');
+//    A.Add('unset no_proxy');
+//    A.Add('');
+//    A.Add('unset ALL_PROXY');
+//    A.Add('unset FTP_PROXY');
+//    A.Add('unset HTTP_PROXY');
+//    A.Add('unset HTTPS_PROXY');
+//    A.Add('unset NO_PROXY');
     A.Add('');
-    A.Add('unset ALL_PROXY');
-    A.Add('unset FTP_PROXY');
-    A.Add('unset HTTP_PROXY');
-    A.Add('unset HTTPS_PROXY');
-    A.Add('unset NO_PROXY');
-    A.Add('');
-    A.Add('# GNOME or gsettings');
-    A.Add('if [[ $(echo $XDG_CURRENT_DESKTOP | grep -E "GNOME|Budgie|Cinnamon") ]]; then');
+    A.Add('# GNOME');
+    A.Add('if [[ $(echo $XDG_CURRENT_DESKTOP | grep -E "GNOME|Budgie|Cinnamon|MATE") ]]; then');
     A.Add('	gsettings set org.gnome.system.proxy mode none');
     A.Add('fi;');
     A.Add('# KDE');
@@ -172,8 +172,8 @@ begin
     A.Add('fi;');
     A.Add('');
     A.Add('fi;');
-    A.Add('');
-    A.Add('exit 0;');
+//    A.Add('');
+// A.Add('exit 0;');
 
     A.SaveToFile(GetUserDir + '.config/xraygui/swproxy.sh');
     RunCommand('/bin/bash', ['-c', 'chmod +x ~/.config/xraygui/swproxy.sh'], S);
@@ -217,6 +217,7 @@ begin
   else
   begin
     CreateSWProxy;
+    //Автозапуск System-Wide Proxy
     RunCommand('/bin/bash', ['-c', 'systemctl --user enable xray-swproxy'], S);
     //Если прокси уже запущен, иначе - настройки не менять; они изменятся при запуске (Start)
     if Shape1.Brush.Color = clLime then

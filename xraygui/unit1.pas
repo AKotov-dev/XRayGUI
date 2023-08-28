@@ -1296,7 +1296,7 @@ procedure TMainForm.StopBtnClick(Sender: TObject);
 var
   S: ansistring;
 begin
-  //Если SWP - Выключаем глобальный прокси (НЕ ENABLE)
+  //Если SWP (xray-wsproxy.service disabled) - Выключаем глобальный прокси
   Application.ProcessMessages;
   if SWPBox.Checked then RunCommand('/bin/bash',
       ['-c', 'systemctl --user stop xray-swproxy'], S);
@@ -1371,11 +1371,11 @@ begin
   //От двойного клика если список пуст
   if ConfigBox.Count = 0 then Exit;
 
-  //Если SWP - Пытаемся включить глобальный прокси
-  Application.ProcessMessages;
+  //Если SWP (xray-wsproxy.service enabled) - Пытаемся включить глобальный прокси
   if SWPBox.Checked then
   begin
     CreateSWProxy;
+    Application.ProcessMessages;
     RunCommand('/bin/bash', ['-c', 'systemctl --user restart xray-swproxy'], S);
   end;
 

@@ -1371,13 +1371,12 @@ begin
   //От двойного клика если список пуст
   if ConfigBox.Count = 0 then Exit;
 
-  //Если SWP - Пытаемся включить глобальный прокси
-  Application.ProcessMessages;
+  //Если SWP (xray-wsproxy.service enabled) - Пытаемся включить глобальный прокси
   if SWPBox.Checked then
   begin
     CreateSWProxy;
-  RunCommand('/bin/bash',
-      ['-c', 'systemctl --user restart xray-swproxy'], S);
+    Application.ProcessMessages;
+    RunCommand('/bin/bash', ['-c', 'systemctl --user restart xray-swproxy'], S);
   end;
 
   ConfigBox.CheckAll(cbUnChecked);

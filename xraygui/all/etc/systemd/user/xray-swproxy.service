@@ -1,0 +1,14 @@
+[Unit]
+Description=XRay Service
+Documentation=https://github.com/xtls
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+ExecStart=/bin/bash -c 'cd ~/.config/xraygui; source ./swproxy.sh set'
+ExecStop=/bin/bash -c 'cd ~/.config/xraygui; source ./swproxy.sh unset'
+
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target

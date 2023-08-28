@@ -15,6 +15,7 @@ type
 
   TMainForm = class(TForm)
     AutoStartBox: TCheckBox;
+    SWPBox: TCheckBox;
     ClearBox: TCheckBox;
     ConfigBox: TCheckListBox;
     GroupBox1: TGroupBox;
@@ -64,6 +65,8 @@ type
     procedure StartProcess(command: string);
     procedure StopBtnClick(Sender: TObject);
     procedure ButtonStatus;
+    procedure CreateSWProxy;
+    procedure SWPBoxChange(Sender: TObject);
     function VmessDecode(URL, val: string): string;
     procedure CreateVMESSConfig(VMESSURL, PORT, SAVEPATH: string);
     function SSDecode(URL: string; val: integer): string;
@@ -81,6 +84,7 @@ type
 
 var
   MainForm: TMainForm;
+  FormLoaded: boolean;
 
 resourcestring
   SAppRunning = 'The program is already running!';
@@ -97,6 +101,87 @@ uses start_trd, portscan_trd, update_trd;
 
 { TMainForm }
 
+//Create ~/config/xraygui/swproxy.sh
+procedure TMainForm.CreateSWProxy;
+var
+  S: ansistring;
+  A: TStringList;
+begin
+  try
+    A := TStringList.Create;
+    A.Add('#!/bin/bash');
+    A.Add('');
+    A.Add('if [ "$1" == "set" ]; then');
+    A.Add('echo "set proxy..."');
+    A.Add('# SET SYSTEM-WIDE PROXY');
+    A.Add('export all_proxy="socks://127.0.0.1:' + PortEdit.Text + '/"');
+    A.Add('export ftp_proxy="http://127.0.0.1:8889/"');
+    A.Add('export http_proxy="http://127.0.0.1:8889/"');
+    A.Add('export https_proxy="http://127.0.0.1:8889/"');
+    A.Add('export no_proxy="localhost,127.0.0.0/8,::1"');
+    A.Add('');
+    A.Add('export ALL_PROXY="socks://127.0.0.1:' + PortEdit.Text + '/"');
+    A.Add('export FTP_PROXY="http://127.0.0.1:8889/"');
+    A.Add('export HTTP_PROXY="http://127.0.0.1:8889/"');
+    A.Add('export HTTPS_PROXY="http://127.0.0.1:8889/"');
+    A.Add('export NO_PROXY="localhost,127.0.0.0/8,::1"');
+    A.Add('');
+    A.Add('# GNOME or gsettings');
+    A.Add('if [[ $(echo $XDG_CURRENT_DESKTOP | grep -E "GNOME|Budgie|Cinnamon") ]]; then');
+    A.Add('	gsettings set org.gnome.system.proxy mode "manual"');
+    A.Add('	gsettings set org.gnome.system.proxy.http host "127.0.0.1"');
+    A.Add('	gsettings set org.gnome.system.proxy.http port "8889"');
+    A.Add('	gsettings set org.gnome.system.proxy.https host "127.0.0.1"');
+    A.Add('	gsettings set org.gnome.system.proxy.https port "8889"');
+    A.Add('	gsettings set org.gnome.system.proxy.ftp host "127.0.0.1"');
+    A.Add('	gsettings set org.gnome.system.proxy.ftp port "8889"');
+    A.Add('	gsettings set org.gnome.system.proxy.socks host "127.0.0.1"');
+    A.Add('	gsettings set org.gnome.system.proxy.socks port "' + PortEdit.Text + '"');
+    A.Add('fi;');
+    A.Add('# KDE-5');
+    A.Add('if [[ $XDG_CURRENT_DESKTOP == KDE ]]; then');
+    A.Add('	kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key ProxyType 1');
+    A.Add('	kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key httpProxy "http://127.0.0.1 8889"');
+    A.Add('	kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key httpsProxy "http://127.0.0.1 8889"');
+    A.Add('	kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key ftpProxy "http://127.0.0.1 8889"');
+    A.Add('	kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key socksProxy "socks://127.0.0.1 '
+      + PortEdit.Text + '"');
+    A.Add('fi;');
+    A.Add('	    else');
+    A.Add('echo "unset proxy..."');
+    A.Add('# UNSET SYSTEM-WIDE PROXY');
+    A.Add('unset all_proxy');
+    A.Add('unset ftp_proxy');
+    A.Add('unset http_proxy');
+    A.Add('unset https_proxy');
+    A.Add('unset no_proxy');
+    A.Add('');
+    A.Add('unset ALL_PROXY');
+    A.Add('unset FTP_PROXY');
+    A.Add('unset HTTP_PROXY');
+    A.Add('unset HTTPS_PROXY');
+    A.Add('unset NO_PROXY');
+    A.Add('');
+    A.Add('# GNOME or gsettings');
+    A.Add('if [[ $(echo $XDG_CURRENT_DESKTOP | grep -E "GNOME|Budgie|Cinnamon") ]]; then');
+    A.Add('	gsettings set org.gnome.system.proxy mode none');
+    A.Add('fi;');
+    A.Add('# KDE');
+    A.Add('if [[ $XDG_CURRENT_DESKTOP == KDE ]]; then');
+    A.Add('	kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key ProxyType 0');
+    A.Add('fi;');
+    A.Add('');
+    A.Add('fi;');
+    A.Add('');
+    A.Add('exit 0;');
+
+    A.SaveToFile(GetUserDir + '.config/xraygui/swproxy.sh');
+    RunCommand('/bin/bash', ['-c', 'chmod +x ~/.config/xraygui/swproxy.sh'], S);
+  finally
+    A.Free;
+  end;
+end;
+
 //Статус панелей и кнопок
 procedure TMainForm.ButtonStatus;
 begin
@@ -112,6 +197,30 @@ begin
     SelAllBtn.Enabled := True;
     Panel2.Enabled := True;
   end;
+end;
+
+//ENABLE/DISABLE + START/STOP System-Wide Proxy
+procedure TMainForm.SWPBoxChange(Sender: TObject);
+var
+  S: ansistring;
+begin
+  if not FormLoaded then Exit;
+
+  Screen.Cursor := crHourGlass;
+  Application.ProcessMessages;
+
+  if not SWPBox.Checked then
+  begin
+    RunCommand('/bin/bash', ['-c', 'systemctl --user disable xray-swproxy'], S);
+    RunCommand('/bin/bash', ['-c', 'systemctl --user stop xray-swproxy'], S);
+  end
+  else
+  begin
+    CreateSWProxy;
+    RunCommand('/bin/bash', ['-c', 'systemctl --user enable xray-swproxy'], S);
+    RunCommand('/bin/bash', ['-c', 'systemctl --user start xray-swproxy'], S);
+  end;
+  Screen.Cursor := crDefault;
 end;
 
 //Общая процедура запуска команд (асинхронная)
@@ -153,6 +262,21 @@ begin
   else
     Result := False;
 end;
+
+//Проверка чекбокса SWP
+function CheckSWPBox: boolean;
+var
+  S: ansistring;
+begin
+  RunCommand('bash', ['-c',
+    '[[ -n $(systemctl --user is-enabled xray-swproxy | grep "enabled") ]] && echo "yes"'], S);
+
+  if Trim(S) = 'yes' then
+    Result := True
+  else
+    Result := False;
+end;
+
 
 //VMESS - Декодирование/Нормализация/Поиск
 function TMainForm.VmessDecode(URL, val: string): string;
@@ -218,6 +342,20 @@ begin
     S.Add('         "tag": "QV2RAY_API"');
     S.Add('     },');
     S.Add('     "inbounds": [');
+    //HTTP/HTTPS proxy
+    S.Add('            {');
+    S.Add('                "listen": "127.0.0.1",');
+    S.Add('                "port": 8889,');
+    S.Add('                "protocol": "http",');
+    S.Add('                "settings": {');
+    S.Add('                 "allowTransparent": true,');
+    S.Add('                 "timeout": 300');
+    S.Add('            },');
+    S.Add('            "sniffing": {');
+    S.Add('            },');
+    S.Add('                 "tag": "http_in"');
+    S.Add('            },');
+    //END OF HTTP/HTTPS proxy
     S.Add('        {');
     S.Add('             "listen": "127.0.0.1",');
     S.Add('             "port": ' + PORT + ',');
@@ -229,7 +367,7 @@ begin
     S.Add('            },');
     S.Add('            "sniffing": {');
     S.Add('            },');
-    S.Add('            "tag": "socks_IN"');
+    S.Add('            "tag": "socks"');
     S.Add('         }');
     S.Add('    ],');
     S.Add('    "log": {');
@@ -331,7 +469,7 @@ begin
     S.Add('                    "disableSystemRoot": false');
     S.Add('                }');
     S.Add('            },');
-    S.Add('            "tag": "PROXY"');
+    S.Add('            "tag": "proxy"');
     S.Add('        },');
     S.Add('        {');
     S.Add('            "protocol": "freedom",');
@@ -371,7 +509,7 @@ begin
     S.Add('        "rules": [');
     S.Add('            {');
     S.Add('                "inboundTag": [');
-    S.Add('                    "QV2RAY_API_INBOUND"');
+    S.Add('                    "QV2RAY_API_inBOUND"');
     S.Add('                ],');
     S.Add('                "outboundTag": "QV2RAY_API",');
     S.Add('               "type": "field"');
@@ -485,6 +623,20 @@ begin
     //    S.Add('        ]');
     //    S.Add('    },');
     S.Add('        "inbounds": [');
+    //HTTP/HTTPS proxy
+    S.Add('            {');
+    S.Add('                "listen": "127.0.0.1",');
+    S.Add('                "port": 8889,');
+    S.Add('                "protocol": "http",');
+    S.Add('                "settings": {');
+    S.Add('                 "allowTransparent": true,');
+    S.Add('                 "timeout": 300');
+    S.Add('            },');
+    S.Add('            "sniffing": {');
+    S.Add('            },');
+    S.Add('                 "tag": "http_in"');
+    S.Add('            },');
+    //END OF HTTP/HTTPS proxy
     S.Add('            {');
     S.Add('                "listen": "127.0.0.1",');
     //LOCAL PORT
@@ -497,7 +649,7 @@ begin
     S.Add('                },');
     S.Add('                "sniffing": {');
     S.Add('                },');
-    S.Add('                "tag": "socks_IN"');
+    S.Add('                "tag": "socks"');
     S.Add('            }');
     S.Add('        ],');
     S.Add('        "log": {');
@@ -525,7 +677,7 @@ begin
     S.Add('                },');
     S.Add('                "streamSettings": {');
     S.Add('                },');
-    S.Add('                "tag": "PROXY"');
+    S.Add('                "tag": "proxy"');
     S.Add('            },');
     S.Add('            {');
     S.Add('                "protocol": "freedom",');
@@ -565,7 +717,7 @@ begin
     S.Add('            "rules": [');
     S.Add('                {');
     S.Add('                    "inboundTag": [');
-    S.Add('                        "XRayGUI_API_INBOUND"');
+    S.Add('                        "XRayGUI_API_inBOUND"');
     S.Add('                    ],');
     S.Add('                    "outboundTag": "XRayGUI_API",');
     S.Add('                    "type": "field"');
@@ -688,6 +840,21 @@ begin
     //     S.Add('            ]');
     //     S.Add('        },');
     S.Add('        "inbounds": [');
+    //HTTP/HTTPS proxy
+    S.Add('            {');
+    S.Add('                "listen": "127.0.0.1",');
+    S.Add('                "port": 8889,');
+    S.Add('                "protocol": "http",');
+    S.Add('                "settings": {');
+    S.Add('                 "allowTransparent": true,');
+    S.Add('                 "timeout": 300');
+    S.Add('            },');
+    S.Add('            "sniffing": {');
+    S.Add('            },');
+    S.Add('                 "tag": "http_in"');
+    S.Add('            },');
+    //END OF HTTP/HTTPS proxy
+
     S.Add('            {');
     S.Add('                "listen": "127.0.0.1",');
     //LOCAL_PORT
@@ -700,7 +867,7 @@ begin
     S.Add('                },');
     S.Add('                "sniffing": {');
     S.Add('                },');
-    S.Add('                "tag": "socks_IN"');
+    S.Add('                "tag": "socks"');
     S.Add('            }');
     S.Add('        ],');
     S.Add('        "log": {');
@@ -793,7 +960,7 @@ begin
     S.Add('                        "disableSystemRoot": false');
     S.Add('                    }');
     S.Add('                },');
-    S.Add('                "tag": "xtndhxcnmdxhdjn"');
+    S.Add('                "tag": "proxy"');
     S.Add('            },');
     S.Add('            {');
     S.Add('                "protocol": "freedom",');
@@ -833,7 +1000,7 @@ begin
     S.Add('            "rules": [');
     S.Add('                {');
     S.Add('                    "inboundTag": [');
-    S.Add('                        "XRayGUI_API_INBOUND"');
+    S.Add('                        "XRayGUI_API_inBOUND"');
     S.Add('                    ],');
     S.Add('                    "outboundTag": "XRayGUI_API",');
     S.Add('                    "type": "field"');
@@ -942,6 +1109,20 @@ begin
     S.Add('        "loglevel": "warning"');
     S.Add('      },');
     S.Add('      "inbounds": [');
+    //HTTP/HTTPS proxy
+    S.Add('            {');
+    S.Add('                "listen": "127.0.0.1",');
+    S.Add('                "port": 8889,');
+    S.Add('                "protocol": "http",');
+    S.Add('                "settings": {');
+    S.Add('                 "allowTransparent": true,');
+    S.Add('                 "timeout": 300');
+    S.Add('            },');
+    S.Add('            "sniffing": {');
+    S.Add('            },');
+    S.Add('                 "tag": "http_in"');
+    S.Add('            },');
+    //END OF HTTP/HTTPS proxy
     S.Add('        {');
     S.Add('          "tag": "socks",');
     //LOCAL PORT
@@ -1112,7 +1293,14 @@ end;
 
 //Останов
 procedure TMainForm.StopBtnClick(Sender: TObject);
+var
+  S: ansistring;
 begin
+  //Если SWP - Выключаем глобальный прокси (НЕ ENABLE)
+  Application.ProcessMessages;
+  if SWPBox.Checked then RunCommand('/bin/bash',
+      ['-c', 'systemctl --user stop xray-swproxy'], S);
+
   //Снять все чекбоксы
   ConfigBox.CheckAll(cbUnChecked);
   //Запомнить, что был останов (findex=100)
@@ -1177,9 +1365,19 @@ end;
 
 //Запуск прокси (XRay)
 procedure TMainForm.StartBtnClick(Sender: TObject);
+var
+  S: ansistring;
 begin
   //От двойного клика если список пуст
   if ConfigBox.Count = 0 then Exit;
+
+  //Если SWP - Пытаемся включить глобальный прокси
+  Application.ProcessMessages;
+  if SWPBox.Checked then
+  begin
+    CreateSWProxy;
+    RunCommand('/bin/bash', ['-c', 'systemctl --user restart xray-swproxy'], S);
+  end;
 
   ConfigBox.CheckAll(cbUnChecked);
   ConfigBox.Checked[ConfigBox.ItemIndex] := True;
@@ -1224,8 +1422,8 @@ begin
     MkDir(GetUserDir + '.config/autostart');}
 
   //Удаляем автозапуск предыдущих версий (переход на systemd --user)
-  if FileExists(GetUserDir + '.config/autostart/xray.desktop') then
-    DeleteFile(GetUserDir + '.config/autostart/xray.desktop');
+ { if FileExists(GetUserDir + '.config/autostart/xray.desktop') then
+    DeleteFile(GetUserDir + '.config/autostart/xray.desktop'); }
 
   //Рабочая директория (конфигурации + лог)
   if not DirectoryExists(GetUserDir + '.config/xraygui') then
@@ -1296,6 +1494,7 @@ end;
 //Копирование в буфер
 procedure TMainForm.CopyItemClick(Sender: TObject);
 begin
+  if ConfigBox.SelCount = 0 then Exit;
   ClipBoard.AsText := ConfigBox.Items[ConfigBox.ItemIndex];
 end;
 
@@ -1304,6 +1503,8 @@ procedure TMainForm.ClearBoxChange(Sender: TObject);
 var
   S: ansistring;
 begin
+  if not FormLoaded then Exit;
+
   if not ClearBox.Checked then
     RunCommand('/bin/bash', ['-c', 'rm -f ~/.config/xraygui/clear'], S)
   else
@@ -1315,6 +1516,8 @@ procedure TMainForm.AutoStartBoxChange(Sender: TObject);
 var
   S: ansistring;
 begin
+  if not FormLoaded then Exit;
+
   Screen.Cursor := crHourGlass;
   Application.ProcessMessages;
 
@@ -1345,6 +1548,9 @@ begin
   ButtonStatus;
   ClearBox.Checked := CheckClear;
   AutoStartBox.Checked := CheckAutoStart;
+  SWPBox.Checked := CheckSWPBox;
+  //Показываем состояние чекбоксов, исключая CheckBox.OnClick при первом запуске
+  FormLoaded := True;
 
   //Запуск потока проверки состояния локального порта
   FPortScanThread := PortScan.Create(False);

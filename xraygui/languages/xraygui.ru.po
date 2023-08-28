@@ -26,8 +26,8 @@ msgstr ""
 
 #: tmainform.clearbox.caption
 msgctxt "tmainform.clearbox.caption"
-msgid "Clear cache and cookies"
-msgstr "Очистить кеш и cookies"
+msgid "Clear cache/cookies"
+msgstr "Очистить кеш/cookies"
 
 #: tmainform.clearbox.hint
 msgid "Clean up the GUI at startup (Mageia only)"
@@ -67,6 +67,10 @@ msgctxt "tmainform.pastebtn.hint"
 msgid "Paste from clipboard"
 msgstr "Вставить из буфера"
 
+#: tmainform.portedit.hint
+msgid "127.0.0.1:Port"
+msgstr "127.0.0.1:Порт"
+
 #: tmainform.saveitem.caption
 msgctxt "tmainform.saveitem.caption"
 msgid "Save to file"
@@ -91,6 +95,18 @@ msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https:
 #: tmainform.stopbtn.caption
 msgid "Stop"
 msgstr "Стоп"
+
+#: tmainform.swpbox.caption
+msgid "SWP"
+msgstr ""
+
+#: tmainform.swpbox.hint
+msgid ""
+"System-Wide Proxy\n"
+"Budgie, GNOME, Cinnamon, ?"
+msgstr ""
+"System-Wide Прокси\n"
+"Budgie, GNOME, Cinnamon, ?"
 
 #: unit1.sapprunning
 msgid "The program is already running!"

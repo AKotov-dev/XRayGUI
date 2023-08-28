@@ -14,7 +14,7 @@ msgid "XRayGUI"
 msgstr ""
 
 #: tmainform.clearbox.caption
-msgid "Clear cache and cookies"
+msgid "Clear cache/cookies"
 msgstr ""
 
 #: tmainform.clearbox.hint
@@ -55,6 +55,10 @@ msgctxt "tmainform.pastebtn.hint"
 msgid "Paste from clipboard"
 msgstr ""
 
+#: tmainform.portedit.hint
+msgid "127.0.0.1:Port"
+msgstr ""
+
 #: tmainform.saveitem.caption
 msgctxt "tmainform.saveitem.caption"
 msgid "Save to file"
@@ -78,6 +82,16 @@ msgstr ""
 
 #: tmainform.stopbtn.caption
 msgid "Stop"
+msgstr ""
+
+#: tmainform.swpbox.caption
+msgid "SWP"
+msgstr ""
+
+#: tmainform.swpbox.hint
+msgid ""
+"System-Wide Proxy\n"
+"Budgie, GNOME, Cinnamon, ?"
 msgstr ""
 
 #: unit1.sapprunning

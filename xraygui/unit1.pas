@@ -216,12 +216,14 @@ begin
   end
   else
   begin
+    //Автозапуск самого прокси, поскольку при перезагрузке прокси будет недоступен
+    AutoStartBox.Checked := True;
+    //Делаем скрипт звпуска ~/.config/xraygui/swproxy.sh
     CreateSWProxy;
     //Автозапуск System-Wide Proxy
     RunCommand('/bin/bash', ['-c', 'systemctl --user enable xray-swproxy'], S);
-    //Если прокси уже запущен, иначе - настройки не менять; они изменятся при запуске (Start)
-    if Shape1.Brush.Color = clLime then
-      RunCommand('/bin/bash', ['-c', 'systemctl --user start xray-swproxy'], S);
+    //Применяем, если прокси уже запущен, иначе - настройки не менять; они изменятся при запуске (Start)
+    RunCommand('/bin/bash', ['-c', 'systemctl --user start xray-swproxy'], S);
   end;
   Screen.Cursor := crDefault;
 end;
@@ -1525,9 +1527,13 @@ begin
   Application.ProcessMessages;
 
   if not AutoStartBox.Checked then
-    RunCommand('/bin/bash', ['-c', 'systemctl --user disable xray'], S)
+  begin
+    SWPBox.Checked := False;
+    RunCommand('/bin/bash', ['-c', 'systemctl --user disable xray'], S);
+  end
   else
     RunCommand('/bin/bash', ['-c', 'systemctl --user enable xray'], S);
+
   Screen.Cursor := crDefault;
 end;
 

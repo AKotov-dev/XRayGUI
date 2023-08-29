@@ -101,16 +101,12 @@ msgid "SWP"
 msgstr ""
 
 #: tmainform.swpbox.hint
-#, fuzzy
-#| msgid ""
-#| "System-Wide Proxy\n"
-#| "Budgie, GNOME, Cinnamon, KDE, MATE"
 msgid ""
 "System-Wide Proxy\n"
 "Budgie, GNOME, Cinnamon, KDE, MATE, XFCE (exp)"
 msgstr ""
 "System-Wide Прокси\n"
-"Budgie, GNOME, Cinnamon, KDE, MATE"
+"Budgie, GNOME, Cinnamon, KDE, MATE, XFCE (exp)"
 
 #: unit1.sapprunning
 msgid "The program is already running!"
@@ -131,4 +127,3 @@ msgid ""
 msgstr ""
 "Поддерживаемые протоколы:\n"
 "vmess, vless, ss (без obfs) и trojan!"
-

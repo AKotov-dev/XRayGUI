@@ -1533,6 +1533,7 @@ begin
   end
   else
     RunCommand('/bin/bash', ['-c', 'systemctl --user enable xray'], S);
+
   Screen.Cursor := crDefault;
 end;
 

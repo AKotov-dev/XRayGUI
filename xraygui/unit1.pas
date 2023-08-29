@@ -172,8 +172,8 @@ begin
     A.Add('fi;');
     A.Add('');
     A.Add('fi;');
-    //    A.Add('');
-    // A.Add('exit 0;');
+    //     A.Add('');
+    //     A.Add('exit 0;');
 
     A.SaveToFile(GetUserDir + '.config/xraygui/swproxy.sh');
     RunCommand('/bin/bash', ['-c', 'chmod +x ~/.config/xraygui/swproxy.sh'], S);
@@ -281,7 +281,6 @@ begin
   else
     Result := False;
 end;
-
 
 //VMESS - Декодирование/Нормализация/Поиск
 function TMainForm.VmessDecode(URL, val: string): string;
@@ -1421,14 +1420,6 @@ end;
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   MainForm.Caption := Application.Title;
-
-  //Директория ссылок Автозапуска (перевод на systemd --user)
- { if not DirectoryExists(GetUserDir + '.config/autostart') then
-    MkDir(GetUserDir + '.config/autostart');}
-
-  //Удаляем автозапуск предыдущих версий (переход на systemd --user)
- { if FileExists(GetUserDir + '.config/autostart/xray.desktop') then
-    DeleteFile(GetUserDir + '.config/autostart/xray.desktop'); }
 
   //Рабочая директория (конфигурации + лог)
   if not DirectoryExists(GetUserDir + '.config/xraygui') then

@@ -91,7 +91,7 @@ msgstr ""
 #: tmainform.swpbox.hint
 msgid ""
 "System-Wide Proxy\n"
-"Budgie, GNOME, Cinnamon, KDE, MATE"
+"Budgie, GNOME, Cinnamon, KDE, MATE, XFCE (exp)"
 msgstr ""
 
 #: unit1.sapprunning

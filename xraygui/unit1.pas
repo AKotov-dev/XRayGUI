@@ -127,7 +127,7 @@ begin
     //    A.Add('export NO_PROXY="localhost,127.0.0.0/8,::1"');
     A.Add('');
     A.Add('# GNOME');
-    A.Add('if [[ $(echo $XDG_CURRENT_DESKTOP | grep -E "GNOME|Budgie|Cinnamon|MATE") ]]; then');
+    A.Add('if [[ $(echo $XDG_CURRENT_DESKTOP | grep -E "GNOME|Budgie|Cinnamon|MATE|XFCE") ]]; then');
     A.Add('	gsettings set org.gnome.system.proxy mode "manual"');
     A.Add('	gsettings set org.gnome.system.proxy.http host "127.0.0.1"');
     A.Add('	gsettings set org.gnome.system.proxy.http port "8889"');
@@ -163,7 +163,7 @@ begin
     //    A.Add('unset NO_PROXY');
     A.Add('');
     A.Add('# GNOME');
-    A.Add('if [[ $(echo $XDG_CURRENT_DESKTOP | grep -E "GNOME|Budgie|Cinnamon|MATE") ]]; then');
+    A.Add('if [[ $(echo $XDG_CURRENT_DESKTOP | grep -E "GNOME|Budgie|Cinnamon|MATE|XFCE") ]]; then');
     A.Add('	gsettings set org.gnome.system.proxy mode none');
     A.Add('fi;');
     A.Add('# KDE-5');

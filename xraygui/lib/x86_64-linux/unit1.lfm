@@ -234,7 +234,7 @@ object MainForm: TMainForm
         AnchorSideRight.Control = AutoStartBox
         Left = 216
         Height = 32
-        Hint = 'System-Wide Proxy'#10'Budgie, GNOME, Cinnamon, ?'
+        Hint = 'System-Wide Proxy'#10'Budgie, GNOME, Cinnamon, KDE, MATE'
         Top = 10
         Width = 62
         Anchors = [akTop, akRight]

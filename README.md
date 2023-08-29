@@ -1,5 +1,5 @@
 # XRayGUI
-**Dependencies:** systemd gtk2 fping wget p7zip zenity  
+**Dependencies:** systemd gtk2 fping wget p7zip zenity lib64proxy-gnome lib64proxy-kde  
   
 A small and nimble GUI + [XRay-core](https://github.com/XTLS/Xray-core) - all in one rpm package: launch, find `VMESS`, `VLESS`, `SS (Shadowsocks)` or `Trojan` configurations on the network, copy to the buffer, paste into `XRayGUI` (`Paste` button) and click `Start`. If the green indicator lights up and the logs run, the connection is established. In the browser, set the SOCKS5 - `127.0.0.1`:`1080` proxy and redirect DNS via proxy (check the box there). The list of configurations can be saved to a file and downloaded from a file (PopUp Menu). You can check your new location here: https://whoer.net  
 

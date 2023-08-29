@@ -1469,8 +1469,12 @@ begin
       ConfigBox.Click;
     end
     else
+    begin
+      //Список пуст = cнимаем автозапуск SWP
+      SWPBox.Checked := False;
       //Список пуст = удаляем ярлык автозагрузки
       AutoStartBox.Checked := False;
+    end;
   end;
 
   //Запоминаем позицию чекера

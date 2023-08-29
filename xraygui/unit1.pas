@@ -1474,6 +1474,8 @@ begin
       SWPBox.Checked := False;
       //Список пуст = удаляем ярлык автозагрузки
       AutoStartBox.Checked := False;
+      //Список пуст = cнимаем очистку cache
+      ClearBox.Checked := False;
     end;
   end;
 

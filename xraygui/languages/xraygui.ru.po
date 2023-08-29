@@ -103,10 +103,10 @@ msgstr ""
 #: tmainform.swpbox.hint
 msgid ""
 "System-Wide Proxy\n"
-"Budgie, GNOME, Cinnamon, KDE, MATE, XFCE (exp)"
+"Budgie, GNOME, Cinnamon, KDE, MATE"
 msgstr ""
 "System-Wide Прокси\n"
-"Budgie, GNOME, Cinnamon, KDE, MATE, XFCE (exp)"
+"Budgie, GNOME, Cinnamon, KDE, MATE"
 
 #: unit1.sapprunning
 msgid "The program is already running!"

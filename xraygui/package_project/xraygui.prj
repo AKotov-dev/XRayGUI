@@ -86,12 +86,12 @@ toolversion=2.2.4
 
 [INFO]
 0=v1.5
-1=+ SWP checkbox for System-Wide Proxy
-2=+ Additional port 8889 (HTTP/HTTPS/FTP) for SWP
+1=+ System-Wide Proxy (SWP)
+2=+ Additional port 8889 (HTTP/HTTPS/FTP)
 3=+ Correction of tags for reading connection logs
 4=+ Packages for Mageia-9 and Ubuntu
 5=
-6=**Note:** System-Wide Proxy supported in GNOME-like DEs. [Read more...](https://github.com/AKotov-dev/XRayGUI)
+6=**Note:** System-Wide Proxy supported in Budgie, GNOME, Cinnamon, MATE, KDE-5.  [Read more...](https://github.com/AKotov-dev/XRayGUI)
 7=
 8=v1.4
 9=+ Support VLESS + KCP

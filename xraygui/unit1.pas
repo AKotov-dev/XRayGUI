@@ -15,6 +15,7 @@ type
 
   TMainForm = class(TForm)
     AutoStartBox: TCheckBox;
+    RealityBtn: TSpeedButton;
     SWPBox: TCheckBox;
     ClearBox: TCheckBox;
     ConfigBox: TCheckListBox;
@@ -59,6 +60,7 @@ type
     procedure Panel2Resize(Sender: TObject);
     procedure PasteBtnClick(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
+    procedure RealityBtnClick(Sender: TObject);
     procedure SaveItemClick(Sender: TObject);
     procedure SelAllBtnClick(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
@@ -95,7 +97,7 @@ resourcestring
 
 implementation
 
-uses start_trd, portscan_trd, update_trd;
+uses start_trd, portscan_trd, update_trd, reality_gen;
 
 {$R *.lfm}
 
@@ -854,6 +856,17 @@ begin
     S.Add('                 "timeout": 300');
     S.Add('            },');
     S.Add('            "sniffing": {');
+    //reality?
+    if VlessDecode(VLESSURL, 'security') = 'reality' then
+    begin
+      S.Add('                    "enabled": true,');
+      S.Add('                    "destOverride": [');
+      S.Add('                    "http",');
+      S.Add('                    "tls",');
+      S.Add('                    "quic"');
+      S.Add('                    ],');
+      S.Add('                    "routeOnly": true');
+    end;
     S.Add('            },');
     S.Add('                 "tag": "http_in"');
     S.Add('            },');
@@ -870,6 +883,17 @@ begin
     S.Add('                    "udp": true');
     S.Add('                },');
     S.Add('                "sniffing": {');
+    //reality?
+    if VlessDecode(VLESSURL, 'security') = 'reality' then
+    begin
+      S.Add('                    "enabled": true,');
+      S.Add('                    "destOverride": [');
+      S.Add('                    "http",');
+      S.Add('                    "tls",');
+      S.Add('                    "quic"');
+      S.Add('                    ],');
+      S.Add('                    "routeOnly": true');
+    end;
     S.Add('                },');
     S.Add('                "tag": "socks"');
     S.Add('            }');
@@ -899,6 +923,9 @@ begin
     //Не все серверы перешли на эту опцию, временно оставляем (direct) для совместимости
     if VlessDecode(VLESSURL, 'security') = 'xtls' then
       S.Add('                                    "flow": "xtls-rprx-direct",');
+    if VlessDecode(VLESSURL, 'security') = 'reality' then
+      S.Add('                                    "flow": "' +
+        VlessDecode(VLESSURL, 'flow') + '",');
 
     //ID
     S.Add('                                    "id": "' +
@@ -930,18 +957,47 @@ begin
 
     //TYPE
     S.Add('                    "network": "' + VlessDecode(VLESSURL, 'type') + '",');
-    //SECURITY
-    if VlessDecode(VLESSURL, 'security') <> 'none' then
+
+    //SECURITY (reality?)
+    if VlessDecode(VLESSURL, 'security') <> 'reality' then
+    begin
       S.Add('                    "security": "' +
         VlessDecode(VLESSURL, 'security') + '",');
-    S.Add('                    "tlsSettings": {');
-    S.Add('                        "disableSystemRoot": false,');
-    S.Add('                        "fingerprint": "chrome",');
-    S.Add('                        "allowInsecure": true,');
-    //SERVER
-    S.Add('                        "serverName": "' +
-      VlessDecode(VLESSURL, 'server') + '"');
-    S.Add('                    },');
+      S.Add('                    "tlsSettings": {');
+      S.Add('                        "disableSystemRoot": false,');
+      S.Add('                        "fingerprint": "chrome",');
+      S.Add('                        "allowInsecure": true,');
+      //SERVER
+      S.Add('                        "serverName": "' +
+        VlessDecode(VLESSURL, 'server') + '"');
+      S.Add('                    },');
+    end
+    else
+    if VlessDecode(VLESSURL, 'security') = 'reality' then
+    begin
+      S.Add('                    "security": "' +
+        VlessDecode(VLESSURL, 'security') + '",');
+
+      S.Add('                    "realitySettings": {');
+      S.Add('                        "network": "' +
+        VlessDecode(VLESSURL, 'type') + '",');
+      S.Add('                        "show": false,');
+      S.Add('                        "fingerprint": "chrome",');
+      S.Add('                        "allowInsecure": true,');
+      S.Add('                        "publicKey": "' +
+        VlessDecode(VLESSURL, 'pbk') + '",');
+      S.Add('                        "shortId": "' +
+        VlessDecode(VLESSURL, 'sid') + '",');
+      S.Add('                        "spiderX": "",');
+      //SERVER OR SNI
+      if VlessDecode(VLESSURL, 'sni') <> '' then
+        S.Add('                        "serverName": "' +
+          VlessDecode(VLESSURL, 'sni') + '"')
+      else
+        S.Add('                        "serverName": "' +
+          VlessDecode(VLESSURL, 'server') + '"');
+      S.Add('                    },');
+    end;
 
     //IF WS
     if VlessDecode(VLESSURL, 'type') = 'ws' then
@@ -1353,6 +1409,12 @@ begin
   if ConfigBox.Count = 0 then SaveItem.Enabled := False
   else
     SaveItem.Enabled := True;
+end;
+
+//Reality Generator
+procedure TMainForm.RealityBtnClick(Sender: TObject);
+begin
+  RealityForm.ShowModal;
 end;
 
 //Сохранение в файл *.proxy

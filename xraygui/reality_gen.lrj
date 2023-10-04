@@ -1,0 +1,22 @@
+{"version":1,"strings":[
+{"hash":226276297,"name":"trealityform.caption","sourcebytes":[82,69,65,76,73,84,89,32,99,111,110,102,105,103,117,114,97,116,105,111,110,32,103,101,110,101,114,97,116,111,114,32,40,67,108,105,101,110,116,45,83,101,114,118,101,114,41],"value":"REALITY configuration generator (Client-Server)"},
+{"hash":201768788,"name":"trealityform.label1.caption","sourcebytes":[83,101,114,118,101,114,58,80,111,114,116],"value":"Server:Port"},
+{"hash":58,"name":"trealityform.label2.caption","sourcebytes":[58],"value":":"},
+{"hash":14195,"name":"trealityform.edit2.text","sourcebytes":[52,52,51],"value":"443"},
+{"hash":371156,"name":"trealityform.label3.caption","sourcebytes":[85,85,73,68],"value":"UUID"},
+{"hash":316263,"name":"trealityform.label4.caption","sourcebytes":[70,108,111,119],"value":"Flow"},
+{"hash":43917054,"name":"trealityform.combobox1.text","sourcebytes":[120,116,108,115,45,114,112,114,120,45,118,105,115,105,111,110],"value":"xtls-rprx-vision"},
+{"hash":22569,"name":"trealityform.label5.caption","sourcebytes":[83,78,73],"value":"SNI"},
+{"hash":106116749,"name":"trealityform.combobox2.text","sourcebytes":[119,119,119,46,109,105,99,114,111,115,111,102,116,46,99,111,109],"value":"www.microsoft.com"},
+{"hash":79138900,"name":"trealityform.label6.caption","sourcebytes":[70,80,114,105,110,116],"value":"FPrint"},
+{"hash":111121973,"name":"trealityform.combobox3.text","sourcebytes":[99,104,114,111,109,101],"value":"chrome"},
+{"hash":49302105,"name":"trealityform.label7.caption","sourcebytes":[80,117,98,108,105,99,32,75,101,121],"value":"Public Key"},
+{"hash":150003977,"name":"trealityform.label8.caption","sourcebytes":[80,114,105,118,97,116,101,32,75,101,121],"value":"Private Key"},
+{"hash":21159,"name":"trealityform.speedbutton1.caption","sourcebytes":[78,69,87],"value":"NEW"},
+{"hash":21159,"name":"trealityform.speedbutton2.caption","sourcebytes":[78,69,87],"value":"NEW"},
+{"hash":22484,"name":"trealityform.label9.caption","sourcebytes":[83,73,68],"value":"SID"},
+{"hash":21159,"name":"trealityform.speedbutton3.caption","sourcebytes":[78,69,87],"value":"NEW"},
+{"hash":304761,"name":"trealityform.speedbutton4.caption","sourcebytes":[67,111,112,121],"value":"Copy"},
+{"hash":186454372,"name":"trealityform.label10.caption","sourcebytes":[67,111,110,110,101,99,116,105,111,110,32,115,116,114,105,110,103,32,116,111,32,105,110,115,101,114,116,32,105,110,116,111,32,88,82,97,121,71,85,73,32,118,105,97,32,67,108,105,112,98,111,97,114,100],"value":"Connection string to insert into XRayGUI via Clipboard"},
+{"hash":189352286,"name":"trealityform.speedbutton5.caption","sourcebytes":[83,97,118,101,32,115,101,114,118,101,114,46,106,115,111,110],"value":"Save server.json"}
+]}

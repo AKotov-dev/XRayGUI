@@ -14,7 +14,7 @@ msgid "XRayGUI"
 msgstr ""
 
 #: tmainform.clearbox.caption
-msgid "Clear cache/cookies"
+msgid "Clear cookies"
 msgstr ""
 
 #: tmainform.clearbox.hint
@@ -22,6 +22,7 @@ msgid "Clean up the GUI at startup (Mageia only)"
 msgstr ""
 
 #: tmainform.copyitem.caption
+msgctxt "tmainform.copyitem.caption"
 msgid "Copy"
 msgstr ""
 
@@ -59,6 +60,11 @@ msgstr ""
 msgid "127.0.0.1:Port"
 msgstr ""
 
+#: tmainform.realitybtn.hint
+msgctxt "tmainform.realitybtn.hint"
+msgid "REALITY configuration generator (Client-Server)"
+msgstr ""
+
 #: tmainform.saveitem.caption
 msgctxt "tmainform.saveitem.caption"
 msgid "Save to file"
@@ -92,6 +98,91 @@ msgstr ""
 msgid ""
 "System-Wide Proxy\n"
 "Budgie, GNOME, Cinnamon, KDE, MATE"
+msgstr ""
+
+#: trealityform.caption
+msgctxt "trealityform.caption"
+msgid "REALITY configuration generator (Client-Server)"
+msgstr ""
+
+#: trealityform.combobox1.text
+msgid "xtls-rprx-vision"
+msgstr ""
+
+#: trealityform.combobox2.text
+msgid "www.microsoft.com"
+msgstr ""
+
+#: trealityform.combobox3.text
+msgid "chrome"
+msgstr ""
+
+#: trealityform.edit2.text
+msgid "443"
+msgstr ""
+
+#: trealityform.label1.caption
+msgid "Server:Port"
+msgstr ""
+
+#: trealityform.label10.caption
+msgid "Connection string to insert into XRayGUI via Clipboard"
+msgstr ""
+
+#: trealityform.label2.caption
+msgid ":"
+msgstr ""
+
+#: trealityform.label3.caption
+msgid "UUID"
+msgstr ""
+
+#: trealityform.label4.caption
+msgid "Flow"
+msgstr ""
+
+#: trealityform.label5.caption
+msgid "SNI"
+msgstr ""
+
+#: trealityform.label6.caption
+msgid "FPrint"
+msgstr ""
+
+#: trealityform.label7.caption
+msgid "Public Key"
+msgstr ""
+
+#: trealityform.label8.caption
+msgid "Private Key"
+msgstr ""
+
+#: trealityform.label9.caption
+msgid "SID"
+msgstr ""
+
+#: trealityform.speedbutton1.caption
+msgctxt "trealityform.speedbutton1.caption"
+msgid "NEW"
+msgstr ""
+
+#: trealityform.speedbutton2.caption
+msgctxt "trealityform.speedbutton2.caption"
+msgid "NEW"
+msgstr ""
+
+#: trealityform.speedbutton3.caption
+msgctxt "trealityform.speedbutton3.caption"
+msgid "NEW"
+msgstr ""
+
+#: trealityform.speedbutton4.caption
+msgctxt "trealityform.speedbutton4.caption"
+msgid "Copy"
+msgstr ""
+
+#: trealityform.speedbutton5.caption
+msgid "Save server.json"
 msgstr ""
 
 #: unit1.sapprunning

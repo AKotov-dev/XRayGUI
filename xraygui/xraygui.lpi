@@ -4,7 +4,7 @@
     <Version Value="12"/>
     <General>
       <SessionStorage Value="InProjectDir"/>
-      <Title Value="XRayGUI v1.5"/>
+      <Title Value="XRayGUI v1.6"/>
       <Scaled Value="True"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
@@ -95,6 +95,13 @@
       <Unit>
         <Filename Value="update_trd.pas"/>
         <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="reality_gen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="RealityForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit>
     </Units>
   </ProjectOptions>

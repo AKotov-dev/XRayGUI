@@ -1,0 +1,361 @@
+object RealityForm: TRealityForm
+  Left = 296
+  Height = 555
+  Top = 127
+  Width = 611
+  ActiveControl = Edit1
+  Caption = 'Reality configuration generator (Client-Server)'
+  ClientHeight = 555
+  ClientWidth = 611
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poMainFormCenter
+  SessionProperties = 'ComboBox1.Text;ComboBox2.Text;ComboBox3.Text;Edit1.Text;Edit2.Text;Edit3.Text;Edit4.Text;Edit5.Text;Edit6.Text;Memo1.Lines;SaveDialog1.InitialDir'
+  LCLVersion = '2.2.4.0'
+  object Label1: TLabel
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 17
+    Top = 18
+    Width = 66
+    Caption = 'Server:Port'
+    ParentColor = False
+  end
+  object Edit1: TEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrCenter
+    Left = 79
+    Height = 37
+    Top = 8
+    Width = 238
+    BorderSpacing.Left = 5
+    OnChange = Edit1Change
+    TabOrder = 0
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Edit1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrCenter
+    Left = 319
+    Height = 17
+    Top = 18
+    Width = 3
+    BorderSpacing.Left = 2
+    Caption = ':'
+    ParentColor = False
+  end
+  object Edit2: TEdit
+    AnchorSideLeft.Control = Label2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrCenter
+    Left = 324
+    Height = 37
+    Top = 8
+    Width = 82
+    BorderSpacing.Left = 2
+    OnChange = Edit1Change
+    TabOrder = 1
+    Text = '443'
+  end
+  object Label3: TLabel
+    Left = 9
+    Height = 17
+    Top = 208
+    Width = 31
+    Caption = 'UUID'
+    ParentColor = False
+  end
+  object Edit3: TEdit
+    AnchorSideLeft.Control = Edit5
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = SpeedButton1
+    Left = 83
+    Height = 37
+    Top = 198
+    Width = 432
+    Anchors = [akTop, akLeft, akRight]
+    OnChange = Edit1Change
+    TabOrder = 5
+  end
+  object Label4: TLabel
+    Left = 8
+    Height = 17
+    Top = 64
+    Width = 30
+    Caption = 'Flow'
+    ParentColor = False
+  end
+  object ComboBox1: TComboBox
+    AnchorSideLeft.Control = Label4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = Edit2
+    AnchorSideRight.Side = asrBottom
+    Left = 58
+    Height = 37
+    Top = 54
+    Width = 348
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 20
+    ItemHeight = 0
+    ItemIndex = 0
+    Items.Strings = (
+      'xtls-rprx-vision'
+      'xtls-rprx-vision-udp443'
+    )
+    OnChange = Edit1Change
+    TabOrder = 2
+    Text = 'xtls-rprx-vision'
+  end
+  object Label5: TLabel
+    Left = 9
+    Height = 17
+    Top = 112
+    Width = 21
+    Caption = 'SNI'
+    ParentColor = False
+  end
+  object ComboBox2: TComboBox
+    AnchorSideLeft.Control = ComboBox1
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = Edit2
+    AnchorSideRight.Side = asrBottom
+    Left = 58
+    Height = 37
+    Top = 102
+    Width = 348
+    Anchors = [akTop, akLeft, akRight]
+    ItemHeight = 0
+    Items.Strings = (
+      'www.asus.com'
+      'www.cisco.com'
+      'www.linksys.com'
+      'www.microsoft.com'
+      'www.nvidia.com'
+      'www.samsung.com'
+    )
+    OnChange = Edit1Change
+    TabOrder = 3
+    Text = 'www.microsoft.com'
+  end
+  object Label6: TLabel
+    Left = 9
+    Height = 17
+    Top = 160
+    Width = 37
+    Caption = 'FPrint'
+    ParentColor = False
+  end
+  object ComboBox3: TComboBox
+    AnchorSideLeft.Control = ComboBox1
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = Edit2
+    AnchorSideRight.Side = asrBottom
+    Left = 58
+    Height = 37
+    Top = 150
+    Width = 348
+    Anchors = [akTop, akLeft, akRight]
+    ItemHeight = 0
+    ItemIndex = 0
+    Items.Strings = (
+      'chrome'
+      'firefox'
+      'edge'
+      'safari'
+      '360'
+      'android'
+      'ios'
+    )
+    OnChange = Edit1Change
+    TabOrder = 4
+    Text = 'chrome'
+  end
+  object Label7: TLabel
+    Left = 10
+    Height = 17
+    Top = 304
+    Width = 60
+    Caption = 'Public Key'
+    ParentColor = False
+  end
+  object Edit4: TEdit
+    AnchorSideLeft.Control = Edit5
+    AnchorSideTop.Control = Label7
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = SpeedButton2
+    Left = 83
+    Height = 37
+    Top = 294
+    Width = 432
+    Anchors = [akTop, akLeft, akRight]
+    OnChange = Edit1Change
+    TabOrder = 6
+  end
+  object Label8: TLabel
+    Left = 10
+    Height = 17
+    Top = 256
+    Width = 65
+    Caption = 'Private Key'
+    ParentColor = False
+  end
+  object Edit5: TEdit
+    AnchorSideLeft.Control = Label8
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label8
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = SpeedButton2
+    Left = 83
+    Height = 37
+    Top = 246
+    Width = 432
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    OnChange = Edit1Change
+    TabOrder = 7
+  end
+  object SpeedButton1: TSpeedButton
+    AnchorSideLeft.Control = Edit3
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit3
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Edit3
+    AnchorSideBottom.Side = asrBottom
+    Left = 515
+    Height = 37
+    Top = 198
+    Width = 88
+    Anchors = [akTop, akRight, akBottom]
+    BorderSpacing.Right = 8
+    Caption = 'NEW'
+    OnClick = SpeedButton1Click
+  end
+  object SpeedButton2: TSpeedButton
+    AnchorSideLeft.Control = Edit4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit5
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Edit4
+    AnchorSideBottom.Side = asrBottom
+    Left = 515
+    Height = 85
+    Top = 246
+    Width = 88
+    Anchors = [akTop, akRight, akBottom]
+    BorderSpacing.Right = 8
+    Caption = 'NEW'
+    OnClick = SpeedButton2Click
+  end
+  object Label9: TLabel
+    Left = 10
+    Height = 17
+    Top = 352
+    Width = 20
+    Caption = 'SID'
+    ParentColor = False
+  end
+  object Edit6: TEdit
+    AnchorSideTop.Control = Label9
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = Edit2
+    AnchorSideRight.Side = asrBottom
+    Left = 40
+    Height = 37
+    Top = 342
+    Width = 366
+    Anchors = [akTop, akLeft, akRight]
+    OnChange = Edit1Change
+    TabOrder = 8
+  end
+  object SpeedButton3: TSpeedButton
+    AnchorSideLeft.Control = Edit6
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit6
+    AnchorSideBottom.Control = Edit6
+    AnchorSideBottom.Side = asrBottom
+    Left = 406
+    Height = 37
+    Top = 342
+    Width = 88
+    Anchors = [akTop, akLeft, akBottom]
+    Caption = 'NEW'
+    OnClick = SpeedButton3Click
+  end
+  object Memo1: TMemo
+    AnchorSideLeft.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 123
+    Top = 424
+    Width = 595
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 9
+  end
+  object SpeedButton4: TSpeedButton
+    AnchorSideRight.Control = Memo1
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Memo1
+    Left = 498
+    Height = 35
+    Top = 389
+    Width = 105
+    Anchors = [akRight, akBottom]
+    Caption = 'Copy'
+    OnClick = SpeedButton4Click
+  end
+  object Label10: TLabel
+    AnchorSideLeft.Control = Memo1
+    AnchorSideBottom.Control = Memo1
+    Left = 8
+    Height = 17
+    Top = 407
+    Width = 325
+    Anchors = [akLeft, akBottom]
+    Caption = 'Connection string to insert into XRayGUI via Clipboard'
+    ParentColor = False
+  end
+  object SpeedButton5: TSpeedButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 434
+    Height = 64
+    Top = 8
+    Width = 169
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 8
+    Caption = 'Save server.json'
+    OnClick = SpeedButton5Click
+  end
+  object IniPropStorage1: TIniPropStorage
+    StoredValues = <>
+    Left = 448
+    Top = 104
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.*.json'
+    FileName = 'server.json'
+    Filter = 'JSON files (*.json)|*.json'
+    Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
+    Left = 544
+    Top = 104
+  end
+end

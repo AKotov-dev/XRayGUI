@@ -252,7 +252,7 @@ object MainForm: TMainForm
         AnchorSideBottom.Side = asrBottom
         Left = 466
         Height = 36
-        Hint = 'REALITY configuration generator (Client-Server)'
+        Hint = 'REALITY configurations generator (Client-Server)'
         Top = 8
         Width = 50
         Anchors = [akTop, akRight, akBottom]

@@ -1,10 +1,10 @@
 object RealityForm: TRealityForm
-  Left = 301
+  Left = 306
   Height = 555
-  Top = 238
+  Top = 132
   Width = 611
   ActiveControl = Edit1
-  Caption = 'REALITY configuration generator (Client-Server)'
+  Caption = 'REALITY configurations generator (Client-Server)'
   ClientHeight = 555
   ClientWidth = 611
   OnCreate = FormCreate
@@ -165,15 +165,14 @@ object RealityForm: TRealityForm
     Width = 348
     Anchors = [akTop, akLeft, akRight]
     ItemHeight = 0
-    ItemIndex = 0
     Items.Strings = (
       'chrome'
       'firefox'
       'edge'
       'safari'
       '360'
-      'android'
       'ios'
+      'android'
     )
     OnChange = Edit1Change
     TabOrder = 4

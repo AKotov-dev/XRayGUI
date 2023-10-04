@@ -49,8 +49,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <TopLine Value="1414"/>
-        <CursorPos X="24" Y="1417"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="13"/>
         <UsageCount Value="73"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -82,10 +82,8 @@
         <ComponentName Value="RealityForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="79"/>
-        <CursorPos X="65" Y="81"/>
+        <CursorPos X="21"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>

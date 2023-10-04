@@ -92,8 +92,6 @@ begin
     Edit5.Text := Trim(Copy(S, 0, Pos(#10, S) - 1));
     //Public Key
     Edit4.Text := Trim(Copy(S, Pos(#10, S), Length(S)));
-
-    //ShowMessage(S);
   end;
 end;
 

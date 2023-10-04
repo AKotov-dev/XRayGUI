@@ -6,12 +6,14 @@ A small and nimble GUI + [XRay-core](https://github.com/XTLS/Xray-core) - all in
 **Support (without obfs):**
 + Shadowsocks
 + VMESS, + TLS, + WS, + WS + TLS, + KCP
-+ VLESS, + TLS, + WS, + WS + TLS, + gRPC, + gPRC + TLS, + KCP
++ VLESS, + TLS, + WS, + WS + TLS, + gRPC, + gPRC + TLS, + KCP, + REALITY
 + Trojan, + WS, + gRPC
 
 System-Wide Proxy
 --
 Starting from `XRayGUI-v1.5`, it became possible to use the connection as a global proxy for the entire system (`SWP` checkbox). This allows you to redirect all traffic through Socks5 without manually interfering with browser settings. The mode is guaranteed to work in GNOME, Budgie, Cinnamon, MATE (package required: `lib64proxy-gnome`) and KDE-5 (package required: `lib64proxy-kde`).  
+  
+Starting with `XRayGUI-v1.6`, support for VLESS `REALITY` and a generator of simple but reliable Client-Server configurations have been introduced.  
   
 **Note:** Starting with XRayGUI-v1.1, the binary `xray-core` removed from the rpm package is downloaded and updated directly from the developer's GitHub to the directory `~/.config/xraygui/xray`.  
   

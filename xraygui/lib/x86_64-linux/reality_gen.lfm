@@ -305,6 +305,9 @@ object RealityForm: TRealityForm
     BorderSpacing.Left = 8
     BorderSpacing.Right = 8
     BorderSpacing.Bottom = 8
+    Font.Height = -12
+    Font.Name = 'Monospace'
+    ParentFont = False
     ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 9

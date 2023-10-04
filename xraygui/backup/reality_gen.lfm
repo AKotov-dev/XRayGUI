@@ -1,7 +1,7 @@
 object RealityForm: TRealityForm
-  Left = 306
+  Left = 339
   Height = 555
-  Top = 132
+  Top = 151
   Width = 611
   ActiveControl = Edit1
   Caption = 'REALITY configurations generator (Client-Server)'
@@ -305,6 +305,9 @@ object RealityForm: TRealityForm
     BorderSpacing.Left = 8
     BorderSpacing.Right = 8
     BorderSpacing.Bottom = 8
+    Font.Height = -12
+    Font.Name = 'Monospace'
+    ParentFont = False
     ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 9

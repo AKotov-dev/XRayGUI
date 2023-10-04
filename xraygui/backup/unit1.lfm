@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 294
+  Left = 377
   Height = 708
-  Top = 124
+  Top = 303
   Width = 982
   ActiveControl = Panel1
   Caption = 'XRayGUI'
@@ -392,7 +392,7 @@ object MainForm: TMainForm
     Top = 688
     Width = 982
     Align = alBottom
-    Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
+    Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru'
     Font.Color = clGray
     Font.Height = -11
     Font.Name = 'Sans'

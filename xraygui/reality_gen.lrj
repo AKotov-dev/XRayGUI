@@ -1,5 +1,5 @@
 {"version":1,"strings":[
-{"hash":226276297,"name":"trealityform.caption","sourcebytes":[82,69,65,76,73,84,89,32,99,111,110,102,105,103,117,114,97,116,105,111,110,32,103,101,110,101,114,97,116,111,114,32,40,67,108,105,101,110,116,45,83,101,114,118,101,114,41],"value":"REALITY configuration generator (Client-Server)"},
+{"hash":84010505,"name":"trealityform.caption","sourcebytes":[82,69,65,76,73,84,89,32,99,111,110,102,105,103,117,114,97,116,105,111,110,115,32,103,101,110,101,114,97,116,111,114,32,40,67,108,105,101,110,116,45,83,101,114,118,101,114,41],"value":"REALITY configurations generator (Client-Server)"},
 {"hash":201768788,"name":"trealityform.label1.caption","sourcebytes":[83,101,114,118,101,114,58,80,111,114,116],"value":"Server:Port"},
 {"hash":58,"name":"trealityform.label2.caption","sourcebytes":[58],"value":":"},
 {"hash":14195,"name":"trealityform.edit2.text","sourcebytes":[52,52,51],"value":"443"},

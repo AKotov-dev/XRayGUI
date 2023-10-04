@@ -62,7 +62,7 @@ msgstr ""
 
 #: tmainform.realitybtn.hint
 msgctxt "tmainform.realitybtn.hint"
-msgid "REALITY configuration generator (Client-Server)"
+msgid "REALITY configurations generator (Client-Server)"
 msgstr ""
 
 #: tmainform.saveitem.caption
@@ -102,7 +102,7 @@ msgstr ""
 
 #: trealityform.caption
 msgctxt "trealityform.caption"
-msgid "REALITY configuration generator (Client-Server)"
+msgid "REALITY configurations generator (Client-Server)"
 msgstr ""
 
 #: trealityform.combobox1.text

@@ -1,10 +1,10 @@
 object RealityForm: TRealityForm
-  Left = 296
+  Left = 301
   Height = 555
-  Top = 127
+  Top = 238
   Width = 611
   ActiveControl = Edit1
-  Caption = 'Reality configuration generator (Client-Server)'
+  Caption = 'REALITY configuration generator (Client-Server)'
   ClientHeight = 555
   ClientWidth = 611
   OnCreate = FormCreate

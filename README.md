@@ -9,7 +9,7 @@ A small and nimble GUI + [XRay-core](https://github.com/XTLS/Xray-core) - all in
 + VLESS, + TLS, + WS, + WS + TLS, + gRPC, + gPRC + TLS, + KCP, + REALITY
 + Trojan, + WS, + gRPC
 
-Starting with `XRayGUI-v1.6`, support for VLESS `REALITY` and a generator of simple but reliable Client-Server configurations have been introduced ("R" button).
+Starting with `XRayGUI-v1.6`, support for `XTLS-Reality` and a generator of simple but reliable Client-Server configurations have been introduced ("R" button).
 
 System-Wide Proxy
 --

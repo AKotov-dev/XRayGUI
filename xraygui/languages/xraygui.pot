@@ -117,6 +117,10 @@ msgstr ""
 msgid "chrome"
 msgstr ""
 
+#: trealityform.edit2.hint
+msgid "Strictly recommended 443"
+msgstr ""
+
 #: trealityform.edit2.text
 msgid "443"
 msgstr ""

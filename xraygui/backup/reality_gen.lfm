@@ -1,11 +1,11 @@
 object RealityForm: TRealityForm
-  Left = 339
-  Height = 555
-  Top = 151
+  Left = 292
+  Height = 533
+  Top = 129
   Width = 611
   ActiveControl = Edit1
   Caption = 'REALITY configurations generator (Client-Server)'
-  ClientHeight = 555
+  ClientHeight = 533
   ClientWidth = 611
   OnCreate = FormCreate
   OnShow = FormShow
@@ -54,10 +54,13 @@ object RealityForm: TRealityForm
     AnchorSideTop.Side = asrCenter
     Left = 324
     Height = 37
+    Hint = 'Strictly recommended 443'
     Top = 8
     Width = 82
     BorderSpacing.Left = 2
     OnChange = Edit1Change
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 1
     Text = '443'
   end
@@ -298,7 +301,7 @@ object RealityForm: TRealityForm
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 8
-    Height = 123
+    Height = 101
     Top = 424
     Width = 595
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -349,7 +352,7 @@ object RealityForm: TRealityForm
   end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>
-    Left = 448
+    Left = 456
     Top = 104
   end
   object SaveDialog1: TSaveDialog

@@ -196,6 +196,10 @@ end;
 //Пересоздаём однострочную конфигурацию клиента
 procedure TRealityForm.Edit1Change(Sender: TObject);
 begin
+  if Edit2.Text <> '443' then Edit2.Font.Color := clRed
+  else
+    Edit2.Font.Color := clDefault;
+
   Memo1.Text := 'vless://' + Edit3.Text + '@' + Edit1.Text + ':' +
     Edit2.Text + '?encryption=none&flow=' + ComboBox1.Text +
     '&security=reality&sni=' + ComboBox2.Text + '&fp=' + ComboBox3.Text +

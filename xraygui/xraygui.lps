@@ -83,13 +83,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="21"/>
+        <CursorPos X="19"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="4">
+    <JumpHistory HistoryIndex="8">
       <Position>
         <Filename Value="reality_gen.pas"/>
         <Caret Line="9" Column="45"/>
@@ -109,6 +109,22 @@
       <Position>
         <Filename Value="reality_gen.pas"/>
         <Caret Line="93" Column="17" TopLine="82"/>
+      </Position>
+      <Position>
+        <Filename Value="reality_gen.pas"/>
+        <Caret Column="21"/>
+      </Position>
+      <Position>
+        <Filename Value="reality_gen.pas"/>
+        <Caret Line="199" Column="66" TopLine="176"/>
+      </Position>
+      <Position>
+        <Filename Value="reality_gen.pas"/>
+        <Caret Line="189" Column="68" TopLine="178"/>
+      </Position>
+      <Position>
+        <Filename Value="reality_gen.pas"/>
+        <Caret Line="191" Column="33" TopLine="180"/>
       </Position>
     </JumpHistory>
     <RunParams>

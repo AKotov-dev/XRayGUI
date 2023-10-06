@@ -13,11 +13,13 @@ object RealityForm: TRealityForm
   SessionProperties = 'ComboBox1.Text;ComboBox2.Text;ComboBox3.Text;Edit1.Text;Edit2.Text;Edit3.Text;Edit4.Text;Edit5.Text;Edit6.Text;Memo1.Lines;SaveDialog1.InitialDir'
   LCLVersion = '2.2.4.0'
   object Label1: TLabel
+    AnchorSideLeft.Control = Owner
     AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 17
     Top = 18
     Width = 66
+    BorderSpacing.Left = 8
     Caption = 'Server:Port'
     ParentColor = False
   end
@@ -65,10 +67,12 @@ object RealityForm: TRealityForm
     Text = '443'
   end
   object Label3: TLabel
-    Left = 9
+    AnchorSideLeft.Control = Owner
+    Left = 8
     Height = 17
     Top = 208
     Width = 31
+    BorderSpacing.Left = 8
     Caption = 'UUID'
     ParentColor = False
   end
@@ -77,19 +81,21 @@ object RealityForm: TRealityForm
     AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = SpeedButton1
-    Left = 83
+    Left = 81
     Height = 37
     Top = 198
-    Width = 432
+    Width = 434
     Anchors = [akTop, akLeft, akRight]
     OnChange = Edit1Change
     TabOrder = 5
   end
   object Label4: TLabel
+    AnchorSideLeft.Control = Owner
     Left = 8
     Height = 17
     Top = 64
     Width = 30
+    BorderSpacing.Left = 8
     Caption = 'Flow'
     ParentColor = False
   end
@@ -117,10 +123,12 @@ object RealityForm: TRealityForm
     Text = 'xtls-rprx-vision'
   end
   object Label5: TLabel
-    Left = 9
+    AnchorSideLeft.Control = Owner
+    Left = 8
     Height = 17
     Top = 112
     Width = 21
+    BorderSpacing.Left = 8
     Caption = 'SNI'
     ParentColor = False
   end
@@ -149,10 +157,12 @@ object RealityForm: TRealityForm
     Text = 'www.microsoft.com'
   end
   object Label6: TLabel
-    Left = 9
+    AnchorSideLeft.Control = Owner
+    Left = 8
     Height = 17
     Top = 160
     Width = 37
+    BorderSpacing.Left = 8
     Caption = 'FPrint'
     ParentColor = False
   end
@@ -182,10 +192,12 @@ object RealityForm: TRealityForm
     Text = 'chrome'
   end
   object Label7: TLabel
-    Left = 10
+    AnchorSideLeft.Control = Owner
+    Left = 8
     Height = 17
     Top = 304
     Width = 60
+    BorderSpacing.Left = 8
     Caption = 'Public Key'
     ParentColor = False
   end
@@ -194,19 +206,21 @@ object RealityForm: TRealityForm
     AnchorSideTop.Control = Label7
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = SpeedButton2
-    Left = 83
+    Left = 81
     Height = 37
     Top = 294
-    Width = 432
+    Width = 434
     Anchors = [akTop, akLeft, akRight]
     OnChange = Edit1Change
-    TabOrder = 6
+    TabOrder = 7
   end
   object Label8: TLabel
-    Left = 10
+    AnchorSideLeft.Control = Owner
+    Left = 8
     Height = 17
     Top = 256
     Width = 65
+    BorderSpacing.Left = 8
     Caption = 'Private Key'
     ParentColor = False
   end
@@ -216,14 +230,14 @@ object RealityForm: TRealityForm
     AnchorSideTop.Control = Label8
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = SpeedButton2
-    Left = 83
+    Left = 81
     Height = 37
     Top = 246
-    Width = 432
+    Width = 434
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 8
     OnChange = Edit1Change
-    TabOrder = 7
+    TabOrder = 6
   end
   object SpeedButton1: TSpeedButton
     AnchorSideLeft.Control = Edit3
@@ -260,10 +274,12 @@ object RealityForm: TRealityForm
     OnClick = SpeedButton2Click
   end
   object Label9: TLabel
-    Left = 10
+    AnchorSideLeft.Control = Owner
+    Left = 8
     Height = 17
     Top = 352
     Width = 20
+    BorderSpacing.Left = 8
     Caption = 'SID'
     ParentColor = False
   end

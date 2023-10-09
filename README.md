@@ -19,4 +19,4 @@ Starting from `XRayGUI-v1.5`, it became possible to use the connection as a glob
   
 ![](https://github.com/AKotov-dev/XRayGUI/blob/main/ScreenShot1.png)  
   
-Tested in Mageia-8/9 and Linux Mint.
+Tested in Mageia-9 and Linux Mint.

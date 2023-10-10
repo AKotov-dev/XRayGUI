@@ -342,6 +342,7 @@ object RealityForm: TRealityForm
     Anchors = [akRight, akBottom]
     BorderSpacing.Bottom = 2
     Caption = 'Copy'
+    Enabled = False
     OnClick = CopyBtnClick
   end
   object Label10: TLabel
@@ -366,6 +367,7 @@ object RealityForm: TRealityForm
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 8
     Caption = 'Save server.json'
+    Enabled = False
     OnClick = SaveBtnClick
   end
   object IniPropStorage1: TIniPropStorage

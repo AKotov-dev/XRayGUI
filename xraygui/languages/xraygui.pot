@@ -110,7 +110,7 @@ msgid "xtls-rprx-vision"
 msgstr ""
 
 #: trealityform.combobox2.text
-msgid "www.microsoft.com"
+msgid "www.yahoo.com"
 msgstr ""
 
 #: trealityform.combobox3.text

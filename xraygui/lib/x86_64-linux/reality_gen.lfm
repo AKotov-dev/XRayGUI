@@ -143,8 +143,10 @@ object RealityForm: TRealityForm
     Width = 348
     Anchors = [akTop, akLeft, akRight]
     ItemHeight = 0
+    ItemIndex = 7
     Items.Strings = (
       'www.asus.com'
+      'www.bing.com'
       'www.cisco.com'
       'www.linksys.com'
       'www.microsoft.com'
@@ -154,7 +156,7 @@ object RealityForm: TRealityForm
     )
     OnChange = Edit1Change
     TabOrder = 3
-    Text = 'www.microsoft.com'
+    Text = 'www.yahoo.com'
   end
   object Label6: TLabel
     AnchorSideLeft.Control = Owner

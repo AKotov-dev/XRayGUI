@@ -198,7 +198,7 @@ procedure TRealityForm.Edit1Change(Sender: TObject);
 begin
   if Edit2.Text <> '443' then Edit2.Font.Color := clRed
   else
-    Edit2.Font.Color := clDefault;
+    Edit2.Font.Color := clGreen;
 
   Memo1.Text := 'vless://' + Edit3.Text + '@' + Edit1.Text + ':' +
     Edit2.Text + '?encryption=none&flow=' + ComboBox1.Text +

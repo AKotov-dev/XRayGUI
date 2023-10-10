@@ -15,6 +15,7 @@ type
 
   TMainForm = class(TForm)
     AutoStartBox: TCheckBox;
+    Button1: TButton;
     RealityBtn: TSpeedButton;
     SWPBox: TCheckBox;
     ClearBox: TCheckBox;
@@ -46,6 +47,7 @@ type
     Splitter3: TSplitter;
     StaticText1: TStaticText;
     procedure AutoStartBoxChange(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
     procedure ClearBoxChange(Sender: TObject);
     procedure ConfigBoxClickCheck(Sender: TObject);
     procedure CopyItemClick(Sender: TObject);
@@ -191,13 +193,25 @@ begin
   begin
     DeleteBtn.Enabled := False;
     SelAllBtn.Enabled := False;
-    Panel2.Enabled := False;
+    //Panel2.Enabled := False;
+    PortEdit.Enabled := False;
+    SWPBox.Enabled := False;
+    AutoStartBox.Enabled := False;
+    ClearBox.Enabled := False;
+    StopBtn.Enabled := False;
+    StartBtn.Enabled := False;
   end
   else
   begin
     DeleteBtn.Enabled := True;
     SelAllBtn.Enabled := True;
-    Panel2.Enabled := True;
+    //Panel2.Enabled := True;
+    PortEdit.Enabled := True;
+    SWPBox.Enabled := True;
+    AutoStartBox.Enabled := True;
+    ClearBox.Enabled := True;
+    StopBtn.Enabled := True;
+    StartBtn.Enabled := True;
   end;
 end;
 
@@ -1594,6 +1608,11 @@ begin
     RunCommand('/bin/bash', ['-c', 'systemctl --user enable xray'], S);
 
   Screen.Cursor := crDefault;
+end;
+
+procedure TMainForm.Button1Click(Sender: TObject);
+begin
+  portedit.Enabled:=False;
 end;
 
 //Масштабирование для Plasma

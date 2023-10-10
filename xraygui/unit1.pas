@@ -191,13 +191,25 @@ begin
   begin
     DeleteBtn.Enabled := False;
     SelAllBtn.Enabled := False;
-    Panel2.Enabled := False;
+    //Panel2.Enabled := False;
+    PortEdit.Enabled := False;
+    SWPBox.Enabled := False;
+    AutoStartBox.Enabled := False;
+    ClearBox.Enabled := False;
+    StopBtn.Enabled := False;
+    StartBtn.Enabled := False;
   end
   else
   begin
     DeleteBtn.Enabled := True;
     SelAllBtn.Enabled := True;
-    Panel2.Enabled := True;
+    //Panel2.Enabled := True;
+    PortEdit.Enabled := True;
+    SWPBox.Enabled := True;
+    AutoStartBox.Enabled := True;
+    ClearBox.Enabled := True;
+    StopBtn.Enabled := True;
+    StartBtn.Enabled := True;
   end;
 end;
 

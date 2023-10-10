@@ -1,7 +1,7 @@
 object RealityForm: TRealityForm
-  Left = 292
+  Left = 291
   Height = 533
-  Top = 129
+  Top = 126
   Width = 611
   ActiveControl = Edit1
   Caption = 'REALITY configurations generator (Client-Server)'
@@ -151,6 +151,7 @@ object RealityForm: TRealityForm
       'www.microsoft.com'
       'www.nvidia.com'
       'www.samsung.com'
+      'www.yahoo.com'
     )
     OnChange = Edit1Change
     TabOrder = 3
@@ -337,18 +338,20 @@ object RealityForm: TRealityForm
     AnchorSideBottom.Control = Memo1
     Left = 498
     Height = 35
-    Top = 389
+    Top = 387
     Width = 105
     Anchors = [akRight, akBottom]
+    BorderSpacing.Bottom = 2
     Caption = 'Copy'
     OnClick = SpeedButton4Click
   end
   object Label10: TLabel
     AnchorSideLeft.Control = Memo1
-    AnchorSideBottom.Control = Memo1
+    AnchorSideBottom.Control = SpeedButton4
+    AnchorSideBottom.Side = asrBottom
     Left = 8
     Height = 17
-    Top = 407
+    Top = 405
     Width = 325
     Anchors = [akLeft, akBottom]
     Caption = 'Connection string to insert into XRayGUI via Clipboard'

@@ -1,7 +1,7 @@
 object RealityForm: TRealityForm
-  Left = 292
+  Left = 291
   Height = 533
-  Top = 129
+  Top = 126
   Width = 611
   ActiveControl = Edit1
   Caption = 'REALITY configurations generator (Client-Server)'
@@ -151,6 +151,7 @@ object RealityForm: TRealityForm
       'www.microsoft.com'
       'www.nvidia.com'
       'www.samsung.com'
+      'www.yahoo.com'
     )
     OnChange = Edit1Change
     TabOrder = 3

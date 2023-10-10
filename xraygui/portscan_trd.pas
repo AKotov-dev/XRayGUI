@@ -73,7 +73,8 @@ begin
     else
     begin
       Shape1.Brush.Color := clYellow;
-      PortEdit.Enabled := True;
+      if ConfigBox.Count <> 0 then
+        PortEdit.Enabled := True;
       LoadItem.Enabled := True;
     end;
 

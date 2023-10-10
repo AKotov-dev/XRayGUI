@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 377
+  Left = 291
   Height = 708
-  Top = 303
+  Top = 124
   Width = 982
   ActiveControl = Panel1
   Caption = 'XRayGUI'
@@ -71,6 +71,15 @@ object MainForm: TMainForm
         OnClick = PasteBtnClick
         ShowHint = True
         ParentShowHint = False
+      end
+      object Button1: TButton
+        Left = 148
+        Height = 25
+        Top = 20
+        Width = 75
+        Caption = 'Button1'
+        OnClick = Button1Click
+        TabOrder = 0
       end
     end
     object Splitter2: TSplitter

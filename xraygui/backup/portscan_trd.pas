@@ -67,15 +67,13 @@ begin
     if ResultStr[0] = 'yes' then
     begin
       Shape1.Brush.Color := clLime;
-      PortEdit.Enabled := False;
-      SWPBox.Enabled := False;
+    //  PortEdit.Enabled := False;
       LoadItem.Enabled := False;
     end
     else
     begin
       Shape1.Brush.Color := clYellow;
-      PortEdit.Enabled := True;
-      SWPBox.Enabled := True;
+    //  PortEdit.Enabled := True;
       LoadItem.Enabled := True;
     end;
 

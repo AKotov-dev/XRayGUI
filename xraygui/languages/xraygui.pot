@@ -117,6 +117,11 @@ msgstr ""
 msgid "chrome"
 msgstr ""
 
+#: trealityform.copybtn.caption
+msgctxt "trealityform.copybtn.caption"
+msgid "Copy"
+msgstr ""
+
 #: trealityform.edit2.hint
 msgid "Strictly recommended 443"
 msgstr ""
@@ -165,6 +170,11 @@ msgstr ""
 msgid "SID"
 msgstr ""
 
+#: trealityform.savebtn.caption
+msgctxt "trealityform.savebtn.caption"
+msgid "Save server.json"
+msgstr ""
+
 #: trealityform.speedbutton1.caption
 msgctxt "trealityform.speedbutton1.caption"
 msgid "NEW"
@@ -178,15 +188,6 @@ msgstr ""
 #: trealityform.speedbutton3.caption
 msgctxt "trealityform.speedbutton3.caption"
 msgid "NEW"
-msgstr ""
-
-#: trealityform.speedbutton4.caption
-msgctxt "trealityform.speedbutton4.caption"
-msgid "Copy"
-msgstr ""
-
-#: trealityform.speedbutton5.caption
-msgid "Save server.json"
 msgstr ""
 
 #: unit1.sapprunning

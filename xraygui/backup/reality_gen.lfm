@@ -8,7 +8,6 @@ object RealityForm: TRealityForm
   ClientHeight = 533
   ClientWidth = 611
   OnCreate = FormCreate
-  OnShow = FormShow
   Position = poMainFormCenter
   SessionProperties = 'ComboBox1.Text;ComboBox2.Text;ComboBox3.Text;Edit1.Text;Edit2.Text;Edit3.Text;Edit4.Text;Edit5.Text;Edit6.Text;Memo1.Lines;SaveDialog1.InitialDir'
   LCLVersion = '2.2.4.0'
@@ -332,7 +331,7 @@ object RealityForm: TRealityForm
     ScrollBars = ssVertical
     TabOrder = 9
   end
-  object SpeedButton4: TSpeedButton
+  object CopyBtn: TSpeedButton
     AnchorSideRight.Control = Memo1
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Memo1
@@ -343,11 +342,11 @@ object RealityForm: TRealityForm
     Anchors = [akRight, akBottom]
     BorderSpacing.Bottom = 2
     Caption = 'Copy'
-    OnClick = SpeedButton4Click
+    OnClick = CopyBtnClick
   end
   object Label10: TLabel
     AnchorSideLeft.Control = Memo1
-    AnchorSideBottom.Control = SpeedButton4
+    AnchorSideBottom.Control = CopyBtn
     AnchorSideBottom.Side = asrBottom
     Left = 8
     Height = 17
@@ -357,7 +356,7 @@ object RealityForm: TRealityForm
     Caption = 'Connection string to insert into XRayGUI via Clipboard'
     ParentColor = False
   end
-  object SpeedButton5: TSpeedButton
+  object SaveBtn: TSpeedButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 434
@@ -367,7 +366,7 @@ object RealityForm: TRealityForm
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 8
     Caption = 'Save server.json'
-    OnClick = SpeedButton5Click
+    OnClick = SaveBtnClick
   end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>

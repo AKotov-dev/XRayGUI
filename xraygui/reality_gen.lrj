@@ -17,7 +17,7 @@
 {"hash":21159,"name":"trealityform.speedbutton2.caption","sourcebytes":[78,69,87],"value":"NEW"},
 {"hash":22484,"name":"trealityform.label9.caption","sourcebytes":[83,73,68],"value":"SID"},
 {"hash":21159,"name":"trealityform.speedbutton3.caption","sourcebytes":[78,69,87],"value":"NEW"},
-{"hash":304761,"name":"trealityform.speedbutton4.caption","sourcebytes":[67,111,112,121],"value":"Copy"},
+{"hash":304761,"name":"trealityform.copybtn.caption","sourcebytes":[67,111,112,121],"value":"Copy"},
 {"hash":186454372,"name":"trealityform.label10.caption","sourcebytes":[67,111,110,110,101,99,116,105,111,110,32,115,116,114,105,110,103,32,116,111,32,105,110,115,101,114,116,32,105,110,116,111,32,88,82,97,121,71,85,73,32,118,105,97,32,67,108,105,112,98,111,97,114,100],"value":"Connection string to insert into XRayGUI via Clipboard"},
-{"hash":189352286,"name":"trealityform.speedbutton5.caption","sourcebytes":[83,97,118,101,32,115,101,114,118,101,114,46,106,115,111,110],"value":"Save server.json"}
+{"hash":189352286,"name":"trealityform.savebtn.caption","sourcebytes":[83,97,118,101,32,115,101,114,118,101,114,46,106,115,111,110],"value":"Save server.json"}
 ]}

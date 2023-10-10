@@ -38,16 +38,15 @@ type
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
-    SpeedButton4: TSpeedButton;
-    SpeedButton5: TSpeedButton;
+    CopyBtn: TSpeedButton;
+    SaveBtn: TSpeedButton;
     procedure Edit1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
-    procedure SpeedButton4Click(Sender: TObject);
-    procedure SpeedButton5Click(Sender: TObject);
+    procedure CopyBtnClick(Sender: TObject);
+    procedure SaveBtnClick(Sender: TObject);
   private
 
   public
@@ -64,11 +63,6 @@ uses unit1;
 {$R *.lfm}
 
 { TRealityForm }
-
-procedure TRealityForm.FormShow(Sender: TObject);
-begin
-  //  IniPropStorage1.Restore;
-end;
 
 //Get UUID
 procedure TRealityForm.SpeedButton1Click(Sender: TObject);
@@ -105,13 +99,13 @@ begin
 end;
 
 //Однострочная конфигурация клиента в Буфер
-procedure TRealityForm.SpeedButton4Click(Sender: TObject);
+procedure TRealityForm.CopyBtnClick(Sender: TObject);
 begin
   Clipboard.AsText := Memo1.Text;
 end;
 
 //Save server.json
-procedure TRealityForm.SpeedButton5Click(Sender: TObject);
+procedure TRealityForm.SaveBtnClick(Sender: TObject);
 var
   S: TStringList;
 begin
@@ -199,6 +193,24 @@ begin
   if Edit2.Text <> '443' then Edit2.Font.Color := clRed
   else
     Edit2.Font.Color := clDefault;
+
+  if ComboBox1.Text <> 'xtls-rprx-vision' then ComboBox1.Font.Color := clRed
+  else
+    ComboBox1.Font.Color := clDefault;
+
+  //Кнопки Save и Copy
+  if (Edit1.Text = '') or (Edit2.Text = '') or (Edit3.Text = '') or
+    (Edit4.Text = '') or (Edit5.Text = '') or (Edit6.Text = '') or
+    (ComboBox1.Text = '') or (ComboBox2.Text = '') or (ComboBox3.Text = '') then
+  begin
+    SaveBtn.Enabled := False;
+    CopyBtn.Enabled := False;
+  end
+  else
+  begin
+    SaveBtn.Enabled := True;
+    CopyBtn.Enabled := True;
+  end;
 
   Memo1.Text := 'vless://' + Edit3.Text + '@' + Edit1.Text + ':' +
     Edit2.Text + '?encryption=none&flow=' + ComboBox1.Text +

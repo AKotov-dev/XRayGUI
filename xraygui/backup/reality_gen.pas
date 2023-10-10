@@ -200,7 +200,7 @@ begin
 
   //Кнопки Save и Copy
   if (Edit1.Text = '') or (Edit2.Text = '') or (Edit3.Text = '') or
-    (Edit4.Text = '') or (Edit5.Text = '') or (Edit6.Text) or
+    (Edit4.Text = '') or (Edit5.Text = '') or (Edit6.Text = '') or
     (ComboBox1.Text = '') or (ComboBox2.Text = '') or (ComboBox3.Text = '') then
   begin
     SaveBtn.Enabled := False;

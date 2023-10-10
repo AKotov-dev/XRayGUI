@@ -49,7 +49,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <CursorPos X="13"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="1623"/>
+        <CursorPos X="3" Y="1624"/>
         <UsageCount Value="75"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -83,16 +85,14 @@
         <ComponentName Value="RealityForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="188"/>
-        <CursorPos X="67" Y="203"/>
+        <CursorPos X="27" Y="201"/>
         <UsageCount Value="25"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="8">
+    <JumpHistory HistoryIndex="9">
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="196" TopLine="191"/>
@@ -128,6 +128,10 @@
       <Position>
         <Filename Value="reality_gen.pas"/>
         <Caret Line="204" Column="81" TopLine="187"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Column="13"/>
       </Position>
     </JumpHistory>
     <RunParams>

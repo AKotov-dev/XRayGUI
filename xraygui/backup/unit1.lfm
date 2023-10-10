@@ -2,11 +2,11 @@ object MainForm: TMainForm
   Left = 291
   Height = 708
   Top = 124
-  Width = 982
+  Width = 1013
   ActiveControl = Panel1
   Caption = 'XRayGUI'
   ClientHeight = 708
-  ClientWidth = 982
+  ClientWidth = 1013
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -72,15 +72,6 @@ object MainForm: TMainForm
         ShowHint = True
         ParentShowHint = False
       end
-      object Button1: TButton
-        Left = 148
-        Height = 25
-        Top = 20
-        Width = 75
-        Caption = 'Button1'
-        OnClick = Button1Click
-        TabOrder = 0
-      end
     end
     object Splitter2: TSplitter
       Cursor = crVSplit
@@ -119,21 +110,21 @@ object MainForm: TMainForm
     Left = 276
     Height = 688
     Top = 0
-    Width = 706
+    Width = 737
     Align = alClient
     Caption = 'Management/Logging'
     ClientHeight = 670
-    ClientWidth = 704
+    ClientWidth = 735
     TabOrder = 2
     object Panel2: TPanel
       Left = 0
       Height = 54
       Top = 0
-      Width = 704
+      Width = 735
       Align = alTop
       BevelOuter = bvNone
       ClientHeight = 54
-      ClientWidth = 704
+      ClientWidth = 735
       TabOrder = 0
       OnResize = Panel2Resize
       object Shape1: TShape
@@ -154,7 +145,7 @@ object MainForm: TMainForm
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = SWPBox
         AnchorSideBottom.Side = asrBottom
-        Left = 89
+        Left = 120
         Height = 37
         Hint = '127.0.0.1:Port'
         Top = 8
@@ -169,7 +160,7 @@ object MainForm: TMainForm
       end
       object StopBtn: TSpeedButton
         AnchorSideRight.Control = StartBtn
-        Left = 526
+        Left = 557
         Height = 36
         Top = 8
         Width = 85
@@ -180,7 +171,7 @@ object MainForm: TMainForm
       end
       object StartBtn: TSpeedButton
         AnchorSideRight.Side = asrBottom
-        Left = 612
+        Left = 643
         Height = 36
         Top = 8
         Width = 85
@@ -194,7 +185,7 @@ object MainForm: TMainForm
         AnchorSideTop.Control = StopBtn
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = RealityBtn
-        Left = 347
+        Left = 378
         Height = 32
         Hint = 'Clean up the GUI at startup (Mageia only)'
         Top = 10
@@ -211,7 +202,7 @@ object MainForm: TMainForm
         AnchorSideTop.Control = PortEdit
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = PortEdit
-        Left = 57
+        Left = 88
         Height = 17
         Top = 18
         Width = 29
@@ -224,7 +215,7 @@ object MainForm: TMainForm
         AnchorSideTop.Control = ClearBox
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = ClearBox
-        Left = 252
+        Left = 283
         Height = 32
         Hint = 'Start proxy after reboot'
         Top = 10
@@ -241,7 +232,7 @@ object MainForm: TMainForm
         AnchorSideTop.Control = AutoStartBox
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = AutoStartBox
-        Left = 185
+        Left = 216
         Height = 32
         Hint = 'System-Wide Proxy'#10'Budgie, GNOME, Cinnamon, KDE, MATE'
         Top = 10
@@ -259,7 +250,7 @@ object MainForm: TMainForm
         AnchorSideRight.Control = StopBtn
         AnchorSideBottom.Control = StopBtn
         AnchorSideBottom.Side = asrBottom
-        Left = 466
+        Left = 497
         Height = 36
         Hint = 'REALITY configurations generator (Client-Server)'
         Top = 8
@@ -376,7 +367,7 @@ object MainForm: TMainForm
       Left = 0
       Height = 6
       Top = 54
-      Width = 704
+      Width = 735
       Align = alTop
       ResizeAnchor = akTop
     end
@@ -384,7 +375,7 @@ object MainForm: TMainForm
       Left = 0
       Height = 610
       Top = 60
-      Width = 704
+      Width = 735
       Align = alClient
       Font.Height = -12
       Font.Name = 'Monospace'
@@ -399,7 +390,7 @@ object MainForm: TMainForm
     Left = 0
     Height = 20
     Top = 688
-    Width = 982
+    Width = 1013
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru'
     Font.Color = clGray

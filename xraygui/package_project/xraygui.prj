@@ -87,7 +87,7 @@ toolversion=2.2.4
 [INFO]
 0=v1.7
 1=+ Reality generator: SNI list expanded
-2=+ Comsetic edits
+2=+ Comsetic edits, code optimization
 3=+ Packages for Mageia-9 and Ubuntu
 4=
 5=v1.6

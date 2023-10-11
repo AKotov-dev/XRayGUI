@@ -2,7 +2,7 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: tmainform.autostartbox.caption
-msgid "Autostart"
+msgid "Auto"
 msgstr ""
 
 #: tmainform.autostartbox.hint
@@ -14,7 +14,7 @@ msgid "XRayGUI"
 msgstr ""
 
 #: tmainform.clearbox.caption
-msgid "Clear cookies"
+msgid "Clear"
 msgstr ""
 
 #: tmainform.clearbox.hint
@@ -28,6 +28,15 @@ msgstr ""
 
 #: tmainform.deletebtn.caption
 msgid "Delete"
+msgstr ""
+
+#: tmainform.domainbox.hint
+msgid "Bypass"
+msgstr ""
+
+#: tmainform.domainbox.text
+msgctxt "tmainform.domainbox.text"
+msgid "cn"
 msgstr ""
 
 #: tmainform.groupbox1.caption

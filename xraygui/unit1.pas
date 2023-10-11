@@ -15,6 +15,7 @@ type
 
   TMainForm = class(TForm)
     AutoStartBox: TCheckBox;
+    DomainBox: TComboBox;
     RealityBtn: TSpeedButton;
     SWPBox: TCheckBox;
     ClearBox: TCheckBox;
@@ -196,6 +197,7 @@ begin
     SWPBox.Enabled := False;
     AutoStartBox.Enabled := False;
     ClearBox.Enabled := False;
+    DomainBox.Enabled := False;
     StopBtn.Enabled := False;
     StartBtn.Enabled := False;
   end
@@ -208,6 +210,7 @@ begin
     SWPBox.Enabled := True;
     AutoStartBox.Enabled := True;
     ClearBox.Enabled := True;
+    DomainBox.Enabled := True;
     StopBtn.Enabled := True;
     StartBtn.Enabled := True;
   end;
@@ -541,14 +544,22 @@ begin
     S.Add('            },');
     S.Add('            {');
     S.Add('                "ip": [');
-    S.Add('                    "geoip:cn"');
+    //Bypass
+    if DomainBox.ItemIndex > 0 then
+      S.Add('                    "geoip:' + DomainBox.Text + '"')
+    else
+      S.Add('                    "geoip:cn"');
     S.Add('                ],');
     S.Add('                "outboundTag": "DIRECT",');
     S.Add('                "type": "field"');
     S.Add('             },');
     S.Add('            {');
     S.Add('                 "domain": [');
-    S.Add('                    "geosite:cn"');
+    //Bypass
+    if DomainBox.ItemIndex > 0 then
+      S.Add('                    "' + DomainBox.Text + '"')
+    else
+      S.Add('                    "geosite:cn"');
     S.Add('                ],');
     S.Add('                "outboundTag": "DIRECT",');
     S.Add('                 "type": "field"');
@@ -731,7 +742,7 @@ begin
     S.Add('        },');
     S.Add('        "routing": {');
     S.Add('            "domainMatcher": "mph",');
-    S.Add('            "domainStrategy": "",');
+    S.Add('            "domainStrategy": "AsIs",');
     S.Add('            "rules": [');
     S.Add('                {');
     S.Add('                    "inboundTag": [');
@@ -749,14 +760,22 @@ begin
     S.Add('                },');
     S.Add('                {');
     S.Add('                    "ip": [');
-    S.Add('                        "geoip:cn"');
+    //Bypass
+    if DomainBox.ItemIndex > 0 then
+      S.Add('                        "geoip:' + DomainBox.Text + '"')
+    else
+      S.Add('                        "geoip:cn"');
     S.Add('                    ],');
     S.Add('                    "outboundTag": "DIRECT",');
     S.Add('                    "type": "field"');
     S.Add('                },');
     S.Add('                {');
     S.Add('                    "domain": [');
-    S.Add('                        "geosite:cn"');
+    //Bypass
+    if DomainBox.ItemIndex > 0 then
+      S.Add('                        "' + DomainBox.Text + '"')
+    else
+      S.Add('                        "geosite:cn"');
     S.Add('                    ],');
     S.Add('                    "outboundTag": "DIRECT",');
     S.Add('                    "type": "field"');
@@ -1068,7 +1087,7 @@ begin
     S.Add('        },');
     S.Add('        "routing": {');
     S.Add('            "domainMatcher": "mph",');
-    S.Add('            "domainStrategy": "",');
+    S.Add('            "domainStrategy": "AsIs",');
     S.Add('            "rules": [');
     S.Add('                {');
     S.Add('                    "inboundTag": [');
@@ -1086,14 +1105,22 @@ begin
     S.Add('                },');
     S.Add('                {');
     S.Add('                    "ip": [');
-    S.Add('                        "geoip:cn"');
+    //Bypass
+    if DomainBox.ItemIndex > 0 then
+      S.Add('                        "geoip:' + DomainBox.Text + '"')
+    else
+      S.Add('                        "geoip:cn"');
     S.Add('                    ],');
     S.Add('                    "outboundTag": "DIRECT",');
     S.Add('                    "type": "field"');
     S.Add('                },');
     S.Add('                {');
     S.Add('                    "domain": [');
-    S.Add('                        "geosite:cn"');
+    //Bypass
+    if DomainBox.ItemIndex > 0 then
+      S.Add('                        "' + DomainBox.Text + '"')
+    else
+      S.Add('                        "geosite:cn"');
     S.Add('                    ],');
     S.Add('                    "outboundTag": "DIRECT",');
     S.Add('                    "type": "field"');
@@ -1302,8 +1329,8 @@ begin
     S.Add('        }');
     S.Add('      ],');
     S.Add('      "routing": {');
-    S.Add('        "domainStrategy": "IPIfNonMatch",');
-    S.Add('        "domainMatcher": "linear",');
+    S.Add('        "domainMatcher": "mph",');
+    S.Add('        "domainStrategy": "AsIs",');
     S.Add('        "rules": [');
     S.Add('          {');
     S.Add('            "type": "field",');
@@ -1334,7 +1361,11 @@ begin
     S.Add('            "type": "field",');
     S.Add('            "outboundTag": "direct",');
     S.Add('            "domain": [');
-    S.Add('              "geosite:cn"');
+    //Bypass
+    if DomainBox.ItemIndex > 0 then
+      S.Add('              "' + DomainBox.Text + '"')
+    else
+      S.Add('              "geosite:cn"');
     S.Add('            ],');
     S.Add('            "enabled": true');
     S.Add('          },');
@@ -1343,7 +1374,11 @@ begin
     S.Add('            "outboundTag": "direct",');
     S.Add('            "ip": [');
     S.Add('              "geoip:private",');
-    S.Add('              "geoip:cn"');
+    //Bypass
+    if DomainBox.ItemIndex > 0 then
+      S.Add('              "geoip:' + DomainBox.Text + '"')
+    else
+      S.Add('              "geoip:cn"');
     S.Add('            ],');
     S.Add('            "enabled": true');
     S.Add('          },');

@@ -1,5 +1,5 @@
 object MainForm: TMainForm
-  Left = 290
+  Left = 293
   Height = 708
   Top = 124
   Width = 1002
@@ -10,7 +10,7 @@ object MainForm: TMainForm
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  SessionProperties = 'ConfigBox.ItemIndex;GroupBox1.Width;Height;Left;Panel1.Height;PortEdit.Value;Top;Width;OpenDialog1.InitialDir;SaveDialog1.InitialDir'
+  SessionProperties = 'ConfigBox.ItemIndex;GroupBox1.Width;Height;Left;OpenDialog1.InitialDir;Panel1.Height;PortEdit.Value;SaveDialog1.InitialDir;Top;Width;DomainBox.Text'
   LCLVersion = '2.2.4.0'
   object GroupBox1: TGroupBox
     Left = 0
@@ -145,7 +145,7 @@ object MainForm: TMainForm
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = SWPBox
         AnchorSideBottom.Side = asrBottom
-        Left = 109
+        Left = 91
         Height = 37
         Hint = '127.0.0.1:Port'
         Top = 8
@@ -184,25 +184,25 @@ object MainForm: TMainForm
         AnchorSideLeft.Control = Shape1
         AnchorSideTop.Control = StopBtn
         AnchorSideTop.Side = asrCenter
-        AnchorSideRight.Control = RealityBtn
-        Left = 367
+        AnchorSideRight.Control = DomainBox
+        Left = 321
         Height = 32
         Hint = 'Clean up the GUI at startup (Mageia only)'
         Top = 10
-        Width = 114
+        Width = 66
         Anchors = [akTop, akRight]
         BorderSpacing.Right = 5
-        Caption = 'Clear cookies'
+        Caption = 'Clear'
         OnChange = ClearBoxChange
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 1
+        TabOrder = 3
       end
       object Label1: TLabel
         AnchorSideTop.Control = PortEdit
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = PortEdit
-        Left = 77
+        Left = 59
         Height = 17
         Top = 18
         Width = 29
@@ -215,14 +215,14 @@ object MainForm: TMainForm
         AnchorSideTop.Control = ClearBox
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = ClearBox
-        Left = 272
+        Left = 254
         Height = 32
         Hint = 'Start proxy after reboot'
         Top = 10
-        Width = 90
+        Width = 62
         Anchors = [akTop, akRight]
         BorderSpacing.Right = 5
-        Caption = 'Autostart'
+        Caption = 'Auto'
         OnChange = AutoStartBoxChange
         ParentShowHint = False
         ShowHint = True
@@ -232,7 +232,7 @@ object MainForm: TMainForm
         AnchorSideTop.Control = AutoStartBox
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = AutoStartBox
-        Left = 205
+        Left = 187
         Height = 32
         Hint = 'System-Wide Proxy'#10'Budgie, GNOME, Cinnamon, KDE, MATE'
         Top = 10
@@ -243,7 +243,7 @@ object MainForm: TMainForm
         OnChange = SWPBoxChange
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 3
+        TabOrder = 1
       end
       object RealityBtn: TSpeedButton
         AnchorSideTop.Control = StopBtn
@@ -360,6 +360,36 @@ object MainForm: TMainForm
         OnClick = RealityBtnClick
         ShowHint = True
         ParentShowHint = False
+      end
+      object DomainBox: TComboBox
+        AnchorSideTop.Control = RealityBtn
+        AnchorSideRight.Control = RealityBtn
+        AnchorSideBottom.Control = RealityBtn
+        AnchorSideBottom.Side = asrBottom
+        Left = 392
+        Height = 36
+        Hint = 'Bypass'
+        Top = 8
+        Width = 84
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Right = 10
+        ItemHeight = 0
+        Items.Strings = (
+          'cn'
+          'by'
+          'ir'
+          'pk'
+          'ru'
+          'tm'
+          'tr'
+          'ua'
+          've'
+          'vn'
+        )
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 4
+        Text = 'cn'
       end
     end
     object Splitter3: TSplitter

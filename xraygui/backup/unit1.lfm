@@ -1,16 +1,16 @@
 object MainForm: TMainForm
-  Left = 291
+  Left = 293
   Height = 708
   Top = 124
-  Width = 1013
+  Width = 1002
   ActiveControl = Panel1
   Caption = 'XRayGUI'
   ClientHeight = 708
-  ClientWidth = 1013
+  ClientWidth = 1002
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  SessionProperties = 'ConfigBox.ItemIndex;GroupBox1.Width;Height;Left;Panel1.Height;PortEdit.Value;Top;Width;OpenDialog1.InitialDir;SaveDialog1.InitialDir'
+  SessionProperties = 'ConfigBox.ItemIndex;GroupBox1.Width;Height;Left;OpenDialog1.InitialDir;Panel1.Height;PortEdit.Value;SaveDialog1.InitialDir;Top;Width;DomainBox.Text'
   LCLVersion = '2.2.4.0'
   object GroupBox1: TGroupBox
     Left = 0
@@ -110,21 +110,21 @@ object MainForm: TMainForm
     Left = 276
     Height = 688
     Top = 0
-    Width = 737
+    Width = 726
     Align = alClient
     Caption = 'Management/Logging'
     ClientHeight = 670
-    ClientWidth = 735
+    ClientWidth = 724
     TabOrder = 2
     object Panel2: TPanel
       Left = 0
       Height = 54
       Top = 0
-      Width = 735
+      Width = 724
       Align = alTop
       BevelOuter = bvNone
       ClientHeight = 54
-      ClientWidth = 735
+      ClientWidth = 724
       TabOrder = 0
       OnResize = Panel2Resize
       object Shape1: TShape
@@ -145,7 +145,7 @@ object MainForm: TMainForm
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = SWPBox
         AnchorSideBottom.Side = asrBottom
-        Left = 120
+        Left = 91
         Height = 37
         Hint = '127.0.0.1:Port'
         Top = 8
@@ -160,7 +160,7 @@ object MainForm: TMainForm
       end
       object StopBtn: TSpeedButton
         AnchorSideRight.Control = StartBtn
-        Left = 557
+        Left = 546
         Height = 36
         Top = 8
         Width = 85
@@ -171,7 +171,7 @@ object MainForm: TMainForm
       end
       object StartBtn: TSpeedButton
         AnchorSideRight.Side = asrBottom
-        Left = 643
+        Left = 632
         Height = 36
         Top = 8
         Width = 85
@@ -184,15 +184,15 @@ object MainForm: TMainForm
         AnchorSideLeft.Control = Shape1
         AnchorSideTop.Control = StopBtn
         AnchorSideTop.Side = asrCenter
-        AnchorSideRight.Control = RealityBtn
-        Left = 378
+        AnchorSideRight.Control = DomainBox
+        Left = 321
         Height = 32
         Hint = 'Clean up the GUI at startup (Mageia only)'
         Top = 10
-        Width = 114
+        Width = 66
         Anchors = [akTop, akRight]
         BorderSpacing.Right = 5
-        Caption = 'Clear cookies'
+        Caption = 'Clear'
         OnChange = ClearBoxChange
         ParentShowHint = False
         ShowHint = True
@@ -202,7 +202,7 @@ object MainForm: TMainForm
         AnchorSideTop.Control = PortEdit
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = PortEdit
-        Left = 88
+        Left = 59
         Height = 17
         Top = 18
         Width = 29
@@ -215,14 +215,14 @@ object MainForm: TMainForm
         AnchorSideTop.Control = ClearBox
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = ClearBox
-        Left = 283
+        Left = 254
         Height = 32
         Hint = 'Start proxy after reboot'
         Top = 10
-        Width = 90
+        Width = 62
         Anchors = [akTop, akRight]
         BorderSpacing.Right = 5
-        Caption = 'Autostart'
+        Caption = 'Auto'
         OnChange = AutoStartBoxChange
         ParentShowHint = False
         ShowHint = True
@@ -232,7 +232,7 @@ object MainForm: TMainForm
         AnchorSideTop.Control = AutoStartBox
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = AutoStartBox
-        Left = 216
+        Left = 187
         Height = 32
         Hint = 'System-Wide Proxy'#10'Budgie, GNOME, Cinnamon, KDE, MATE'
         Top = 10
@@ -250,7 +250,7 @@ object MainForm: TMainForm
         AnchorSideRight.Control = StopBtn
         AnchorSideBottom.Control = StopBtn
         AnchorSideBottom.Side = asrBottom
-        Left = 497
+        Left = 486
         Height = 36
         Hint = 'REALITY configurations generator (Client-Server)'
         Top = 8
@@ -361,13 +361,43 @@ object MainForm: TMainForm
         ShowHint = True
         ParentShowHint = False
       end
+      object DomainBox: TComboBox
+        AnchorSideTop.Control = RealityBtn
+        AnchorSideRight.Control = RealityBtn
+        AnchorSideBottom.Control = RealityBtn
+        AnchorSideBottom.Side = asrBottom
+        Left = 392
+        Height = 36
+        Hint = 'Bypass'
+        Top = 8
+        Width = 84
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Right = 10
+        ItemHeight = 0
+        Items.Strings = (
+          'cn'
+          'by'
+          'ir'
+          'pk'
+          'ru'
+          'tm'
+          'tr'
+          'ua'
+          've'
+          'vn'
+        )
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 4
+        Text = 'cn'
+      end
     end
     object Splitter3: TSplitter
       Cursor = crVSplit
       Left = 0
       Height = 6
       Top = 54
-      Width = 735
+      Width = 724
       Align = alTop
       ResizeAnchor = akTop
     end
@@ -375,7 +405,7 @@ object MainForm: TMainForm
       Left = 0
       Height = 610
       Top = 60
-      Width = 735
+      Width = 724
       Align = alClient
       Font.Height = -12
       Font.Name = 'Monospace'
@@ -390,7 +420,7 @@ object MainForm: TMainForm
     Left = 0
     Height = 20
     Top = 688
-    Width = 1013
+    Width = 1002
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru'
     Font.Color = clGray

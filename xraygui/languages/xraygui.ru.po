@@ -13,8 +13,8 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 
 #: tmainform.autostartbox.caption
-msgid "Autostart"
-msgstr "Автостарт"
+msgid "Auto"
+msgstr ""
 
 #: tmainform.autostartbox.hint
 msgid "Start proxy after reboot"
@@ -26,12 +26,12 @@ msgstr ""
 
 #: tmainform.clearbox.caption
 msgctxt "tmainform.clearbox.caption"
-msgid "Clear cookies"
-msgstr "Очистить cookies"
+msgid "Clear"
+msgstr ""
 
 #: tmainform.clearbox.hint
 msgid "Clean up the GUI at startup (Mageia only)"
-msgstr "Очищать при старте GUI (только Mageia)"
+msgstr "Очищать Cookies при старте GUI (только Mageia)"
 
 #: tmainform.copyitem.caption
 msgctxt "tmainform.copyitem.caption"
@@ -41,6 +41,17 @@ msgstr "Копировать"
 #: tmainform.deletebtn.caption
 msgid "Delete"
 msgstr "Удалить"
+
+#: tmainform.domainbox.hint
+#, fuzzy
+#| msgid "Domain Bypass"
+msgid "Bypass"
+msgstr "Обход домена"
+
+#: tmainform.domainbox.text
+msgctxt "tmainform.domainbox.text"
+msgid "cn"
+msgstr ""
 
 #: tmainform.groupbox1.caption
 msgid "Configurations [vmess/vless/ss/trojan]"

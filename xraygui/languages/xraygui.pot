@@ -31,7 +31,7 @@ msgid "Delete"
 msgstr ""
 
 #: tmainform.domainbox.hint
-msgid "Bypass"
+msgid "Bypassing domain zones"
 msgstr ""
 
 #: tmainform.domainbox.text

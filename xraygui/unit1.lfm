@@ -368,7 +368,7 @@ object MainForm: TMainForm
         AnchorSideBottom.Side = asrBottom
         Left = 392
         Height = 36
-        Hint = 'Bypass'
+        Hint = 'Bypassing domain zones'
         Top = 8
         Width = 84
         Anchors = [akTop, akLeft, akRight, akBottom]

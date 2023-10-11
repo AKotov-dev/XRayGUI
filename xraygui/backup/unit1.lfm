@@ -196,7 +196,7 @@ object MainForm: TMainForm
         OnChange = ClearBoxChange
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 1
+        TabOrder = 3
       end
       object Label1: TLabel
         AnchorSideTop.Control = PortEdit
@@ -243,7 +243,7 @@ object MainForm: TMainForm
         OnChange = SWPBoxChange
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 3
+        TabOrder = 1
       end
       object RealityBtn: TSpeedButton
         AnchorSideTop.Control = StopBtn

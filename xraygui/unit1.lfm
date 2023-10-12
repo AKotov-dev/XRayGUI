@@ -1,11 +1,11 @@
 object MainForm: TMainForm
   Left = 288
-  Height = 716
-  Top = 114
+  Height = 722
+  Top = 108
   Width = 1003
   ActiveControl = Panel1
   Caption = 'XRayGUI'
-  ClientHeight = 716
+  ClientHeight = 722
   ClientWidth = 1003
   OnClose = FormClose
   OnCreate = FormCreate
@@ -14,12 +14,12 @@ object MainForm: TMainForm
   LCLVersion = '2.2.4.0'
   object GroupBox1: TGroupBox
     Left = 0
-    Height = 696
+    Height = 702
     Top = 0
     Width = 272
     Align = alLeft
     Caption = 'Configurations [vmess/vless/ss/trojan]'
-    ClientHeight = 678
+    ClientHeight = 684
     ClientWidth = 270
     TabOrder = 0
     object Panel1: TPanel
@@ -84,7 +84,7 @@ object MainForm: TMainForm
     end
     object ConfigBox: TCheckListBox
       Left = 0
-      Height = 618
+      Height = 624
       Top = 60
       Width = 270
       Align = alClient
@@ -102,18 +102,18 @@ object MainForm: TMainForm
   end
   object Splitter1: TSplitter
     Left = 272
-    Height = 696
+    Height = 702
     Top = 0
     Width = 4
   end
   object GroupBox2: TGroupBox
     Left = 276
-    Height = 696
+    Height = 702
     Top = 0
     Width = 727
     Align = alClient
     Caption = 'Management/Logging'
-    ClientHeight = 678
+    ClientHeight = 684
     ClientWidth = 725
     TabOrder = 2
     object Panel2: TPanel
@@ -129,7 +129,7 @@ object MainForm: TMainForm
       OnResize = Panel2Resize
       object Shape1: TShape
         AnchorSideLeft.Side = asrBottom
-        AnchorSideTop.Control = ClearBox
+        AnchorSideTop.Control = StopBtn
         AnchorSideTop.Side = asrCenter
         Left = 8
         Height = 12
@@ -141,7 +141,7 @@ object MainForm: TMainForm
       end
       object PortEdit: TSpinEdit
         AnchorSideLeft.Side = asrBottom
-        AnchorSideTop.Control = AutoStartBox
+        AnchorSideTop.Control = StopBtn
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = DomainBox
         AnchorSideBottom.Side = asrBottom
@@ -199,7 +199,7 @@ object MainForm: TMainForm
         TabOrder = 4
       end
       object Label1: TLabel
-        AnchorSideTop.Control = PortEdit
+        AnchorSideTop.Control = StopBtn
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = PortEdit
         Left = 73
@@ -212,7 +212,7 @@ object MainForm: TMainForm
         ParentColor = False
       end
       object AutoStartBox: TCheckBox
-        AnchorSideTop.Control = ClearBox
+        AnchorSideTop.Control = StopBtn
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = ClearBox
         Left = 349
@@ -229,7 +229,7 @@ object MainForm: TMainForm
         TabOrder = 3
       end
       object SWPBox: TCheckBox
-        AnchorSideTop.Control = AutoStartBox
+        AnchorSideTop.Control = StopBtn
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = AutoStartBox
         Left = 282
@@ -362,7 +362,7 @@ object MainForm: TMainForm
         ParentShowHint = False
       end
       object DomainBox: TComboBox
-        AnchorSideTop.Control = AutoStartBox
+        AnchorSideTop.Control = StopBtn
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = SWPBox
         AnchorSideBottom.Side = asrBottom
@@ -390,8 +390,6 @@ object MainForm: TMainForm
           'tr'
           'ua'
           'uz'
-          've'
-          'vn'
         )
         ParentFont = False
         ParentShowHint = False
@@ -411,7 +409,7 @@ object MainForm: TMainForm
     end
     object LogMemo: TMemo
       Left = 0
-      Height = 618
+      Height = 624
       Top = 60
       Width = 725
       Align = alClient
@@ -427,7 +425,7 @@ object MainForm: TMainForm
   object StaticText1: TStaticText
     Left = 0
     Height = 20
-    Top = 696
+    Top = 702
     Width = 1003
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru'

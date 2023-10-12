@@ -380,12 +380,16 @@ object MainForm: TMainForm
         Items.Strings = (
           'by'
           'cn'
+          'er'
           'ir'
           'pk'
           'ru'
+          'sa'
+          'so'
           'tm'
           'tr'
           'ua'
+          'uz'
           've'
           'vn'
         )

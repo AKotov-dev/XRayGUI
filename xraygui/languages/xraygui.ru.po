@@ -78,8 +78,12 @@ msgid "Paste from clipboard"
 msgstr "Вставить из буфера"
 
 #: tmainform.portedit.hint
-msgid "127.0.0.1:Port"
-msgstr "127.0.0.1:Порт"
+msgid ""
+"127.0.0.1:Port (SOCKS)\n"
+"127.0.0.1:8889 (HTTP)"
+msgstr ""
+"127.0.0.1:Порт (SOCKS)\n"
+"127.0.0.1:8889 (HTTP)"
 
 #: tmainform.realitybtn.hint
 msgctxt "tmainform.realitybtn.hint"

@@ -147,7 +147,7 @@ object MainForm: TMainForm
         AnchorSideBottom.Side = asrBottom
         Left = 105
         Height = 37
-        Hint = '127.0.0.1:Port'
+        Hint = '127.0.0.1:Port (SOCKS)'#10'127.0.0.1:8889 (HTTP)'
         Top = 8
         Width = 91
         Anchors = [akTop, akRight]

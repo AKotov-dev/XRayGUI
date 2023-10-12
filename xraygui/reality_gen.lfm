@@ -181,13 +181,13 @@ object RealityForm: TRealityForm
     Anchors = [akTop, akLeft, akRight]
     ItemHeight = 0
     Items.Strings = (
+      'android'
       'chrome'
-      'firefox'
       'edge'
+      'firefox'
+      'ios'
       'safari'
       '360'
-      'ios'
-      'android'
     )
     OnChange = Edit1Change
     TabOrder = 4

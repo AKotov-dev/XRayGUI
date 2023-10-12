@@ -84,7 +84,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="99"/>
         <CursorPos X="19"/>
         <UsageCount Value="27"/>
       </Unit>

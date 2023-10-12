@@ -1,12 +1,12 @@
 object MainForm: TMainForm
-  Left = 293
-  Height = 708
-  Top = 124
-  Width = 1002
+  Left = 288
+  Height = 716
+  Top = 114
+  Width = 1003
   ActiveControl = Panel1
   Caption = 'XRayGUI'
-  ClientHeight = 708
-  ClientWidth = 1002
+  ClientHeight = 716
+  ClientWidth = 1003
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -14,12 +14,12 @@ object MainForm: TMainForm
   LCLVersion = '2.2.4.0'
   object GroupBox1: TGroupBox
     Left = 0
-    Height = 688
+    Height = 696
     Top = 0
     Width = 272
     Align = alLeft
     Caption = 'Configurations [vmess/vless/ss/trojan]'
-    ClientHeight = 670
+    ClientHeight = 678
     ClientWidth = 270
     TabOrder = 0
     object Panel1: TPanel
@@ -84,7 +84,7 @@ object MainForm: TMainForm
     end
     object ConfigBox: TCheckListBox
       Left = 0
-      Height = 610
+      Height = 618
       Top = 60
       Width = 270
       Align = alClient
@@ -102,29 +102,29 @@ object MainForm: TMainForm
   end
   object Splitter1: TSplitter
     Left = 272
-    Height = 688
+    Height = 696
     Top = 0
     Width = 4
   end
   object GroupBox2: TGroupBox
     Left = 276
-    Height = 688
+    Height = 696
     Top = 0
-    Width = 726
+    Width = 727
     Align = alClient
     Caption = 'Management/Logging'
-    ClientHeight = 670
-    ClientWidth = 724
+    ClientHeight = 678
+    ClientWidth = 725
     TabOrder = 2
     object Panel2: TPanel
       Left = 0
       Height = 54
       Top = 0
-      Width = 724
+      Width = 725
       Align = alTop
       BevelOuter = bvNone
       ClientHeight = 54
-      ClientWidth = 724
+      ClientWidth = 725
       TabOrder = 0
       OnResize = Panel2Resize
       object Shape1: TShape
@@ -143,9 +143,9 @@ object MainForm: TMainForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = AutoStartBox
         AnchorSideTop.Side = asrCenter
-        AnchorSideRight.Control = SWPBox
+        AnchorSideRight.Control = DomainBox
         AnchorSideBottom.Side = asrBottom
-        Left = 91
+        Left = 97
         Height = 37
         Hint = '127.0.0.1:Port'
         Top = 8
@@ -160,7 +160,7 @@ object MainForm: TMainForm
       end
       object StopBtn: TSpeedButton
         AnchorSideRight.Control = StartBtn
-        Left = 546
+        Left = 547
         Height = 36
         Top = 8
         Width = 85
@@ -171,7 +171,7 @@ object MainForm: TMainForm
       end
       object StartBtn: TSpeedButton
         AnchorSideRight.Side = asrBottom
-        Left = 632
+        Left = 633
         Height = 36
         Top = 8
         Width = 85
@@ -184,8 +184,8 @@ object MainForm: TMainForm
         AnchorSideLeft.Control = Shape1
         AnchorSideTop.Control = StopBtn
         AnchorSideTop.Side = asrCenter
-        AnchorSideRight.Control = DomainBox
-        Left = 321
+        AnchorSideRight.Control = RealityBtn
+        Left = 416
         Height = 32
         Hint = 'Clean up the GUI at startup (Mageia only)'
         Top = 10
@@ -196,13 +196,13 @@ object MainForm: TMainForm
         OnChange = ClearBoxChange
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 3
+        TabOrder = 4
       end
       object Label1: TLabel
         AnchorSideTop.Control = PortEdit
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = PortEdit
-        Left = 59
+        Left = 65
         Height = 17
         Top = 18
         Width = 29
@@ -215,7 +215,7 @@ object MainForm: TMainForm
         AnchorSideTop.Control = ClearBox
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = ClearBox
-        Left = 254
+        Left = 349
         Height = 32
         Hint = 'Start proxy after reboot'
         Top = 10
@@ -226,13 +226,13 @@ object MainForm: TMainForm
         OnChange = AutoStartBoxChange
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 2
+        TabOrder = 3
       end
       object SWPBox: TCheckBox
         AnchorSideTop.Control = AutoStartBox
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = AutoStartBox
-        Left = 187
+        Left = 282
         Height = 32
         Hint = 'System-Wide Proxy'#10'Budgie, GNOME, Cinnamon, KDE, MATE'
         Top = 10
@@ -243,14 +243,14 @@ object MainForm: TMainForm
         OnChange = SWPBoxChange
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 1
+        TabOrder = 2
       end
       object RealityBtn: TSpeedButton
         AnchorSideTop.Control = StopBtn
         AnchorSideRight.Control = StopBtn
         AnchorSideBottom.Control = StopBtn
         AnchorSideBottom.Side = asrBottom
-        Left = 486
+        Left = 487
         Height = 36
         Hint = 'REALITY configurations generator (Client-Server)'
         Top = 8
@@ -362,17 +362,20 @@ object MainForm: TMainForm
         ParentShowHint = False
       end
       object DomainBox: TComboBox
-        AnchorSideTop.Control = RealityBtn
-        AnchorSideRight.Control = RealityBtn
-        AnchorSideBottom.Control = RealityBtn
+        AnchorSideTop.Control = AutoStartBox
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = SWPBox
         AnchorSideBottom.Side = asrBottom
-        Left = 392
-        Height = 36
-        Hint = 'Bypass'
+        Left = 193
+        Height = 37
+        Hint = 'Bypassing domain zones'
         Top = 8
         Width = 84
-        Anchors = [akTop, akLeft, akRight, akBottom]
-        BorderSpacing.Right = 10
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 5
+        Font.Height = -13
+        Font.Name = 'Sans'
+        Font.Style = [fsBold]
         ItemHeight = 0
         Items.Strings = (
           'cn'
@@ -386,9 +389,10 @@ object MainForm: TMainForm
           've'
           'vn'
         )
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 4
+        TabOrder = 1
         Text = 'cn'
       end
     end
@@ -397,15 +401,15 @@ object MainForm: TMainForm
       Left = 0
       Height = 6
       Top = 54
-      Width = 724
+      Width = 725
       Align = alTop
       ResizeAnchor = akTop
     end
     object LogMemo: TMemo
       Left = 0
-      Height = 610
+      Height = 618
       Top = 60
-      Width = 724
+      Width = 725
       Align = alClient
       Font.Height = -12
       Font.Name = 'Monospace'
@@ -419,8 +423,8 @@ object MainForm: TMainForm
   object StaticText1: TStaticText
     Left = 0
     Height = 20
-    Top = 688
-    Width = 1002
+    Top = 696
+    Width = 1003
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru'
     Font.Color = clGray

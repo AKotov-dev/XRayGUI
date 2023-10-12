@@ -17,6 +17,6 @@ Starting from `XRayGUI-v1.5`, it became possible to use the connection as a glob
   
 **Note:** Starting with `XRayGUI-v1.1`, the binary `xray-core` removed from the rpm package is downloaded and updated directly from the developer's GitHub to the directory `~/.config/xraygui/xray`.  
   
-![](https://github.com/AKotov-dev/XRayGUI/blob/main/ScreenShot1.png)  
+![](https://github.com/AKotov-dev/XRayGUI/blob/main/ScreenShot2.png)  
   
 Tested in Mageia-9 and Linux Mint.

@@ -17,8 +17,8 @@ msgid "Auto"
 msgstr ""
 
 #: tmainform.autostartbox.hint
-msgid "Start proxy after reboot"
-msgstr "Старт прокси после перезагрузки"
+msgid "AutoStart proxy after reboot"
+msgstr "Автостарт прокси после перезагрузки"
 
 #: tmainform.caption
 msgid "XRayGUI"
@@ -30,8 +30,8 @@ msgid "Clear"
 msgstr ""
 
 #: tmainform.clearbox.hint
-msgid "Clean up the GUI at startup (Mageia only)"
-msgstr "Очищать Cookies при старте GUI (только Mageia)"
+msgid "Clearing Cookies after starting the GUI (Mageia only)"
+msgstr "Очистить Cookies при старте GUI (только Mageia)"
 
 #: tmainform.copyitem.caption
 msgctxt "tmainform.copyitem.caption"
@@ -117,10 +117,10 @@ msgstr ""
 
 #: tmainform.swpbox.hint
 msgid ""
-"System-Wide Proxy\n"
+"System-Wide Proxy:\n"
 "Budgie, GNOME, Cinnamon, KDE, MATE"
 msgstr ""
-"System-Wide Прокси\n"
+"System-Wide Прокси:\n"
 "Budgie, GNOME, Cinnamon, KDE, MATE"
 
 #: trealityform.caption

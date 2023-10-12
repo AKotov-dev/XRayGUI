@@ -68,13 +68,17 @@ begin
     begin
       Shape1.Brush.Color := clLime;
       PortEdit.Enabled := False;
+      DomainBox.Enabled := False;
       LoadItem.Enabled := False;
     end
     else
     begin
       Shape1.Brush.Color := clYellow;
       if ConfigBox.Count <> 0 then
+      begin
         PortEdit.Enabled := True;
+        DomainBox.Enabled := True;
+      end;
       LoadItem.Enabled := True;
     end;
 

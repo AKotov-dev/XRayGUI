@@ -145,7 +145,7 @@ object MainForm: TMainForm
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = DomainBox
         AnchorSideBottom.Side = asrBottom
-        Left = 97
+        Left = 105
         Height = 37
         Hint = '127.0.0.1:Port'
         Top = 8
@@ -187,7 +187,7 @@ object MainForm: TMainForm
         AnchorSideRight.Control = RealityBtn
         Left = 416
         Height = 32
-        Hint = 'Clean up the GUI at startup (Mageia only)'
+        Hint = 'Clearing Cookies after starting the GUI (Mageia only)'
         Top = 10
         Width = 66
         Anchors = [akTop, akRight]
@@ -202,7 +202,7 @@ object MainForm: TMainForm
         AnchorSideTop.Control = PortEdit
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = PortEdit
-        Left = 65
+        Left = 73
         Height = 17
         Top = 18
         Width = 29
@@ -217,7 +217,7 @@ object MainForm: TMainForm
         AnchorSideRight.Control = ClearBox
         Left = 349
         Height = 32
-        Hint = 'Start proxy after reboot'
+        Hint = 'AutoStart proxy after reboot'
         Top = 10
         Width = 62
         Anchors = [akTop, akRight]
@@ -234,7 +234,7 @@ object MainForm: TMainForm
         AnchorSideRight.Control = AutoStartBox
         Left = 282
         Height = 32
-        Hint = 'System-Wide Proxy'#10'Budgie, GNOME, Cinnamon, KDE, MATE'
+        Hint = 'System-Wide Proxy:'#10'Budgie, GNOME, Cinnamon, KDE, MATE'
         Top = 10
         Width = 62
         Anchors = [akTop, akRight]
@@ -366,11 +366,11 @@ object MainForm: TMainForm
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = SWPBox
         AnchorSideBottom.Side = asrBottom
-        Left = 193
+        Left = 201
         Height = 37
         Hint = 'Bypassing domain zones'
         Top = 8
-        Width = 84
+        Width = 76
         Anchors = [akTop, akRight]
         BorderSpacing.Right = 5
         Font.Height = -13
@@ -378,8 +378,8 @@ object MainForm: TMainForm
         Font.Style = [fsBold]
         ItemHeight = 0
         Items.Strings = (
-          'cn'
           'by'
+          'cn'
           'ir'
           'pk'
           'ru'

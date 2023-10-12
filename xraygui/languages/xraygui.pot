@@ -6,7 +6,7 @@ msgid "Auto"
 msgstr ""
 
 #: tmainform.autostartbox.hint
-msgid "Start proxy after reboot"
+msgid "AutoStart proxy after reboot"
 msgstr ""
 
 #: tmainform.caption
@@ -18,7 +18,7 @@ msgid "Clear"
 msgstr ""
 
 #: tmainform.clearbox.hint
-msgid "Clean up the GUI at startup (Mageia only)"
+msgid "Clearing Cookies after starting the GUI (Mageia only)"
 msgstr ""
 
 #: tmainform.copyitem.caption
@@ -105,7 +105,7 @@ msgstr ""
 
 #: tmainform.swpbox.hint
 msgid ""
-"System-Wide Proxy\n"
+"System-Wide Proxy:\n"
 "Budgie, GNOME, Cinnamon, KDE, MATE"
 msgstr ""
 

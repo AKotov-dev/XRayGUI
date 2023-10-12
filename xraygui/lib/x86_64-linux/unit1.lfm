@@ -187,7 +187,7 @@ object MainForm: TMainForm
         AnchorSideRight.Control = RealityBtn
         Left = 416
         Height = 32
-        Hint = 'Clean up the GUI at startup (Mageia only)'
+        Hint = 'Clearing Cookies after starting the GUI (Mageia only)'
         Top = 10
         Width = 66
         Anchors = [akTop, akRight]
@@ -217,7 +217,7 @@ object MainForm: TMainForm
         AnchorSideRight.Control = ClearBox
         Left = 349
         Height = 32
-        Hint = 'Start proxy after reboot'
+        Hint = 'AutoStart proxy after reboot'
         Top = 10
         Width = 62
         Anchors = [akTop, akRight]
@@ -234,7 +234,7 @@ object MainForm: TMainForm
         AnchorSideRight.Control = AutoStartBox
         Left = 282
         Height = 32
-        Hint = 'System-Wide Proxy'#10'Budgie, GNOME, Cinnamon, KDE, MATE'
+        Hint = 'System-Wide Proxy:'#10'Budgie, GNOME, Cinnamon, KDE, MATE'
         Top = 10
         Width = 62
         Anchors = [akTop, akRight]
@@ -378,14 +378,18 @@ object MainForm: TMainForm
         Font.Style = [fsBold]
         ItemHeight = 0
         Items.Strings = (
-          'cn'
           'by'
+          'cn'
+          'er'
           'ir'
           'pk'
           'ru'
+          'sa'
+          'so'
           'tm'
           'tr'
           'ua'
+          'uz'
           've'
           'vn'
         )

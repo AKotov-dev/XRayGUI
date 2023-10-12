@@ -197,7 +197,7 @@ begin
     SWPBox.Enabled := False;
     AutoStartBox.Enabled := False;
     ClearBox.Enabled := False;
-    DomainBox.Enabled := False;
+    //DomainBox.Enabled := False;
     StopBtn.Enabled := False;
     StartBtn.Enabled := False;
   end
@@ -210,7 +210,7 @@ begin
     SWPBox.Enabled := True;
     AutoStartBox.Enabled := True;
     ClearBox.Enabled := True;
-    DomainBox.Enabled := True;
+    //DomainBox.Enabled := True;
     StopBtn.Enabled := True;
     StartBtn.Enabled := True;
   end;
@@ -545,7 +545,7 @@ begin
     S.Add('            {');
     S.Add('                "ip": [');
     //Bypass
-    if DomainBox.ItemIndex > 0 then
+    if DomainBox.Text <> 'cn' then
       S.Add('                    "geoip:' + DomainBox.Text + '"')
     else
       S.Add('                    "geoip:cn"');
@@ -556,7 +556,7 @@ begin
     S.Add('            {');
     S.Add('                 "domain": [');
     //Bypass
-    if DomainBox.ItemIndex > 0 then
+    if DomainBox.Text <> 'cn' then
       S.Add('                    "' + DomainBox.Text + '"')
     else
       S.Add('                    "geosite:cn"');
@@ -761,7 +761,7 @@ begin
     S.Add('                {');
     S.Add('                    "ip": [');
     //Bypass
-    if DomainBox.ItemIndex > 0 then
+    if DomainBox.Text <> 'cn' then
       S.Add('                        "geoip:' + DomainBox.Text + '"')
     else
       S.Add('                        "geoip:cn"');
@@ -772,7 +772,7 @@ begin
     S.Add('                {');
     S.Add('                    "domain": [');
     //Bypass
-    if DomainBox.ItemIndex > 0 then
+    if DomainBox.Text <> 'cn' then
       S.Add('                        "' + DomainBox.Text + '"')
     else
       S.Add('                        "geosite:cn"');
@@ -1106,7 +1106,7 @@ begin
     S.Add('                {');
     S.Add('                    "ip": [');
     //Bypass
-    if DomainBox.ItemIndex > 0 then
+    if DomainBox.Text <> 'cn' then
       S.Add('                        "geoip:' + DomainBox.Text + '"')
     else
       S.Add('                        "geoip:cn"');
@@ -1117,7 +1117,7 @@ begin
     S.Add('                {');
     S.Add('                    "domain": [');
     //Bypass
-    if DomainBox.ItemIndex > 0 then
+    if DomainBox.Text <> 'cn' then
       S.Add('                        "' + DomainBox.Text + '"')
     else
       S.Add('                        "geosite:cn"');
@@ -1362,7 +1362,7 @@ begin
     S.Add('            "outboundTag": "direct",');
     S.Add('            "domain": [');
     //Bypass
-    if DomainBox.ItemIndex > 0 then
+    if DomainBox.Text <> 'cn' then
       S.Add('              "' + DomainBox.Text + '"')
     else
       S.Add('              "geosite:cn"');
@@ -1375,7 +1375,7 @@ begin
     S.Add('            "ip": [');
     S.Add('              "geoip:private",');
     //Bypass
-    if DomainBox.ItemIndex > 0 then
+    if DomainBox.Text <> 'cn' then
       S.Add('              "geoip:' + DomainBox.Text + '"')
     else
       S.Add('              "geoip:cn"');

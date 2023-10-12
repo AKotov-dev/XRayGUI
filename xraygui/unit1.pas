@@ -197,7 +197,7 @@ begin
     SWPBox.Enabled := False;
     AutoStartBox.Enabled := False;
     ClearBox.Enabled := False;
-    //DomainBox.Enabled := False;
+    DomainBox.Enabled := False;
     StopBtn.Enabled := False;
     StartBtn.Enabled := False;
   end
@@ -210,7 +210,7 @@ begin
     SWPBox.Enabled := True;
     AutoStartBox.Enabled := True;
     ClearBox.Enabled := True;
-    //DomainBox.Enabled := True;
+    DomainBox.Enabled := True;
     StopBtn.Enabled := True;
     StartBtn.Enabled := True;
   end;

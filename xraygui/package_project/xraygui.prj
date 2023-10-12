@@ -22,7 +22,7 @@ maintainer=Alex Kotov
 vendor=alex_q_2000 (C) 2023
 
 [SUMMARY]
-summary=GUI for XRay
+summary=A small and nimble GUI for XRay-core
 
 [URLCOPY]
 urlcopy=https://github.com/AKotov-dev/XRayGUI

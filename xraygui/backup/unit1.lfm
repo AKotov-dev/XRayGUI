@@ -390,8 +390,6 @@ object MainForm: TMainForm
           'tr'
           'ua'
           'uz'
-          've'
-          'vn'
         )
         ParentFont = False
         ParentShowHint = False

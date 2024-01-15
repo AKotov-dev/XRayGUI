@@ -17,7 +17,7 @@ System-Wide Proxy
 --
 Starting from `XRayGUI-v1.5`, it became possible to use the connection as a global proxy for the entire system (`SWP` checkbox). This allows you to redirect all traffic through Socks5 without manually interfering with browser settings. The mode is guaranteed to work in GNOME, Budgie, Cinnamon, MATE (package required: `lib64proxy-gnome`) and KDE-5 (package required: `lib64proxy-kde`).
   
-In Mageia Linux for XFCE, LXDE and LXQt the global proxy is specified in `Mageia Control Center->Network->Proxy`. On other OSes, you can create a file `/etc/profile.d/proxy.sh`: execute under `su` and relogin:
+In Mageia Linux for XFCE, LXDE and LXQt the global proxy is specified in `Mageia Control Center->Network->Proxy`. On other OSes, you can create a file `/etc/profile.d/proxy.sh`. Execute under `su` and relogin:
 ```
 echo -e "export {http_proxy,https_proxy,ftp_proxy}=http://127.0.0.1:8889\nexport {HTTP_PROXY,HTTPS_PROXY,FTP_PROXY}=\$http_proxy" > /etc/profile.d/proxy.sh; chmod +x /etc/profile.d/proxy.sh
 ```

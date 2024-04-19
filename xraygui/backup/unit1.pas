@@ -1630,7 +1630,6 @@ end;
 //Вывод QR-кода
 procedure TMainForm.ConfigBoxClick(Sender: TObject);
 begin
-  try
   if ConfigBox.SelCount <> 0 then
   begin
     GetQR.Parameters.Clear;
@@ -1644,7 +1643,7 @@ begin
       Image1.Picture.LoadFromFile(GetUserDir + '.config/xraygui/qr.xpm');
       DeleteFile(GetUserDir + '.config/xraygui/qr.xpm');
     end;
-  except;
+  end;
 end;
 
 //Автостарт

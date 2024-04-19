@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 288
+  Left = 291
   Height = 722
-  Top = 108
+  Top = 97
   Width = 1003
   ActiveControl = Panel1
   Caption = 'XRayGUI'
@@ -11,7 +11,7 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnShow = FormShow
   SessionProperties = 'ConfigBox.ItemIndex;GroupBox1.Width;Height;Left;OpenDialog1.InitialDir;Panel1.Height;PortEdit.Value;SaveDialog1.InitialDir;Top;Width;DomainBox.Text'
-  LCLVersion = '2.2.4.0'
+  LCLVersion = '3.2.0.0'
   object GroupBox1: TGroupBox
     Left = 0
     Height = 702
@@ -83,21 +83,36 @@ object MainForm: TMainForm
       ResizeAnchor = akTop
     end
     object ConfigBox: TCheckListBox
+      AnchorSideBottom.Control = Image1
       Left = 0
-      Height = 624
+      Height = 474
       Top = 60
       Width = 270
-      Align = alClient
+      Align = alTop
+      Anchors = [akTop, akLeft, akRight, akBottom]
       Font.Height = -13
       Font.Name = 'Monospace'
       ItemHeight = 0
       MultiSelect = True
-      OnClickCheck = ConfigBoxClickCheck
-      OnDblClick = StartBtnClick
       ParentFont = False
       PopupMenu = PopupMenu1
       TabOrder = 2
       TopIndex = -1
+      OnClick = ConfigBoxClick
+      OnClickCheck = ConfigBoxClickCheck
+      OnDblClick = StartBtnClick
+    end
+    object Image1: TImage
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideLeft.Side = asrCenter
+      AnchorSideBottom.Control = GroupBox1
+      AnchorSideBottom.Side = asrBottom
+      Left = 60
+      Height = 150
+      Top = 534
+      Width = 150
+      Anchors = [akLeft, akBottom]
+      Stretch = True
     end
   end
   object Splitter1: TSplitter
@@ -193,10 +208,10 @@ object MainForm: TMainForm
         Anchors = [akTop, akRight]
         BorderSpacing.Right = 5
         Caption = 'Clear'
-        OnChange = ClearBoxChange
         ParentShowHint = False
         ShowHint = True
         TabOrder = 4
+        OnChange = ClearBoxChange
       end
       object Label1: TLabel
         AnchorSideTop.Control = StopBtn
@@ -223,10 +238,10 @@ object MainForm: TMainForm
         Anchors = [akTop, akRight]
         BorderSpacing.Right = 5
         Caption = 'Auto'
-        OnChange = AutoStartBoxChange
         ParentShowHint = False
         ShowHint = True
         TabOrder = 3
+        OnChange = AutoStartBoxChange
       end
       object SWPBox: TCheckBox
         AnchorSideTop.Control = StopBtn
@@ -240,10 +255,10 @@ object MainForm: TMainForm
         Anchors = [akTop, akRight]
         BorderSpacing.Right = 5
         Caption = 'SWP'
-        OnChange = SWPBoxChange
         ParentShowHint = False
         ShowHint = True
         TabOrder = 2
+        OnChange = SWPBoxChange
       end
       object RealityBtn: TSpeedButton
         AnchorSideTop.Control = StopBtn
@@ -522,5 +537,25 @@ object MainForm: TMainForm
       0D93F123D4198EA356770C35DAA3306AD4D057ABA0AB52429CF22E4A653BFD49
       BBDFAEFA13A9CD7CB4
     }
+  end
+  object GetQR: TAsyncProcess
+    Active = False
+    Executable = 'bash'
+    Parameters.Strings = (
+      ''
+    )
+    Options = [poWaitOnExit]
+    Priority = ppNormal
+    StartupOptions = []
+    ShowWindow = swoNone
+    WindowColumns = 0
+    WindowHeight = 0
+    WindowLeft = 0
+    WindowRows = 0
+    WindowTop = 0
+    WindowWidth = 0
+    FillAttribute = 0
+    Left = 320
+    Top = 176
   end
 end

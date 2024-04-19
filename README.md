@@ -1,5 +1,5 @@
 # XRayGUI
-**Dependencies:** systemd gtk2 fping wget p7zip zenity lib64proxy-gnome lib64proxy-kde  
+**Dependencies:** systemd gtk2 fping wget p7zip zenity lib64proxy-gnome lib64proxy-kde qrencode  
   
 **Ports used:** `SOCKS` - 127.0.0.1:1080 (can be changed), `HTTP` - 127.0.0.1:8889 (fixed)
   
@@ -23,6 +23,6 @@ echo -e "export {http_proxy,https_proxy,ftp_proxy}=http://127.0.0.1:8889\nexport
 ```
 **Note:** Starting with `XRayGUI-v1.1`, the binary `xray-core` removed from the rpm package is downloaded and updated directly from the developer's GitHub to the directory `~/.config/xraygui/xray`.  
   
-![](https://github.com/AKotov-dev/XRayGUI/blob/main/Screenshot2.png)  
+![](https://github.com/AKotov-dev/XRayGUI/blob/main/Screenshot3.png)  
   
 Tested in Mageia-9 and Linux Mint.

@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
   Buttons, ClipBrd, Spin, IniPropStorage, Process, Base64, DefaultTranslator,
-  CheckLst, Menus, URIParser, StrUtils;
+  CheckLst, Menus, AsyncProcess, URIParser, StrUtils;
 
 type
 
@@ -16,6 +16,8 @@ type
   TMainForm = class(TForm)
     AutoStartBox: TCheckBox;
     DomainBox: TComboBox;
+    GetQR: TAsyncProcess;
+    Image1: TImage;
     RealityBtn: TSpeedButton;
     SWPBox: TCheckBox;
     ClearBox: TCheckBox;
@@ -48,6 +50,7 @@ type
     StaticText1: TStaticText;
     procedure AutoStartBoxChange(Sender: TObject);
     procedure ClearBoxChange(Sender: TObject);
+    procedure ConfigBoxClick(Sender: TObject);
     procedure ConfigBoxClickCheck(Sender: TObject);
     procedure CopyItemClick(Sender: TObject);
     procedure DeleteBtnClick(Sender: TObject);
@@ -100,9 +103,9 @@ implementation
 
 uses start_trd, portscan_trd, update_trd, reality_gen;
 
-{$R *.lfm}
+  {$R *.lfm}
 
-{ TMainForm }
+  { TMainForm }
 
 //Create ~/config/xraygui/swproxy.sh
 procedure TMainForm.CreateSWProxy;
@@ -1576,6 +1579,8 @@ begin
       AutoStartBox.Checked := False;
       //Список пуст = cнимаем очистку cache
       ClearBox.Checked := False;
+      //Очищаем QR
+      Image1.Picture.Clear;
     end;
   end;
 
@@ -1620,6 +1625,25 @@ begin
     RunCommand('/bin/bash', ['-c', 'rm -f ~/.config/xraygui/clear'], S)
   else
     RunCommand('/bin/bash', ['-c', 'touch ~/.config/xraygui/clear'], S);
+end;
+
+//Вывод QR-кода
+procedure TMainForm.ConfigBoxClick(Sender: TObject);
+begin
+  if ConfigBox.SelCount <> 0 then
+  begin
+    GetQR.Parameters.Clear;
+    GetQR.Parameters.Add('-c');
+    GetQR.Parameters.Add('qrencode "' + ConfigBox.Items[ConfigBox.ItemIndex] +
+      '" -o ~/.config/xraygui/qr.xpm --margin=2 --type=XPM');
+    GetQR.Execute;
+
+    if FileExists(GetUserDir + '.config/xraygui/qr.xpm') then
+    begin
+      Image1.Picture.LoadFromFile(GetUserDir + '.config/xraygui/qr.xpm');
+      DeleteFile(GetUserDir + '.config/xraygui/qr.xpm');
+    end;
+  end;
 end;
 
 //Автостарт

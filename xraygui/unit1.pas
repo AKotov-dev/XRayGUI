@@ -1630,7 +1630,7 @@ end;
 //Вывод QR-кода
 procedure TMainForm.ConfigBoxClick(Sender: TObject);
 begin
-  if ConfigBox.SelCount <> 0 then
+  if ConfigBox.SelCount = 1 then
   begin
     GetQR.Parameters.Clear;
     GetQR.Parameters.Add('-c');

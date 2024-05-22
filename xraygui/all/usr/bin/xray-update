@@ -29,9 +29,8 @@ echo "lversion: Локальная версия: $lversion"
 #read a
 
 #URL новейшего архива Xray-linux-64.zip на GitHub
-cd ~/.config/xraygui
-archurl=$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases/latest | \
-grep -Po '"browser_download_url": "\K[^"]+' | grep Xray-linux-64.zip$)
+cd ~/.config/xraygui; curl -OL https://api.github.com/repos/XTLS/Xray-core/releases/latest || exit
+archurl=$(cat ./latest | grep -Po '"browser_download_url": "\K[^"]+' | grep Xray-linux-64.zip$)
 echo "URL архива на гите: $archurl"
 #read a
 

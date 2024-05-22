@@ -33,8 +33,8 @@ cd ~/.config/xraygui; curl -m 10 -OL https://api.github.com/repos/XTLS/Xray-core
 #Кол-во попыток доступа к API
 if [ "$(grep 'limit exceeded' ./latest)" ]; then cat ./latest; exit; fi
 
-archurl=$(cat ./latest | tr -d " \n" | tr "," "\n" | \
-grep browser_download_url | grep 'Xray-linux-64.zip"}' | tr -d '}"]' | cut -f2- -d":")
+archurl=$(cat ./latest | tr -d " \n\"{}[]" | tr "," "\n" | \
+grep browser_download_url | grep 'Xray-linux-64.zip$' | cut -f2- -d":")
 echo "URL архива на гите: $archurl"
 #read a
 

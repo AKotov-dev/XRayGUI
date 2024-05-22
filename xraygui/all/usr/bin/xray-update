@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # XRay-Core update script
-# Dependencies: fping wget p7zip zenity
+# Dependencies: fping curl p7zip zenity
 
 #Если сайт доступен - продолжить
 [[ $(fping github.com) ]] || exit;
@@ -25,18 +25,19 @@ test -d ~/.config/xraygui/xray || mkdir -p ~/.config/xraygui/xray
 
 #Версия локального xray
 test -f ~/.config/xraygui/xray/xray && lversion=$(~/.config/xraygui/xray/xray --version | head -n1 | awk '{print $2}') || lversion="0"
-#echo "lversion: Локальная версия: $lversion"
+echo "lversion: Локальная версия: $lversion"
 #read a
 
 #URL новейшего архива Xray-linux-64.zip на GitHub
-cd ~/.config/xraygui; wget -N https://api.github.com/repos/XTLS/Xray-core/releases/latest
-archurl=$(cat ./latest | tr -d '"' | tr ' ' '\n' | grep '/Xray-linux-64.zip' | grep -v ".dgst")
-#echo "URL архива на гите: $archurl"
+cd ~/.config/xraygui
+archurl=$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases/latest | \
+grep -Po '"browser_download_url": "\K[^"]+' | grep Xray-linux-64.zip$)
+echo "URL архива на гите: $archurl"
 #read a
 
 #Версия Xray-linux-64.zip на гите из URL
 rversion=$(echo $archurl | cut -d "/" -f8 | sed 's/[[:alpha:]]*//g')
-#echo "rversion: Версия на гите: $rversion"
+echo "rversion: Версия на гите: $rversion"
 #read a
 
 #Сравнение локальной версии xray и на гите из URL
@@ -46,7 +47,7 @@ zenity --question --title="${str[0]}" --text="${str[1]}\n\n${str[2]}\n${str[3]}"
 	killall xraygui; systemctl --user stop xray; killall xray
 
 	cd ~/.config/xraygui/xray
-	wget -O ./Xray-linux-64.zip $archurl
+	curl -OL $archurl
 	7z e -y ./*.zip
 	rm -f ./*.zip*
 	sleep 2; if [[ -z $(pidof xraygui) ]]; then xraygui; fi;

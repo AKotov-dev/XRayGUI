@@ -31,7 +31,7 @@ urlcopy=https://github.com/AKotov-dev/XRayGUI
 license=GPLv3
 
 [DEPS]
-deps=systemd fping zenity p7zip qrencode gtk2 lib64proxy-gnome lib64proxy-kde
+deps=systemd zenity p7zip qrencode gtk2 lib64proxy-gnome lib64proxy-kde
 
 [META]
 meta=0
@@ -86,8 +86,8 @@ toolversion=3.2
 
 [INFO]
 0=v2.1
-1=+ Removing wget from dependencies (spec)
-2=+ /usr/bin/xray-update: switching to curl
+1=+ /usr/bin/xray-update: switching to curl
+2=+ Removing wget and fping from dependencies (spec)
 3=+ Packages for Mageia-8/9 and Ubuntu
 4=
 5=v2.0

@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # XRay-Core update script
-# Dependencies: fping curl p7zip zenity
+# Dependencies: curl p7zip zenity
 
 #Если сайт доступен - продолжить
-[[ $(fping github.com) ]] || exit;
+#[[ $(fping github.com) ]] || exit;
 
 #Language select
 case $LANG in
@@ -28,9 +28,13 @@ test -f ~/.config/xraygui/xray/xray && lversion=$(~/.config/xraygui/xray/xray --
 echo "lversion: Локальная версия: $lversion"
 #read a
 
-#URL новейшего архива Xray-linux-64.zip на GitHub
-cd ~/.config/xraygui; curl -OL https://api.github.com/repos/XTLS/Xray-core/releases/latest || exit
-archurl=$(cat ./latest | grep -Po '"browser_download_url": "\K[^"]+' | grep Xray-linux-64.zip$)
+#URL новейшего архива Xray-linux-64.zip на GitHub (содержимое latest может быть представлено одной строкой)
+cd ~/.config/xraygui; curl -m 10 -OL https://api.github.com/repos/XTLS/Xray-core/releases/latest || exit
+# Кол-во попыток доступа к API
+if [ "$(grep 'limit exceeded' ./latest)" ]; then cat ./latest; exit; fi
+
+archurl=$(cat ./latest | tr -d " \n" | tr "," "\n" | \
+grep browser_download_url | grep 'Xray-linux-64.zip"}' | tr -d '}"]' | cut -f2- -d":")
 echo "URL архива на гите: $archurl"
 #read a
 

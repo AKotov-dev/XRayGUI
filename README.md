@@ -1,5 +1,5 @@
 # XRayGUI
-**Dependencies:** systemd gtk2 p7zip zenity lib64proxy-gnome lib64proxy-kde qrencode  
+**Dependencies:** systemd gtk2 p7zip zenity curl lib64proxy-gnome lib64proxy-kde qrencode  
   
 **Ports used:** `SOCKS` - 127.0.0.1:1080 (can be changed), `HTTP` - 127.0.0.1:8889 (fixed)
   

@@ -1556,12 +1556,9 @@ begin
   if MessageDlg(SDeleteMsg, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
 
   begin
-    with ConfigBox do
-    begin
-      for i := -1 + Items.Count downto 0 do
-        if (Selected[i]) and (ConfigBox.Checked[i] = False) then
-          ConfigBox.Items.Delete(i);
-    end;
+    for i := -1 + ConfigBox.Items.Count downto 0 do
+      if (ConfigBox.Selected[i]) and (ConfigBox.Checked[i] = False) then
+        ConfigBox.Items.Delete(i);
 
     //Сохранение нового списка
     ConfigBox.Items.SaveToFile(GetUserDir + '.config/xraygui/configlist');
@@ -1719,7 +1716,10 @@ end;
 procedure TMainForm.IniPropStorage1RestoreProperties(Sender: TObject);
 begin
   if IniPropStorage1.ReadInteger('findex', 100) <> 100 then
+  begin
     ConfigBox.Checked[IniPropStorage1.ReadInteger('findex', 100)] := True;
+    ConfigBox.ItemIndex:=IniPropStorage1.ReadInteger('findex', 100);
+  end;
 end;
 
 //Загрузка/Нормализация/Валидация

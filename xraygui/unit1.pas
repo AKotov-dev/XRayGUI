@@ -1712,11 +1712,14 @@ begin
   FUpdateThread.Priority := tpNormal;
 end;
 
-//Восстанавливаем индекс Check
+//Восстанавливаем индекс Check (если есть) + ItemIndex ставим на Check
 procedure TMainForm.IniPropStorage1RestoreProperties(Sender: TObject);
 begin
   if IniPropStorage1.ReadInteger('findex', 100) <> 100 then
+  begin
     ConfigBox.Checked[IniPropStorage1.ReadInteger('findex', 100)] := True;
+    ConfigBox.ItemIndex := IniPropStorage1.ReadInteger('findex', 100);
+  end;
 end;
 
 //Загрузка/Нормализация/Валидация

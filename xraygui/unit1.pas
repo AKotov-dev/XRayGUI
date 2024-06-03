@@ -1556,19 +1556,27 @@ begin
   if MessageDlg(SDeleteMsg, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
 
   begin
-    with ConfigBox do
-    begin
-      for i := -1 + Items.Count downto 0 do
-        if (Selected[i]) and (ConfigBox.Checked[i] = False) then
-          ConfigBox.Items.Delete(i);
-    end;
+    for i := -1 + ConfigBox.Items.Count downto 0 do
+      if (ConfigBox.Selected[i]) and (ConfigBox.Checked[i] = False) then
+        ConfigBox.Items.Delete(i);
 
     //Сохранение нового списка
     ConfigBox.Items.SaveToFile(GetUserDir + '.config/xraygui/configlist');
 
+    //Если удаление происходит в режиме Connected, возвращать ItemIndex в позицию Checked, иначе - ItemIndex = 0
     if ConfigBox.Count <> 0 then
     begin
-      ConfigBox.ItemIndex := 0;
+      for i := 0 to ConfigBox.Count - 1 do
+      begin
+        if ConfigBox.Checked[i] = True then
+        begin
+          ConfigBox.ItemIndex := i;
+          Break;
+        end
+        else
+          ConfigBox.ItemIndex := 0;
+      end;
+
       ConfigBox.Click;
     end
     else

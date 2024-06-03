@@ -1566,9 +1566,20 @@ begin
     //Сохранение нового списка
     ConfigBox.Items.SaveToFile(GetUserDir + '.config/xraygui/configlist');
 
+    //Если удаление происходит в режиме Connected, возвращать ItemIndex в позицию Checked, иначе - ItemIndex = 0
     if ConfigBox.Count <> 0 then
     begin
-      ConfigBox.ItemIndex := 0;
+      for i := 0 to ConfigBox.Count - 1 do
+      begin
+        if ConfigBox.Checked[i] = True then
+        begin
+          ConfigBox.ItemIndex := i;
+          Break;
+        end
+        else
+          ConfigBox.ItemIndex := 0;
+      end;
+
       ConfigBox.Click;
     end
     else
@@ -1630,7 +1641,7 @@ end;
 //Вывод QR-кода
 procedure TMainForm.ConfigBoxClick(Sender: TObject);
 begin
-  if ConfigBox.SelCount <> 0 then
+  if ConfigBox.SelCount = 1 then
   begin
     GetQR.Parameters.Clear;
     GetQR.Parameters.Add('-c');

@@ -31,7 +31,7 @@ urlcopy=https://github.com/AKotov-dev/XRayGUI
 license=GPLv3
 
 [DEPS]
-deps=systemd zenity p7zip qrencode curl gtk2 lib64proxy-gnome lib64proxy-kde
+deps=systemd zenity p7zip qrencode gtk2 lib64proxy-gnome lib64proxy-kde
 
 [META]
 meta=0

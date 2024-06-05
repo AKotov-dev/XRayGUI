@@ -957,7 +957,9 @@ begin
     //Не все серверы перешли на эту опцию, временно оставляем (direct) для совместимости
     if VlessDecode(VLESSURL, 'security') = 'xtls' then
       S.Add('                                    "flow": "xtls-rprx-direct",');
-    if VlessDecode(VLESSURL, 'security') = 'reality' then
+    //XRayGUI-v2.2 (update flow)
+    if (VlessDecode(VLESSURL, 'security') = 'reality') or
+      (VlessDecode(VLESSURL, 'flow') = 'xtls-rprx-vision') then
       S.Add('                                    "flow": "' +
         VlessDecode(VLESSURL, 'flow') + '",');
 

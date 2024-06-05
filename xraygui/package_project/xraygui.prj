@@ -87,7 +87,7 @@ toolversion=3.2
 [INFO]
 0=v2.2
 1=+ Fix vless-grpc configuration (serviceName)
-2=+ Correction of [xtls-rprx-direct/xtls-rprx-vision]( https://github.com/wulabing/Xray_onekey/issues/445)
+2=+ Correction of [xtls-rprx-direct/xtls-rprx-vision](https://github.com/wulabing/Xray_onekey/issues/445)
 3=+ Correction of deleting configurations in Connected mode
 4=+ Correcting the pointer setting in the list of configurations at the first start
 5=+ Packages for Mageia-8/9 and Ubuntu

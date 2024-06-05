@@ -973,11 +973,13 @@ begin
     S.Add('                "streamSettings": {');
 
     //if gRPC
-    if Pos('type=grpc', VLESSURL) <> 0 then
+    //if Pos('type=grpc', VLESSURL) <> 0 then
+    if VlessDecode(VLESSURL, 'type') = 'grpc' then
     begin
       S.Add('                    "grpcSettings": {');
       S.Add('                    "multiMode": false,');
-      S.Add('                    "serviceName": "grpc"');
+      //S.Add('                    "serviceName": "vless-grpc"');
+      S.Add('                    "serviceName": "' + VlessDecode(VLESSURL, 'serviceName') + '"');
       S.Add('                },');
     end;
 
@@ -1712,13 +1714,13 @@ begin
   FUpdateThread.Priority := tpNormal;
 end;
 
-//Восстанавливаем индекс Check
+//Восстанавливаем индекс Check (если есть) + ItemIndex ставим на Check
 procedure TMainForm.IniPropStorage1RestoreProperties(Sender: TObject);
 begin
   if IniPropStorage1.ReadInteger('findex', 100) <> 100 then
   begin
     ConfigBox.Checked[IniPropStorage1.ReadInteger('findex', 100)] := True;
-    ConfigBox.ItemIndex:=IniPropStorage1.ReadInteger('findex', 100);
+    ConfigBox.ItemIndex := IniPropStorage1.ReadInteger('findex', 100);
   end;
 end;
 

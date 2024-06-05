@@ -973,16 +973,17 @@ begin
     S.Add('                "streamSettings": {');
 
     //if gRPC
-    if Pos('type=grpc', VLESSURL) <> 0 then
+    if VlessDecode(VLESSURL, 'type') = 'grpc' then
     begin
       S.Add('                    "grpcSettings": {');
       S.Add('                    "multiMode": false,');
-      S.Add('                    "serviceName": "grpc"');
+      S.Add('                    "serviceName": "' +
+        VlessDecode(VLESSURL, 'serviceName') + '"');
       S.Add('                },');
     end;
 
     //if KCP
-    if Pos('type=kcp', VLESSURL) <> 0 then
+    if VlessDecode(VLESSURL, 'type') = 'kcp' then
     begin
       S.Add('                    "kcpSettings": {');
       S.Add('                    "seed": "' + VlessDecode(VLESSURL, 'seed') + '"');

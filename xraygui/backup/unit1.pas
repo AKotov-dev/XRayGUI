@@ -429,6 +429,17 @@ begin
       S.Add('                "path": "' + VmessDecode(VMESSURL, 'path') + '"');
       S.Add('                           },');
     end;
+
+    //GRPC
+    if VmessDecode(VMESSURL, 'net') = 'grpc' then
+    begin
+      S.Add('             "grpcSettings": {');
+      S.Add('                "serviceName": "' +
+        VmessDecode(VMESSURL, 'path') + '"');
+      S.Add('                 },');
+      S.Add('                "network": "' + VmessDecode(VMESSURL, 'net') + '",');
+    end;
+
     if VmessDecode(VMESSURL, 'net') = 'kcp' then
     begin
       S.Add('                 "network": "kcp",');
@@ -488,10 +499,10 @@ begin
     S.Add('                "allowInsecure": true,');
     S.Add('                "fingerprint": "chrome",');
     S.Add('                    "disableSystemRoot": false');
-    S.Add('                },');
-    S.Add('                "xtlsSettings": {');
+    S.Add('                 },');
+    S.Add('              "xtlsSettings": {');
     S.Add('                    "disableSystemRoot": false');
-    S.Add('                }');
+    S.Add('                 }');
     S.Add('            },');
     S.Add('            "tag": "proxy"');
     S.Add('        },');
@@ -957,7 +968,9 @@ begin
     //Не все серверы перешли на эту опцию, временно оставляем (direct) для совместимости
     if VlessDecode(VLESSURL, 'security') = 'xtls' then
       S.Add('                                    "flow": "xtls-rprx-direct",');
-    if (VlessDecode(VLESSURL, 'security') = 'reality') or (VlessDecode(VLESSURL, 'flow') = 'xtls-rprx-vision') then
+    //XRayGUI-v2.2 (update flow)
+    if (VlessDecode(VLESSURL, 'security') = 'reality') or
+      (VlessDecode(VLESSURL, 'flow') = 'xtls-rprx-vision') then
       S.Add('                                    "flow": "' +
         VlessDecode(VLESSURL, 'flow') + '",');
 

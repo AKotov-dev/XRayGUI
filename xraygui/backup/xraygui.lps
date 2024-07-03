@@ -40,7 +40,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="19"/>
-        <UsageCount Value="80"/>
+        <UsageCount Value="81"/>
       </Unit>
       <Unit>
         <Filename Value="unit1.pas"/>
@@ -50,9 +50,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="951"/>
-        <CursorPos X="109" Y="960"/>
-        <UsageCount Value="80"/>
+        <TopLine Value="481"/>
+        <CursorPos X="32" Y="501"/>
+        <UsageCount Value="81"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -62,21 +62,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="14"/>
         <CursorPos X="19"/>
-        <UsageCount Value="79"/>
+        <UsageCount Value="80"/>
       </Unit>
       <Unit>
         <Filename Value="portscan_trd.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="21"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="60"/>
       </Unit>
       <Unit>
         <Filename Value="update_trd.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="20"/>
-        <UsageCount Value="53"/>
+        <UsageCount Value="54"/>
       </Unit>
       <Unit>
         <Filename Value="reality_gen.pas"/>
@@ -86,7 +86,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="19"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="31"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="28">

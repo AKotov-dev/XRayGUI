@@ -429,6 +429,17 @@ begin
       S.Add('                "path": "' + VmessDecode(VMESSURL, 'path') + '"');
       S.Add('                           },');
     end;
+
+    //GRPC (v2.3)
+    if VmessDecode(VMESSURL, 'net') = 'grpc' then
+    begin
+      S.Add('             "grpcSettings": {');
+      S.Add('                "serviceName": "' +
+        VmessDecode(VMESSURL, 'path') + '"');
+      S.Add('                 },');
+      S.Add('                "network": "' + VmessDecode(VMESSURL, 'net') + '",');
+    end;
+
     if VmessDecode(VMESSURL, 'net') = 'kcp' then
     begin
       S.Add('                 "network": "kcp",');
@@ -488,10 +499,10 @@ begin
     S.Add('                "allowInsecure": true,');
     S.Add('                "fingerprint": "chrome",');
     S.Add('                    "disableSystemRoot": false');
-    S.Add('                },');
-    S.Add('                "xtlsSettings": {');
+    S.Add('                 },');
+    S.Add('              "xtlsSettings": {');
     S.Add('                    "disableSystemRoot": false');
-    S.Add('                }');
+    S.Add('                 }');
     S.Add('            },');
     S.Add('            "tag": "proxy"');
     S.Add('        },');

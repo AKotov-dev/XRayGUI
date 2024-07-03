@@ -7,7 +7,7 @@ A small and nimble GUI for [XRay-core](https://github.com/XTLS/Xray-core): launc
 
 **Support (without obfs):**
 + Shadowsocks
-+ VMESS, + TLS, + WS, + WS + TLS, + KCP + gRPC
++ VMESS, + TLS, + WS, + WS + TLS, + KCP, + gRPC
 + VLESS, + TLS, + WS, + WS + TLS, + gRPC, + gRPC + TLS, + KCP, + REALITY
 + Trojan, + WS, + gRPC
 

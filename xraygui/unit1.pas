@@ -1055,7 +1055,7 @@ begin
       begin
         S.Add('                        "headers": {');
         //SERVER-HOST
-        S.Add('                            "Host": "' +
+        S.Add('                            "serverName": "' +
           VlessDecode(VLESSURL, 'host') + '"');
         S.Add('                        },');
       end;
@@ -1319,7 +1319,7 @@ begin
       S.Add('          "wsSettings": {');
       S.Add('              "path": "' + TrojanDecode(TrojanURL, 'path') + '",');
       S.Add('              "headers": {');
-      S.Add('                "Host": "' + TrojanDecode(TrojanURL, 'host') + '"');
+      S.Add('                "serverName": "' + TrojanDecode(TrojanURL, 'host') + '"');
       S.Add('               }');
       S.Add('        }');
       S.Add('        },');
@@ -1722,8 +1722,8 @@ begin
   FShowLogTRD.Priority := tpNormal;
 
   //Поток проверки обновлений Xray-Core
-  FUpdateThread := CheckUpdate.Create(False);
-  FUpdateThread.Priority := tpNormal;
+ { FUpdateThread := CheckUpdate.Create(False);
+  FUpdateThread.Priority := tpNormal; }
 end;
 
 //Восстанавливаем индекс Check (если есть) + ItemIndex ставим на Check

@@ -54,7 +54,7 @@ begin
   //---
 
   RequireDerivedFormResource := True;
-  Application.Title:='XRayGUI v2.3';
+  Application.Title:='XRayGUI v2.3.1';
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);

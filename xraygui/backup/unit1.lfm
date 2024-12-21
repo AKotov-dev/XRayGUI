@@ -11,7 +11,7 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnShow = FormShow
   SessionProperties = 'ConfigBox.ItemIndex;GroupBox1.Width;Height;Left;OpenDialog1.InitialDir;Panel1.Height;PortEdit.Value;SaveDialog1.InitialDir;Top;Width;DomainBox.Text'
-  LCLVersion = '3.2.0.0'
+  LCLVersion = '3.6.0.0'
   object GroupBox1: TGroupBox
     Left = 0
     Height = 702

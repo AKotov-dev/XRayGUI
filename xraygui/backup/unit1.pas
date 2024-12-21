@@ -430,7 +430,7 @@ begin
       S.Add('                           },');
     end;
 
-    //GRPC
+    //GRPC (v2.3)
     if VmessDecode(VMESSURL, 'net') = 'grpc' then
     begin
       S.Add('             "grpcSettings": {');
@@ -1055,7 +1055,7 @@ begin
       begin
         S.Add('                        "headers": {');
         //SERVER-HOST
-        S.Add('                            "Host": "' +
+        S.Add('                            "serverName": "' +
           VlessDecode(VLESSURL, 'host') + '"');
         S.Add('                        },');
       end;
@@ -1319,7 +1319,7 @@ begin
       S.Add('          "wsSettings": {');
       S.Add('              "path": "' + TrojanDecode(TrojanURL, 'path') + '",');
       S.Add('              "headers": {');
-      S.Add('                "Host": "' + TrojanDecode(TrojanURL, 'host') + '"');
+      S.Add('                "serverName": "' + TrojanDecode(TrojanURL, 'host') + '"');
       S.Add('               }');
       S.Add('        }');
       S.Add('        },');

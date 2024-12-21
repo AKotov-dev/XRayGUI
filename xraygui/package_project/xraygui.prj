@@ -87,7 +87,7 @@ toolversion=3.2
 [INFO]
 0=v2.3.1
 1=+ [RU]
-2=+ Начиная с Xray-core v24.12.18 и переходом на новый протокол XHTTP разработчики предлагают переписывать когфигурационные файлы клиентов и серверов. В целях сохранения совместимости уже существующих подключений разработка XRayGUI временно заморожена + автоматическое обновление Xray-core отключено.
+2=Начиная с Xray-core v24.12.18 и переходом на новый протокол XHTTP разработчики предлагают переписывать конфигурационные файлы клиентов и серверов. В целях сохранения совместимости уже существующих подключений разработка XRayGUI временно заморожена + автоматическое обновление Xray-core отключено.
 3=+ [EN]
 4=Starting with Xray-core v24.12.18 and the transition to the new XHTTP protocol, the developers suggest rewriting the configuration files of clients and servers. In order to maintain compatibility of existing connections, the development of XRayGUI is temporarily frozen + automatic updating of Xray-core is disabled.
 5=

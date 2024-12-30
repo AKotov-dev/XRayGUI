@@ -971,8 +971,7 @@ begin
     //XRayGUI-v2.2 (update flow)
     if (VlessDecode(VLESSURL, 'security') = 'reality') or
       (VlessDecode(VLESSURL, 'flow') = 'xtls-rprx-vision') then
-      S.Add('                                    "flow": "' +
-        VlessDecode(VLESSURL, 'flow') + '",');
+      S.Add('                                    "flow": "xtls-rprx-vision' + '",');
 
     //ID
     S.Add('                                    "id": "' +
@@ -1722,8 +1721,8 @@ begin
   FShowLogTRD.Priority := tpNormal;
 
   //Поток проверки обновлений Xray-Core
-  FUpdateThread := CheckUpdate.Create(False);
-  FUpdateThread.Priority := tpNormal;
+ { FUpdateThread := CheckUpdate.Create(False);
+  FUpdateThread.Priority := tpNormal; }
 end;
 
 //Восстанавливаем индекс Check (если есть) + ItemIndex ставим на Check

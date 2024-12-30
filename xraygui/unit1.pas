@@ -969,11 +969,10 @@ begin
     if VlessDecode(VLESSURL, 'security') = 'xtls' then
       S.Add('                                    "flow": "xtls-rprx-direct",');
     //XRayGUI-v2.2 (update flow)
-    if (VlessDecode(VLESSURL, 'security') = 'reality') or
+ {   if (VlessDecode(VLESSURL, 'security') = 'reality') or
       (VlessDecode(VLESSURL, 'flow') = 'xtls-rprx-vision') then
-      S.Add('                                    "flow": "' +
-        VlessDecode(VLESSURL, 'flow') + '",');
-
+      S.Add('                                    "flow": "xtls-rprx-vision' + '",');
+  }
     //ID
     S.Add('                                    "id": "' +
       VlessDecode(VLESSURL, 'id') + '"');

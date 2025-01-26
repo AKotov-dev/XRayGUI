@@ -1,7 +1,7 @@
 object MainForm: TMainForm
   Left = 299
   Height = 722
-  Top = 137
+  Top = 110
   Width = 1003
   ActiveControl = Panel1
   Caption = 'XRayGUI'

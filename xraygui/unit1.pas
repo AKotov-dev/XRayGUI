@@ -966,13 +966,20 @@ begin
       VlessDecode(VLESSURL, 'encryption') + '",');
     //Deprecate xtls-rprx-direct/xtls-rprx-vision #445: https://github.com/wulabing/Xray_onekey/issues/445
     //Не все серверы перешли на эту опцию, временно оставляем (direct) для совместимости
-    if VlessDecode(VLESSURL, 'security') = 'xtls' then
+   { if VlessDecode(VLESSURL, 'security') = 'xtls' then
       S.Add('                                    "flow": "xtls-rprx-direct",');
     //XRayGUI-v2.2 (update flow)
- {   if (VlessDecode(VLESSURL, 'security') = 'reality') or
+    if (VlessDecode(VLESSURL, 'security') = 'reality') or
       (VlessDecode(VLESSURL, 'flow') = 'xtls-rprx-vision') then
       S.Add('                                    "flow": "xtls-rprx-vision' + '",');
-  }
+   }
+
+    if (VlessDecode(VLESSURL, 'flow') = 'none') then
+      S.Add('                                    "flow": "",')
+    else
+      S.Add('                                    "flow": "' +
+        VlessDecode(VLESSURL, 'flow') + '",');
+
     //ID
     S.Add('                                    "id": "' +
       VlessDecode(VLESSURL, 'id') + '"');
@@ -983,6 +990,16 @@ begin
     S.Add('                    ]');
     S.Add('                },');
     S.Add('                "streamSettings": {');
+
+    //if XHTTP
+    if VlessDecode(VLESSURL, 'type') = 'xhttp' then
+    begin
+      S.Add('                    "xhttpSettings": {');
+      S.Add('                    "path": "' + VlessDecode(VLESSURL, 'path') + '",');
+      S.Add('                    "hostname": "' +
+        VlessDecode(VLESSURL, 'host') + '"');
+      S.Add('                },');
+    end;
 
     //if gRPC
     if VlessDecode(VLESSURL, 'type') = 'grpc' then
@@ -1721,8 +1738,8 @@ begin
   FShowLogTRD.Priority := tpNormal;
 
   //Поток проверки обновлений Xray-Core
- { FUpdateThread := CheckUpdate.Create(False);
-  FUpdateThread.Priority := tpNormal; }
+  FUpdateThread := CheckUpdate.Create(False);
+  FUpdateThread.Priority := tpNormal;
 end;
 
 //Восстанавливаем индекс Check (если есть) + ItemIndex ставим на Check

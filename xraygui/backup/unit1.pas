@@ -996,7 +996,7 @@ begin
     begin
       S.Add('                    "xhttpSettings": {');
       S.Add('                    "path": "' + VlessDecode(VLESSURL, 'path') + '",');
-      S.Add('                    "hostname": "' +
+      S.Add('                    "host": "' +
         VlessDecode(VLESSURL, 'host') + '"');
       S.Add('                },');
     end;
@@ -1738,8 +1738,8 @@ begin
   FShowLogTRD.Priority := tpNormal;
 
   //Поток проверки обновлений Xray-Core
- { FUpdateThread := CheckUpdate.Create(False);
-  FUpdateThread.Priority := tpNormal; }
+  FUpdateThread := CheckUpdate.Create(False);
+  FUpdateThread.Priority := tpNormal;
 end;
 
 //Восстанавливаем индекс Check (если есть) + ItemIndex ставим на Check

@@ -996,8 +996,9 @@ begin
     begin
       S.Add('                    "xhttpSettings": {');
       S.Add('                    "path": "' + VlessDecode(VLESSURL, 'path') + '",');
-      S.Add('                    "hostname": "' +
-        VlessDecode(VLESSURL, 'host') + '"');
+      S.Add('                    "host": "' +
+        VlessDecode(VLESSURL, 'host') + '",');
+      S.Add('                    "mode": "auto"');
       S.Add('                },');
     end;
 

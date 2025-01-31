@@ -445,9 +445,11 @@ begin
     begin
       S.Add('                    "httpupgradeSettings": {');
       S.Add('                    "path": "' + VmessDecode(VMESSURL, 'path') + '",');
-      S.Add('                    "host": "' + VmessDecode(VMESSURL, 'host') + '",');
-      S.Add('                    "sni": "' + VmessDecode(VMESSURL, 'sni') + '"');
-      S.Add('                },');
+      if VmessDecode(VMESSURL, 'tls') = 'tls' then
+        S.Add('                    "sni": "' + VmessDecode(VMESSURL, 'sni') + '"')
+      else
+        S.Add('                    "host": "' + VmessDecode(VMESSURL, 'host') + '"');
+      S.Add('                 },');
       S.Add('                    "network": "' + VmessDecode(VMESSURL, 'net') + '",');
     end;
 
@@ -1021,10 +1023,10 @@ begin
     begin
       S.Add('                    "httpupgradeSettings": {');
       S.Add('                    "path": "' + VlessDecode(VLESSURL, 'path') + '",');
-      S.Add('                    "host": "' +
-        VlessDecode(VLESSURL, 'host') + '",');
-      S.Add('                    "mode": "auto",');
-      S.Add('                    "sni": "' + VlessDecode(VLESSURL, 'sni') + '"');
+      if VlessDecode(VLESSURL, 'security') = 'tls' then
+        S.Add('                    "sni": "' + VlessDecode(VLESSURL, 'sni') + '"')
+      else
+        S.Add('                    "host": "' + VlessDecode(VLESSURL, 'host') + '"');
       S.Add('                },');
     end;
 

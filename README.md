@@ -7,9 +7,9 @@ A small and nimble GUI for [XRay-core](https://github.com/XTLS/Xray-core): launc
 
 **Support:**
 + Shadowsocks (without obfs)
-+ VMESS, +TLS, +WS, +WS+TLS, +KCP, +gRPC, +HTTPUpgrade
-+ VLESS, +TLS, +WS, +WS+TLS, +gRPC, +gRPC+TLS, +KCP, +REALITY, +XHTTP, +HTTPUpgrade
-+ Trojan, +WS, +gRPC
++ VMESS: +TLS, +WS, +WS+TLS, +KCP, +gRPC, +HTTPUpgrade
++ VLESS: +TLS, +WS, +WS+TLS, +gRPC, +gRPC+TLS, +KCP, +REALITY, +XHTTP, +HTTPUpgrade
++ Trojan: +WS, +gRPC
 
 Starting with `XRayGUI-v1.6`, support for `XTLS-Reality` and a generator of simple but reliable Client-Server configurations have been introduced ("R" button).
 

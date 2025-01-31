@@ -418,7 +418,7 @@ begin
     S.Add('             },');
     S.Add('            "streamSettings": {');
 
-    //NETWORK
+    //WS
     if VmessDecode(VMESSURL, 'net') = 'ws' then
     begin
       S.Add('                "network": "' + VmessDecode(VMESSURL, 'net') + '",');
@@ -430,7 +430,7 @@ begin
       S.Add('                           },');
     end;
 
-    //GRPC (v2.3)
+    //GRPC
     if VmessDecode(VMESSURL, 'net') = 'grpc' then
     begin
       S.Add('             "grpcSettings": {');
@@ -440,6 +440,18 @@ begin
       S.Add('                "network": "' + VmessDecode(VMESSURL, 'net') + '",');
     end;
 
+    //HTTPUPGRADE
+    if VmessDecode(VMESSURL, 'net') = 'httpupgrade' then
+    begin
+      S.Add('                    "httpupgradeSettings": {');
+      S.Add('                    "path": "' + VmessDecode(VMESSURL, 'path') + '",');
+      S.Add('                    "host": "' + VmessDecode(VMESSURL, 'host') + '",');
+      S.Add('                    "sni": "' + VmessDecode(VMESSURL, 'sni') + '"');
+      S.Add('                },');
+      S.Add('                    "network": "' + VmessDecode(VMESSURL, 'net') + '",');
+    end;
+
+    //KCP
     if VmessDecode(VMESSURL, 'net') = 'kcp' then
     begin
       S.Add('                 "network": "kcp",');
@@ -457,6 +469,8 @@ begin
       S.Add('                 "seed": "' + VmessDecode(VMESSURL, 'path') + '"');
       S.Add('                 },');
     end;
+
+    //HTTP
     if VmessDecode(VMESSURL, 'type') = 'http' then
     begin
       S.Add('                 "network": "' + VmessDecode(VMESSURL, 'net') + '",');
@@ -997,7 +1011,20 @@ begin
       S.Add('                    "xhttpSettings": {');
       S.Add('                    "path": "' + VlessDecode(VLESSURL, 'path') + '",');
       S.Add('                    "host": "' +
-        VlessDecode(VLESSURL, 'host') + '"');
+        VlessDecode(VLESSURL, 'host') + '",');
+      S.Add('                    "mode": "auto"');
+      S.Add('                },');
+    end;
+
+    //if HTTPUPGRADE
+    if VlessDecode(VLESSURL, 'type') = 'httpupgrade' then
+    begin
+      S.Add('                    "httpupgradeSettings": {');
+      S.Add('                    "path": "' + VlessDecode(VLESSURL, 'path') + '",');
+      S.Add('                    "host": "' +
+        VlessDecode(VLESSURL, 'host') + '",');
+      S.Add('                    "mode": "auto",');
+      S.Add('                    "sni": "' + VlessDecode(VLESSURL, 'sni') + '"');
       S.Add('                },');
     end;
 

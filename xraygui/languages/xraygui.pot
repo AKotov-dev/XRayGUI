@@ -94,7 +94,7 @@ msgid "Start"
 msgstr ""
 
 #: tmainform.statictext1.caption
-msgid "License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://forum.rosalinux.ru"
+msgid "License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://github.com/AKotov-dev"
 msgstr ""
 
 #: tmainform.stopbtn.caption

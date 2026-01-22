@@ -1,0 +1,104 @@
+[NAME]
+name=xraygui
+
+[VERSION]
+version=2.6
+
+[RELEASE]
+release=0.mrx9
+
+[GROUP]
+group=Applications/System
+
+[DESCRIPTION]
+0=A small and nimble GUI for XRay-core
+1=---
+2=More information: /usr/share/doc/package_name/repack.txt
+
+[MAINTAINER]
+maintainer=Alex Kotov
+
+[VENDOR]
+vendor=alex_q_2000 (C) 2023
+
+[SUMMARY]
+summary=A small and nimble GUI for XRay-core
+
+[URLCOPY]
+urlcopy=https://github.com/AKotov-dev/XRayGUI
+
+[LICENSE]
+license=GPLv3
+
+[DEPS]
+deps=systemd zenity curl p7zip qrencode gtk2 lib64proxy-gnome lib64proxy-kde
+
+[META]
+meta=0
+
+[NOARCH]
+noarch=0
+
+[DEB]
+deb=0
+
+[FILES]
+0=/usr/share/xraygui/
+1=/usr/share/doc/xraygui/
+2=/usr/bin/xraygui
+3=/usr/bin/xray-update
+4=/usr/share/icons/xraygui.png
+5=/etc/systemd/user/xray.service
+6=/etc/systemd/user/xray-update.service
+7=/usr/share/applications/xraygui.desktop
+
+[AFTERINSTALL]
+0=#!/bin/bash
+1=
+2=systemctl daemon-reload
+
+[AFTERREMOVE]
+0=#!/bin/bash
+1=
+2=systemctl daemon-reload
+
+[BEFOREREMOVE]
+0=#!/bin/bash
+1=
+2=#Окончательное удаление
+3=if [ $1 -eq 0 ]; then
+4=if [[ $(pidof xray) ]]; then killall xray; fi
+5=systemctl daemon-reload
+6=fi
+
+[URL32]
+url32=https://github.com/AKotov-dev/XRayGUI
+
+[PROGRAMNAME]
+programname=XRayGUI
+
+[DEVTOOL]
+devtool=Lazarus
+
+[TOOLVERSION]
+toolversion=4.4
+
+[INFO]
+0=V2.6
+1=+ Recompiled using Lazarus 4.4
+2=+ Enhanced system-wide proxy mode
+3=+ Added packages for Mageia 9 and Ubuntu
+4=
+5=**Note:** Extended the list of supported desktop environments for system-wide proxy configuration: XFCE and LXDE are now supported when [xfce-proxy-gui](https://github.com/AKotov-dev/xfce-proxy-gui) is installed.
+6=
+7=The list of supported DEs for system-wide proxy has been expanded: XFCE and LXDE have been added if  is installed on the system.
+8=
+9=V2.5
+10=+ Recompiling to Lazarus-3.6
+11=+ VMESS/VLESS `HTTPUpgrade` support
+12=+ Packages for Mageia-9 and Ubuntu
+13=
+14=v2.4
+15=+ XHTTP support
+16=+ Fix xhttpSettings: hostname/host
+17=+ Packages for Mageia-9 and Ubuntu

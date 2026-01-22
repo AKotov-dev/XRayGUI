@@ -1,5 +1,5 @@
 object MainForm: TMainForm
-  Left = 299
+  Left = 348
   Height = 722
   Top = 110
   Width = 1003
@@ -7,11 +7,11 @@ object MainForm: TMainForm
   Caption = 'XRayGUI'
   ClientHeight = 722
   ClientWidth = 1003
+  SessionProperties = 'ConfigBox.ItemIndex;GroupBox1.Width;Height;Left;OpenDialog1.InitialDir;Panel1.Height;PortEdit.Value;SaveDialog1.InitialDir;Top;Width;DomainBox.Text'
+  LCLVersion = '4.4.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  SessionProperties = 'ConfigBox.ItemIndex;GroupBox1.Width;Height;Left;OpenDialog1.InitialDir;Panel1.Height;PortEdit.Value;SaveDialog1.InitialDir;Top;Width;DomainBox.Text'
-  LCLVersion = '3.6.0.0'
   object GroupBox1: TGroupBox
     Left = 0
     Height = 702
@@ -40,9 +40,9 @@ object MainForm: TMainForm
         Top = 8
         Width = 85
         Caption = 'Delete'
-        OnClick = DeleteBtnClick
         ShowHint = True
         ParentShowHint = False
+        OnClick = DeleteBtnClick
       end
       object SelAllBtn: TSpeedButton
         AnchorSideLeft.Control = DeleteBtn
@@ -54,9 +54,9 @@ object MainForm: TMainForm
         Width = 36
         BorderSpacing.Left = 1
         Caption = '*'
-        OnClick = SelAllBtnClick
         ShowHint = True
         ParentShowHint = False
+        OnClick = SelAllBtnClick
       end
       object PasteBtn: TSpeedButton
         AnchorSideRight.Side = asrBottom
@@ -68,9 +68,9 @@ object MainForm: TMainForm
         Anchors = [akTop, akRight]
         BorderSpacing.Right = 5
         Caption = 'Paste'
-        OnClick = PasteBtnClick
         ShowHint = True
         ParentShowHint = False
+        OnClick = PasteBtnClick
       end
     end
     object Splitter2: TSplitter
@@ -372,9 +372,9 @@ object MainForm: TMainForm
           B1F0B6B2B0DFB5B1AFC3B4B0AF97B4AFAE60B3AEAD29B2AEAD06B2AEAC00B8B2
           B300000000000000000000000000000000000000000000000000
         }
-        OnClick = RealityBtnClick
         ShowHint = True
         ParentShowHint = False
+        OnClick = RealityBtnClick
       end
       object DomainBox: TComboBox
         AnchorSideTop.Control = StopBtn

@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=XRayGUI (Proxy connector)
-Name[ru]=XRayGUI (Прокси коннектор)
-Comment=VMESS, VLESS, Shadowsocks
-Icon=xraygui
-Exec=xraygui
-Type=Application
-Categories=System;
-Terminal=false

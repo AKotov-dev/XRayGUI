@@ -229,21 +229,16 @@ begin
   Screen.Cursor := crHourGlass;
   Application.ProcessMessages;
 
-  if not SWPBox.Checked then
-  begin
-    RunCommand('/bin/bash', ['-c', 'systemctl --user disable xray-swproxy'], S);
-    RunCommand('/bin/bash', ['-c', 'systemctl --user stop xray-swproxy'], S);
-  end
+  if (not SWPBox.Checked) and FileExists(GetUserDir + '.config/xraygui/swproxy.sh') then
+    RunCommand('/bin/bash', ['-c', '~/.config/xraygui/swproxy.sh unset'], S)
   else
   begin
     //Автозапуск самого прокси, поскольку при перезагрузке прокси будет недоступен
     AutoStartBox.Checked := True;
     //Делаем скрипт звпуска ~/.config/xraygui/swproxy.sh
     CreateSWProxy;
-    //Автозапуск System-Wide Proxy
-    RunCommand('/bin/bash', ['-c', 'systemctl --user enable xray-swproxy'], S);
-    //Применяем, если прокси уже запущен, иначе - настройки не менять; они изменятся при запуске (Start)
-    RunCommand('/bin/bash', ['-c', 'systemctl --user start xray-swproxy'], S);
+    //Запуск System-Wide Proxy
+    RunCommand('/bin/bash', ['-c', '~/.config/xraygui/swproxy.sh set'], S);
   end;
   Screen.Cursor := crDefault;
 end;
@@ -293,13 +288,15 @@ function CheckSWPBox: boolean;
 var
   S: ansistring;
 begin
-  RunCommand('bash', ['-c',
-    '[[ -n $(systemctl --user is-enabled xray-swproxy | grep "enabled") ]] && echo "yes"'], S);
+  if RunCommand('bash', ['-c', 'gsettings get org.gnome.system.proxy mode'], S) then
+  begin
+    S := Trim(StringReplace(S, '''', '', [rfReplaceAll]));
 
-  if Trim(S) = 'yes' then
-    Result := True
-  else
-    Result := False;
+    if S = 'manual' then
+      Result := True
+    else
+      Result := False;
+  end;
 end;
 
 //VMESS - Декодирование/Нормализация/Поиск
@@ -1024,7 +1021,7 @@ begin
       S.Add('                    "httpupgradeSettings": {');
       S.Add('                    "path": "' + VlessDecode(VLESSURL, 'path') + '",');
       if VlessDecode(VLESSURL, 'security') = 'tls' then
-        S.Add('                    "sni": "' + VlessDecode(VLESSURL, 'sni') + '",')
+        S.Add('                    "sni": "' + VlessDecode(VLESSURL, 'sni') + '"')
       else
         S.Add('                    "host": "' + VlessDecode(VLESSURL, 'host') + '"');
       S.Add('                },');

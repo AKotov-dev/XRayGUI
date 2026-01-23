@@ -18,6 +18,7 @@ type
     DomainBox: TComboBox;
     GetQR: TAsyncProcess;
     Image1: TImage;
+    Image2: TImage;
     RealityBtn: TSpeedButton;
     SWPBox: TCheckBox;
     ClearBox: TCheckBox;
@@ -120,17 +121,6 @@ begin
     A.Add('if [ "$1" == "set" ]; then');
     A.Add('echo "set proxy..."');
     A.Add('# SET SYSTEM-WIDE PROXY');
-    //    A.Add('export all_proxy="socks://127.0.0.1:' + PortEdit.Text + '/"');
-    //    A.Add('export ftp_proxy="http://127.0.0.1:8889/"');
-    //    A.Add('export http_proxy="http://127.0.0.1:8889/"');
-    //    A.Add('export https_proxy="http://127.0.0.1:8889/"');
-    //    A.Add('export no_proxy="localhost,127.0.0.0/8,::1"');
-    //    A.Add('');
-    //    A.Add('export ALL_PROXY="socks://127.0.0.1:' + PortEdit.Text + '/"');
-    //    A.Add('export FTP_PROXY="http://127.0.0.1:8889/"');
-    //    A.Add('export HTTP_PROXY="http://127.0.0.1:8889/"');
-    //    A.Add('export HTTPS_PROXY="http://127.0.0.1:8889/"');
-    //    A.Add('export NO_PROXY="localhost,127.0.0.0/8,::1"');
     A.Add('');
     A.Add('# GNOME');
     A.Add('if [[ $(echo $XDG_CURRENT_DESKTOP | grep -E "GNOME|Budgie|Cinnamon|MATE|XFCE|LXDE") ]]; then');
@@ -156,17 +146,6 @@ begin
     A.Add('	    else');
     A.Add('echo "unset proxy..."');
     A.Add('# UNSET SYSTEM-WIDE PROXY');
-    //    A.Add('unset all_proxy');
-    //    A.Add('unset ftp_proxy');
-    //    A.Add('unset http_proxy');
-    //    A.Add('unset https_proxy');
-    //    A.Add('unset no_proxy');
-    //    A.Add('');
-    //    A.Add('unset ALL_PROXY');
-    //    A.Add('unset FTP_PROXY');
-    //    A.Add('unset HTTP_PROXY');
-    //    A.Add('unset HTTPS_PROXY');
-    //    A.Add('unset NO_PROXY');
     A.Add('');
     A.Add('# GNOME');
     A.Add('if [[ $(echo $XDG_CURRENT_DESKTOP | grep -E "GNOME|Budgie|Cinnamon|MATE|XFCE") ]]; then');
@@ -230,7 +209,10 @@ begin
   Application.ProcessMessages;
 
   if (not SWPBox.Checked) and FileExists(GetUserDir + '.config/xraygui/swproxy.sh') then
-    RunCommand('/bin/bash', ['-c', '~/.config/xraygui/swproxy.sh unset'], S)
+  begin
+    RunCommand('/bin/bash', ['-c', '~/.config/xraygui/swproxy.sh unset'], S);
+    DeleteFile(GetUserDir + '.config/xraygui/swproxy.sh');
+  end
   else
   begin
     //Автозапуск самого прокси, поскольку при перезагрузке прокси будет недоступен
@@ -285,18 +267,11 @@ end;
 
 //Проверка чекбокса SWP
 function CheckSWPBox: boolean;
-var
-  S: ansistring;
 begin
-  if RunCommand('bash', ['-c', 'gsettings get org.gnome.system.proxy mode'], S) then
-  begin
-    S := Trim(StringReplace(S, '''', '', [rfReplaceAll]));
-
-    if S = 'manual' then
-      Result := True
-    else
-      Result := False;
-  end;
+  if FileExists(GetUserDir + '.config/xraygui/swproxy.sh') then
+    Result := True
+  else
+    Result := False;
 end;
 
 //VMESS - Декодирование/Нормализация/Поиск
@@ -1586,8 +1561,20 @@ end;
 
 //Создание формы
 procedure TMainForm.FormCreate(Sender: TObject);
+var
+  bmp: TBitmap;
 begin
   MainForm.Caption := Application.Title;
+
+  //Устраняем баг иконки приложения
+  bmp := TBitmap.Create;
+  try
+    bmp.PixelFormat := pf32bit;
+    bmp.Assign(Image1.Picture.Graphic);
+    Application.Icon.Assign(bmp);
+  finally
+    bmp.Free;
+  end;
 
   //Рабочая директория (конфигурации + лог)
   if not DirectoryExists(GetUserDir + '.config/xraygui') then

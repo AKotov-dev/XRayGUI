@@ -240,8 +240,9 @@ begin
     AutoStartBox.Checked := True;
     //Делаем скрипт звпуска ~/.config/xraygui/swproxy.sh
     CreateSWProxy;
-    //Запуск System-Wide Proxy
-    RunCommand('/bin/bash', ['-c', '~/.config/xraygui/swproxy.sh set'], S);
+    //Запуск System-Wide Proxy если он уже работает
+    if Shape1.Brush.Color <> clYellow then
+      RunCommand('/bin/bash', ['-c', '~/.config/xraygui/swproxy.sh set'], S);
   end;
   Screen.Cursor := crDefault;
 end;
@@ -1455,13 +1456,10 @@ end;
 
 //Останов
 procedure TMainForm.StopBtnClick(Sender: TObject);
-var
-  S: ansistring;
 begin
   //Если SWP (xray-wsproxy.service disabled) - Выключаем глобальный прокси
-  Application.ProcessMessages;
-  if SWPBox.Checked then RunCommand('/bin/bash',
-      ['-c', 'systemctl --user stop xray-swproxy'], S);
+  // Application.ProcessMessages;
+  StartProcess(GetUserDir + '.config/xraygui/swproxy.sh unset');
 
   //Снять все чекбоксы
   ConfigBox.CheckAll(cbUnChecked);
@@ -1542,9 +1540,9 @@ begin
   //Если SWP (xray-wsproxy.service enabled) - Пытаемся включить глобальный прокси
   if SWPBox.Checked then
   begin
-    CreateSWProxy;
+    CreateSWProxy; //Создаём новый файд конфигурации
     Application.ProcessMessages;
-    RunCommand('/bin/bash', ['-c', 'systemctl --user restart xray-swproxy'], S);
+    RunCommand('/bin/bash', ['-c', GetUserDir + '.config/xraygui/swproxy.sh set'], S);
   end;
 
   ConfigBox.CheckAll(cbUnChecked);

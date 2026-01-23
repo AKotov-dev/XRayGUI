@@ -21,6 +21,8 @@ In Mageia Linux for XFCE, LXDE and LXQt the global proxy is specified in `Mageia
 ```
 echo -e "export {http_proxy,https_proxy,ftp_proxy}=http://127.0.0.1:8889\nexport {HTTP_PROXY,HTTPS_PROXY,FTP_PROXY}=\$http_proxy" > /etc/profile.d/proxy.sh; chmod +x /etc/profile.d/proxy.sh
 ```
+A good alternative for `LXDE` and `XFCE` environments is installing [xfce-proxy-gui](https://github.com/AKotov-dev/xfce-proxy-gui), which allows you to manage system-wide proxies in the same way as in `GNOME`: settings are changed on the fly without relogins, reboots, or privileges.  
+  
 **Note:** Starting with `XRayGUI-v1.1`, the binary `xray-core` removed from the rpm package is downloaded and updated directly from the developer's GitHub to the directory `~/.config/xraygui/xray`.  
   
 ![](https://github.com/AKotov-dev/XRayGUI/blob/main/Screenshot3.png)  

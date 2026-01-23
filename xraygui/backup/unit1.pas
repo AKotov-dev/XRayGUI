@@ -133,10 +133,8 @@ begin
     A.Add('    gsettings set org.gnome.system.proxy.socks host "127.0.0.1"');
     A.Add('    gsettings set org.gnome.system.proxy.socks port 1080');
     A.Add('    gsettings set org.gnome.system.proxy ignore-hosts "[' +
-      '''' + 'localhost' + '''' + ', ' + '''' + '127.0.0.1' + '''' + ', ' + '''' + '::1' + '''' + ']"');
-
-    showmessage('    gsettings set org.gnome.system.proxy ignore-hosts "[' +
-      '''' + 'localhost' + '''' + ', ' + '''' + '127.0.0.1' + '''' + ', ' + '''' + '::1' + '''' + ']"');
+      '''' + 'localhost' + '''' + ', ' + '''' + '127.0.0.1' + '''' +
+      ', ' + '''' + '::1' + '''' + ']"');
     A.Add('  fi');
     A.Add('');
     A.Add('  # KDE Plasma');
@@ -155,7 +153,9 @@ begin
     A.Add('    kwriteconfig$v --file kioslaverc --group "Proxy Settings" --key httpsProxy "http://127.0.0.1:8889"');
     A.Add('    kwriteconfig$v --file kioslaverc --group "Proxy Settings" --key ftpProxy   "http://127.0.0.1:8889"');
     A.Add('    kwriteconfig$v --file kioslaverc --group "Proxy Settings" --key socksProxy "socks5h://127.0.0.1:1080"');
-    A.Add('    kwriteconfig$v --file kioslaverc --group "Proxy Settings" --key NoProxy    "localhost,127.0.0.1,::1"');
+    A.Add('    kwriteconfig$v --file kioslaverc --group "Proxy Settings" --key NoProxy    "['
+      + '''' + 'localhost' + '''' + ', ' + '''' + '127.0.0.1' + '''' +
+      ', ' + '''' + '::1' + '''' + ']"');
     A.Add('  fi');
     A.Add('else');
     A.Add('  echo "unset proxy..."');
